@@ -32,7 +32,9 @@ export const metadata: Metadata = {
   description: "Надёжные решения для нефтегазовой отрасли и машиностроения",
   generator: "v0.app",
   icons: {
-    icon: "/images/design-mode/%D0%9D%D0%BE%D1%80%D0%BC%202.png",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 }
 
