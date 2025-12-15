@@ -1,0 +1,688 @@
+{
+  "header": {
+    "companyName": "熊贸易公司",
+    "companySubtitle": "油气设备",
+    "nav": {
+      "home": "主页",
+      "about": "关于我们",
+      "products": "产品",
+      "catalog": "目录",
+      "services": "服务",
+      "contacts": "联系方式"
+    },
+    "phone": "+7 (495) 777-56-60",
+    "email": "info@aomedved.ru",
+    "contactButton": "联系我们"
+  },
+  "hero": {
+    "title": "卓越挑战的卓越解决方案",
+    "description": "设计、制造、服务——交钥匙。为石油天然气行业和机械工程提供可靠的解决方案。",
+    "contactButton": "联系我们",
+    "certificatesButton": "证书",
+    "scrollDown": "向下滚动"
+  },
+  "about": {
+    "title": "关于公司",
+    "mission": "我们通过投资人才、技术和生产设施，创建一家可持续、多元化和独立的公司。",
+    "principlesTitle": "商业原则",
+    "principles": [
+      "业务多元化——发展多个业务领域",
+      "投资人才、技术和生产设施",
+      "流程改进和运营效率提升",
+      "发展进出口业务"
+    ],
+    "strategyTitle": "发展战略",
+    "strategy": ["投资人才和技术", "发展高科技生产集群", "扩大民用领域业务", "发展进出口方向"],
+    "certificatesTitle": "证书",
+    "certificates": {
+      "iso9001": {
+        "title": "ISO 9001:2015",
+        "description": "质量管理体系"
+      },
+      "iso14001": {
+        "title": "ISO 14001:2015",
+        "description": "环境管理体系"
+      },
+      "iso45001": {
+        "title": "ISO 45001:2018",
+        "description": "职业健康安全管理体系"
+      },
+      "compliance": {
+        "title": "合格证书",
+        "description": "关税同盟技术法规"
+      }
+    },
+    "close": "关闭"
+  },
+  "equipment": {
+    "items": {
+      "cementingUnit": {
+        "title": "固井机组 CA-320",
+        "description": "高性能油井固井装置",
+        "features": ["压力高达70 MPa", "自动化系统", "增强可靠性", "24/7支持"]
+      },
+      "mobilePump": {
+        "title": "移动泵送站",
+        "description": "用于冲洗和压裂的移动高压装置",
+        "features": ["流量2500升/分钟", "高机动性", "现代设备", "快速安装"]
+      },
+      "fracturingComplex": {
+        "title": "压裂综合设施",
+        "description": "现代化自动水力压裂装置",
+        "features": ["自动化控制", "参数监控", "高效率", "操作安全"]
+      },
+      "multifunctionalUnit": {
+        "title": "多功能装置",
+        "description": "用于各种技术操作的通用设备",
+        "features": ["通用应用", "增强机动性", "可靠结构", "易于维护"]
+      }
+    },
+    "detailsButton": "详情"
+  },
+  "products": {
+    "title": "我们的产品",
+    "description": "石油天然气行业的高质量设备",
+    "categories": {
+      "cementing": "固井",
+      "fracturing": "水力压裂",
+      "pumps": "泵送设备"
+    },
+    "items": {
+      "cementingUnit": {
+        "name": "固井机组 CA-320M",
+        "description": "用于油井固井作业的固井机组"
+      },
+      "mixingUnit": {
+        "name": "混合装置 SMN-20",
+        "description": "用于制备和输送水泥浆"
+      },
+      "fracturingUnit": {
+        "name": "压裂机组 AN-700",
+        "description": "用于水力压裂作业"
+      },
+      "highPressurePump": {
+        "name": "高压泵 NVD-2500",
+        "description": "用于油田服务的柱塞式高压泵"
+      }
+    },
+    "detailsButton": "详情",
+    "catalogButton": "查看完整目录"
+  },
+  "productDetail": {
+    "backButton": "返回产品",
+    "downloadCatalog": "下载目录",
+    "descriptionTitle": "描述",
+    "consultationTitle": "获取咨询",
+    "consultationDescription": "我们的专家将帮助您为任务选择最佳解决方案",
+    "contactButton": "联系我们",
+    "specificationsTitle": "技术规格",
+    "featuresTitle": "优势",
+    "applicationsTitle": "应用领域",
+    "prevImage": "上一张图片",
+    "nextImage": "下一张图片",
+    "goToImage": "转到图片"
+  },
+  "transportationDetail": {
+    "backButton": "返回设备",
+    "goToCatalog": "转到目录",
+    "videoTitle": "产品视频",
+    "descriptionTitle": "描述",
+    "specificationsTitle": "技术规格",
+    "advantagesTitle": "优势",
+    "applicationsTitle": "应用领域",
+    "keyFeaturesTitle": "主要特点",
+    "contactTitle": "联系我们",
+    "consultationButton": "获取咨询"
+  },
+  "services": {
+    "title": "我们的服务",
+    "details": {
+      "cementirovanie": {
+        "title": "固井机组",
+        "description": "移动固井装置的设计和制造",
+        "fullDescription": "我们专门从事石油天然气行业现代固井机组的设计、制造和供应。我们的设备符合最高的质量和可靠性标准，确保在任何气候条件下高效完成油井固井作业。",
+        "benefits": [
+          "采用全球领先制造商的组件",
+          "自主控制系统，支持手动和自动模式",
+          "全面的保修和服务维护",
+          "符合国际安全标准",
+          "可在-45°C至+50°C的温度下工作",
+          "由于高可靠性而快速回本"
+        ],
+        "process": [
+          {
+            "title": "咨询和需求分析",
+            "description": "我们研究您的要求和设备操作条件"
+          },
+          {
+            "title": "解决方案设计",
+            "description": "我们制定技术规格和设备项目"
+          },
+          {
+            "title": "生产和质量控制",
+            "description": "按照所有标准制造并进行多级控制"
+          },
+          {
+            "title": "交付和调试",
+            "description": "交付、安装、调试和人员培训"
+          }
+        ],
+        "whyUs": [
+          "在石油天然气工程领域拥有超过15年的经验",
+          "自有生产和工程中心",
+          "所有设备的质量保证",
+          "24/7合格技术支持"
+        ]
+      },
+      "grp": {
+        "title": "压裂设备",
+        "description": "水力压裂综合解决方案",
+        "fullDescription": "我们提供用于水力压裂作业的全套设备。我们的装置配备了现代控制和监控系统，确保工艺的最高效率和安全性。我们既处理新设备，也进行现有设备的现代化改造。",
+        "benefits": [
+          "高精度自动化控制系统",
+          "连续监控所有工艺参数",
+          "多级安全系统",
+          "远程操作控制能力",
+          "节能设计",
+          "与各种类型的支撑剂和液体兼容"
+        ],
+        "process": [
+          {
+            "title": "可行性研究",
+            "description": "分析地质条件并选择最佳设备"
+          },
+          {
+            "title": "配置和准备",
+            "description": "为特定任务组建设备套件"
+          },
+          {
+            "title": "安装和设置",
+            "description": "设备安装和所有控制系统的设置"
+          },
+          {
+            "title": "培训和支持",
+            "description": "人员培训和操作技术支持"
+          }
+        ],
+        "whyUs": ["压裂任务的综合方法", "在复杂油田工作的经验", "现代高科技设备", "整个使用寿命期间的全面服务维护"]
+      },
+      "nasosnoe": {
+        "title": "泵送设备",
+        "description": "泵送机组的供应和现代化",
+        "fullDescription": "我们为石油天然气行业供应各种高压泵送设备。我们直接与领先制造商合作，这使我们能够在保持高质量的同时提供有竞争力的价格。我们还进行现有设备的现代化改造和大修。",
+        "benefits": [
+          "直接从领先制造商供应",
+          "各种容量泵的广泛范围",
+          "完整的技术文档和证书",
+          "库存备件",
+          "服务维护和维修",
+          "所有供应设备的保修"
+        ],
+        "process": [
+          {
+            "title": "确定要求",
+            "description": "分析技术要求和操作条件"
+          },
+          {
+            "title": "设备选择",
+            "description": "为任务选择最佳泵送设备"
+          },
+          {
+            "title": "供应和安装",
+            "description": "交付、安装和调试工作"
+          },
+          {
+            "title": "维护",
+            "description": "定期技术维护和支持"
+          }
+        ],
+        "whyUs": ["与设备制造商的直接合同", "自有备件仓库", "经验丰富的服务工程师团队", "灵活的交付和付款条件"]
+      },
+      "modernizaciya": {
+        "title": "现代化与维修",
+        "description": "大修和设备现代化",
+        "fullDescription": "我们提供石油天然气设备的大修和现代化服务。我们的经验使我们能够显著延长设备的使用寿命，改善其技术特性并降低运营成本。我们处理任何制造商的设备。",
+        "benefits": [
+          "技术状况的全面诊断",
+          "更换磨损的部件和组件",
+          "控制和自动化系统的现代化",
+          "延长设备使用寿命",
+          "改善技术特性",
+          "降低运营成本"
+        ],
+        "process": [
+          {
+            "title": "技术诊断",
+            "description": "对设备当前状况的完整评估"
+          },
+          {
+            "title": "制定工作计划",
+            "description": "准备维修和现代化计划并计算成本"
+          },
+          {
+            "title": "执行工作",
+            "description": "根据批准的计划进行维修和现代化"
+          },
+          {
+            "title": "测试和调试",
+            "description": "控制测试并将设备移交给客户"
+          }
+        ],
+        "whyUs": ["处理各种制造商设备的经验", "自有生产设施", "必要备件的可用性", "已完成工作的保修"]
+      }
+    },
+    "items": {
+      "cementing": {
+        "title": "油井固井",
+        "description": "设计和制造油井固井设备，包括固井综合设施。"
+      },
+      "fracturing": {
+        "title": "水力压裂",
+        "description": "设计和制造水力压裂设备。"
+      },
+      "pumps": {
+        "title": "泵送设备",
+        "description": "供应泵送设备（高压柱塞泵），用于完井和增产任务。"
+      },
+      "modernization": {
+        "title": "现代化与维修",
+        "description": "对固井设备和水力压裂设备进行现代化改造、大修、延长使用寿命（包括软件）。"
+      }
+    },
+    "detailsButton": "详情"
+  },
+  "serviceDetail": {
+    "aboutServiceTitle": "关于服务",
+    "guaranteeBadge": "质量保证",
+    "teamBadge": "经验丰富的团队",
+    "supportBadge": "24/7支持",
+    "benefitsTitle": "优势",
+    "processTitle": "工作流程",
+    "whyUsTitle": "为什么选择我们",
+    "ctaTitle": "准备开始了吗？",
+    "ctaDescription": "联系我们获取详细咨询和商业报价",
+    "ctaButton": "获取咨询"
+  },
+  "contact": {
+    "title": "联系我们",
+    "description": "准备讨论您的项目？写信给我们或致电",
+    "form": {
+      "name": "您的姓名",
+      "email": "电子邮件",
+      "phone": "电话",
+      "message": "留言",
+      "company": "公司",
+      "captcha": "输入图片中的代码",
+      "refreshCaptcha": "刷新代码",
+      "required": "必填字段",
+      "consent": "我同意处理个人数据",
+      "consentLink": "隐私政策",
+      "consentText": "通过加入本协议并提供我的数据，我确认所有指定的数据都属于我个人，并且我同意根据",
+      "submit": "发送",
+      "sending": "发送中...",
+      "success": "消息已发送！",
+      "error": "发送错误",
+      "errorCaptcha": "图片代码无效",
+      "errorConsent": "需要同意数据处理"
+    },
+    "info": {
+      "address": "地址",
+      "addressValue": "莫斯科，样本街，1号",
+      "phone": "电话",
+      "email": "电子邮件",
+      "hours": "工作时间",
+      "hoursValue": "周一至周五：9:00 - 18:00"
+    }
+  },
+  "footer": {
+    "companyName": "熊贸易公司",
+    "companyDescription": "为石油天然气行业提供可靠的解决方案",
+    "quickLinks": "快速链接",
+    "services": "服务",
+    "contacts": "联系方式",
+    "address": "地址",
+    "addressValue": "莫斯科，样本街，1号",
+    "phone": "电话",
+    "email": "电子邮件",
+    "rights": "版权所有",
+    "privacyPolicy": "隐私政策",
+    "personalData": "个人数据处理"
+  },
+  "languageSwitcher": {
+    "label": "语言",
+    "russian": "Русский",
+    "english": "English",
+    "chinese": "中文"
+  },
+  "common": {
+    "backButton": "返回",
+    "close": "关闭",
+    "learnMore": "了解更多"
+  },
+  "productData": {
+    "tsementirovaniye": {
+      "title": "固井设备",
+      "description": "用于油井完井的移动固井机组",
+      "longDescription": "我们的固井设备由现代化移动机组组成，专为石油和天然气井的高质量完井而设计。我们使用先进技术和全球领先制造商的组件，确保在最具挑战性的条件下的可靠性和效率。",
+      "specifications": {
+        "pressure": { "label": "工作压力", "value": "高达70 MPa" },
+        "capacity": { "label": "流量", "value": "2000-3500升/分钟" },
+        "power": { "label": "发动机功率", "value": "600-800马力" },
+        "tankVolume": { "label": "罐体积", "value": "5000-7000升" },
+        "temperature": { "label": "温度范围", "value": "从-45°C到+50°C" }
+      },
+      "features": [
+        "来自世界最佳制造商的组件",
+        "自主控制系统，支持手动和自动模式",
+        "保修和服务维护",
+        "自动化配料和混合系统",
+        "实时参数监控系统",
+        "增强的结构可靠性"
+      ],
+      "applications": ["一次和二次油井固井", "间隔隔离修井作业", "油井废弃和封存", "在恶劣气候条件下作业"]
+    },
+    "grp": {
+      "title": "压裂设备",
+      "description": "高压水力压裂装置",
+      "longDescription": "我们的水力压裂（HF）装置专为石油和天然气增产而设计。该设备在生产层中形成裂缝，显著增加岩石渗透率并大幅提高油井产量。",
+      "specifications": {
+        "pressure": { "label": "最大压力", "value": "高达100 MPa" },
+        "capacity": { "label": "流量", "value": "3000-4500升/分钟" },
+        "power": { "label": "发动机功率", "value": "1000-1500马力" },
+        "proppant": { "label": "支撑剂浓度", "value": "高达25千克/立方米" },
+        "mobility": { "label": "机动性", "value": "拖车/半拖车配置" }
+      },
+      "features": [
+        "高精度工艺控制系统",
+        "压力和流量自动控制",
+        "压裂液和支撑剂混合系统",
+        "过载保护和应急系统",
+        "远程参数监控",
+        "节能设计"
+      ],
+      "applications": ["石油井水力压裂", "气田HF", "水平井多段压裂", "重复HF以恢复产量"]
+    },
+    "nasos": {
+      "title": "泵送设备",
+      "description": "高压泵送机组和系统",
+      "longDescription": "我们的泵送设备由现代高性能装置组成，专为石油天然气行业的各种任务而设计。该机组确保在高压和大容量泵送液体下的可靠运行。",
+      "specifications": {
+        "pressure": { "label": "工作压力", "value": "高达80 MPa" },
+        "capacity": { "label": "流量", "value": "2500-5000升/分钟" },
+        "power": { "label": "发动机功率", "value": "700-1200马力" },
+        "pumpType": { "label": "泵类型", "value": "三柱塞泵" },
+        "weight": { "label": "机组重量", "value": "18-25吨" }
+      },
+      "features": [
+        "平稳容量调节",
+        "自动润滑系统",
+        "内置冷却系统",
+        "气蚀和水锤保护",
+        "快速更换柱塞块",
+        "低振动和噪音水平"
+      ],
+      "applications": ["油井冲洗和完井", "管道压力测试", "工艺液注入", "HF液体供应"]
+    }
+  },
+  "transportationData": {
+    "cementirovochnyj-agregat": {
+      "title": "固井机组 CA-320",
+      "description": "高性能油井固井装置",
+      "fullDescription": "CA-320固井机组是现代化高科技设备，专为石油和天然气井套管固井作业而设计。该机组确保可靠的套管固定和高质量水泥环的形成。",
+      "features": ["压力高达70 MPa", "自动化系统", "增强可靠性", "24/7支持"],
+      "specifications": {
+        "maxPressure": { "label": "最大压力", "value": "70 MPa" },
+        "capacity": { "label": "流量", "value": "高达2500升/分钟" },
+        "tankVolume": { "label": "混合罐体积", "value": "6立方米" },
+        "power": { "label": "发动机功率", "value": "400马力" },
+        "chassis": { "label": "底盘类型", "value": "KAMAZ 6x6" },
+        "temperature": { "label": "温度范围", "value": "从-45°C到+50°C" }
+      },
+      "advantages": [
+        "设备的高可靠性和性能",
+        "自动化工艺控制系统",
+        "在恶劣气候条件下的作业能力",
+        "经验丰富的合格人员",
+        "24/7技术支持",
+        "完全符合安全标准"
+      ],
+      "applications": ["套管固井", "修井和隔离作业", "环空窜流消除", "新井建设", "油井修井"]
+    },
+    "peredvizhnaya-nasosnaya": {
+      "title": "移动泵送站",
+      "description": "用于冲洗和压裂的移动高压装置",
+      "fullDescription": "移动高压泵送站专为在石油天然气行业执行各种技术操作而设计。该装置为各种井处理操作提供高压工作液供应。",
+      "features": ["流量2500升/分钟", "高机动性", "现代设备", "快速设置"],
+      "specifications": {
+        "maxPressure": { "label": "最大压力", "value": "100 MPa" },
+        "capacity": { "label": "流量", "value": "2500升/分钟" },
+        "power": { "label": "泵功率", "value": "2000马力" },
+        "driveType": { "label": "驱动类型", "value": "柴油" },
+        "chassis": { "label": "底盘类型", "value": "半拖车" },
+        "setupTime": { "label": "部署时间", "value": "30分钟" }
+      },
+      "advantages": ["高性能和效率", "现场快速部署", "现代参数控制系统", "低运营成本", "通用应用", "设备的高机动性"],
+      "applications": ["水力压裂（HF）", "油井冲洗", "酸处理", "水力喷砂射孔", "近井带清洁"]
+    },
+    "kompleks-grp": {
+      "title": "压裂综合设施",
+      "description": "现代化自动水力压裂装置",
+      "fullDescription": "水力压裂综合设施是配备现代自动化和控制系统的新一代高科技设备。该综合设施专为使用水力压裂方法进行石油和天然气增产作业而设计。",
+      "features": ["自动化控制", "参数监控", "高效率", "操作安全"],
+      "specifications": {
+        "maxPressure": { "label": "最大压力", "value": "140 MPa" },
+        "hydraulicPower": { "label": "液压功率", "value": "2500马力" },
+        "capacity": { "label": "流量", "value": "高达3000升/分钟" },
+        "controlSystem": { "label": "控制系统", "value": "自动化" },
+        "unitCount": { "label": "机组数量", "value": "6-8台" },
+        "proppantVolume": { "label": "支撑剂体积", "value": "高达150吨" }
+      },
+      "advantages": ["完全自动化工艺", "高精度参数控制", "最大HF效率", "现代安全系统", "环保作业", "快速综合设施动员"],
+      "applications": ["多段水力压裂", "水平井HF", "石油增产", "提高油井产能", "页岩油田作业"]
+    },
+    "mnogofunkcionalnaya-ustanovka": {
+      "title": "多功能装置",
+      "description": "用于各种技术操作的通用设备",
+      "fullDescription": "多功能装置是在石油天然气行业执行各种技术操作的通用解决方案。该设备结合了几个专用机组的功能，显著提高了工作效率。",
+      "features": ["通用应用", "增强机动性", "可靠结构", "易于维护"],
+      "specifications": {
+        "maxPressure": { "label": "最大压力", "value": "80 MPa" },
+        "capacity": { "label": "流量", "value": "2000升/分钟" },
+        "power": { "label": "装置功率", "value": "600马力" },
+        "tankVolume": { "label": "罐体积", "value": "8立方米" },
+        "chassis": { "label": "底盘类型", "value": "URAL 6x6" },
+        "autonomy": { "label": "作业自主性", "value": "12小时" }
+      },
+      "advantages": [
+        "通用性和多功能性",
+        "高机动性和越野能力",
+        "适用于恶劣条件的可靠结构",
+        "易于维护和操作",
+        "经济效益",
+        "快速重新配置各种操作"
+      ],
+      "applications": ["油井修井", "油井冲洗和完井", "设备压力测试", "工艺液注入", "钻井辅助操作"]
+    }
+  },
+  "excellence": {
+    "title": "工业制品",
+    "description": "我们的解决方案和高效技术帮助客户在石油天然气行业取得卓越成果"
+  },
+  "aboutSection": {
+    "title": "关于公司",
+    "description": "熊贸易公司是石油天然气行业设备的领先制造商。我们专门从事固井机组、水力压裂设备和泵送设备的设计和制造。我们的制造产品符合最高的质量和可靠性标准。"
+  },
+  "privacyPolicy": {
+    "title": "隐私政策",
+    "subtitle": "个人数据处理协议",
+    "backToHome": "返回主页",
+    "lastUpdated": "最后更新",
+    "intro": {
+      "text": "通过加入本协议并在medved-neftegaz.ru网站（以下简称网站）上填写表格字段提供您的数据，用户：",
+      "items": [
+        "确认他们指定的所有数据都属于他们个人；",
+        "确认并承认他们已仔细阅读了协议和他们在表格字段（注册）中指定的个人数据处理条款的全文，协议文本和个人数据处理条款对他们来说是清楚的；",
+        "同意网站处理作为信息一部分提供的个人数据，以便在他们和网站之间签订本协议以及随后执行该协议；",
+        "同意转移他们的个人数据；",
+        "同意个人数据处理条款。"
+      ]
+    },
+    "sections": {
+      "owner": {
+        "title": "网站所有者",
+        "content": "medved-neftegaz.ru网站的所有者是有限责任公司熊贸易公司",
+        "inn": "纳税人识别号 7707482792",
+        "ogrn": "主要国家注册号 1237700059211",
+        "address": "地址：107031，莫斯科，内部领土。特维尔市辖区，大德米特罗夫卡街32号，9栋，3室"
+      },
+      "consent": {
+        "title": "个人数据处理同意",
+        "content": "用户同意处理其个人数据，即执行2006年7月27日第152-FZ号联邦法律《个人数据法》第3条第1部分第3款规定的行动，并确认通过给予此类同意，他们是自由地、根据自己的意愿并为自己的利益行事。",
+        "details": "用户对个人数据处理的同意是具体的、知情的和有意识的。",
+        "form": "用户的此同意被视为以简单书面形式执行，用于处理以下个人数据：",
+        "dataTypes": ["姓名；", "电话号码；", "电子邮件地址（e-mail）。"]
+      },
+      "operations": {
+        "title": "个人数据操作",
+        "content": "用户向medved-neftegaz.ru提供执行以下个人数据操作的权利：收集和积累；根据规范性文件规定的报告保存期限进行存储，但自用户停止使用服务之日起不少于三年；澄清（更新、更改）；使用；销毁；去个人化；应法院要求转移，包括向第三方转移，同时遵守确保个人数据免受未经授权访问的保护措施。"
+      },
+      "duration": {
+        "title": "同意有效期",
+        "content": "该同意自提供数据之时起无限期有效，您可以通过向网站管理部门提交申请并指明《个人数据法》第14条规定的数据来撤销该同意。",
+        "withdrawal": "撤销对个人数据处理的同意可以通过用户以简单书面形式向电子邮件地址info@aomedved.ru发送相应指令来执行"
+      },
+      "liability": {
+        "title": "责任",
+        "content": "网站不对第三方使用（无论是合法还是非法）用户在网站上发布的信息（包括以所有可能的方式进行的复制和传播）承担责任。"
+      },
+      "changes": {
+        "title": "协议变更",
+        "content": "网站有权对本协议进行更改。在进行更改时，当前版本会注明最后更新日期。协议的新版本自发布之时起生效，除非协议的新版本另有规定。",
+        "location": "协议的当前版本位于以下页面：https://medved-neftegaz.ru/privacy-policy"
+      },
+      "confirmation": {
+        "title": "确认",
+        "content": "本同意被我认可为我根据2006年7月27日第152-FZ号联邦法律《个人数据法》第9条给予的关于处理我的个人数据的书面同意。",
+        "dataSubject": "通过本同意，我确认我是所提供个人数据的主体，并且确认所提供数据的准确性。",
+        "awareness": "我知道，在网站上注册和/或提交接收报价的请求和/或订阅接收广告信息意味着我对本同意中描述的条款的书面同意。"
+      }
+    }
+  },
+  "personalData": {
+    "title": "个人数据处理",
+    "backToHome": "返回主页",
+    "lastUpdated": "最后更新",
+    "sections": {
+      "operator": {
+        "title": "1. 个人数据运营商",
+        "content": "个人数据运营商是熊贸易公司股份公司（以下简称运营商），根据2006年7月27日第152-FZ号联邦法律《个人数据法》处理用户的个人数据。"
+      },
+      "purposes": {
+        "title": "2. 个人数据处理目的",
+        "content": "运营商出于以下目的处理个人数据：",
+        "items": [
+          "提供有关公司服务和产品的信息",
+          "处理用户请求和咨询",
+          "签订和执行合同",
+          "通知新服务和特别优惠",
+          "进行统计和其他研究"
+        ]
+      },
+      "legal": {
+        "title": "3. 处理的法律依据",
+        "content": "个人数据处理基于：",
+        "items": ["个人数据主体的同意", "个人数据主体为其一方的合同", "俄罗斯联邦法律"]
+      },
+      "categories": {
+        "title": "4. 处理的数据类别",
+        "content": "运营商处理以下类别的个人数据：",
+        "items": ["姓氏、名字、父称", "联系信息（电子邮件地址、电话号码）", "职位和组织名称", "网站使用数据"]
+      },
+      "methods": {
+        "title": "5. 处理方法",
+        "content": "个人数据处理使用自动化工具和不使用此类工具进行。运营商采用以下处理方法：",
+        "items": [
+          "收集、记录、系统化、积累、存储",
+          "澄清（更新、修改）",
+          "提取、使用、传输（提供、访问）",
+          "去个人化、阻止、删除、销毁"
+        ]
+      },
+      "period": {
+        "title": "6. 个人数据处理期限",
+        "content": "个人数据在实现处理目的所需的期限内处理，除非法律另有规定。在实现处理目的或撤回同意后，个人数据将被删除或去个人化。"
+      },
+      "rights": {
+        "title": "7. 个人数据主体的权利",
+        "content": "个人数据主体有权：",
+        "items": [
+          "接收有关其个人数据处理的信息",
+          "要求澄清、阻止或销毁个人数据",
+          "撤回对个人数据处理的同意",
+          "向授权机构申诉运营商的行为或不作为",
+          "保护其权利和合法利益，包括赔偿损失"
+        ]
+      },
+      "security": {
+        "title": "8. 个人数据保护措施",
+        "content": "运营商采取必要的法律、组织和技术措施保护个人数据免受非法或意外访问、破坏、修改、阻止、复制、提供、传播以及其他非法行为。"
+      },
+      "contact": {
+        "title": "9. 联系信息",
+        "company": "熊贸易公司股份公司",
+        "address": "地址：107031，莫斯科，VN.TER.G. 特维尔市辖区，德米特罗夫卡大街32号，9栋，3室",
+        "phone": "电话",
+        "email": "电子邮件"
+      }
+    }
+  },
+  "catalog": {
+    "title": "产品目录",
+    "subtitle": "石油天然气行业的专业设备",
+    "search": "搜索设备...",
+    "filters": {
+      "title": "筛选",
+      "categories": "类别",
+      "allCategories": "所有类别",
+      "priceRange": "价格范围",
+      "showFilters": "显示筛选",
+      "hideFilters": "隐藏筛选",
+      "reset": "重置",
+      "activeFilters": "活动筛选"
+    },
+    "sort": {
+      "label": "排序",
+      "nameAsc": "按名称（A-Z）",
+      "nameDesc": "按名称（Z-A）",
+      "priceAsc": "按价格（升序）",
+      "priceDesc": "按价格（降序）"
+    },
+    "noResults": "未找到产品",
+    "noResultsDescription": "尝试更改搜索参数",
+    "foundProducts": "找到的产品",
+    "viewDetails": "详情",
+    "price": "价格",
+    "backButton": "返回",
+    "downloadPDF": "下载PDF目录",
+    "pdfDescription": "描述",
+    "pdfKeyFeatures": "主要特点",
+    "pdfTitle": "设备目录"
+  },
+  "cookieConsent": {
+    "title": "我们使用Cookie",
+    "description": "本网站使用Cookie来改善用户体验和分析流量。继续使用本网站即表示您同意我们的",
+    "privacyPolicy": "隐私政策",
+    "accept": "接受",
+    "close": "关闭"
+  },
+  "production": {
+    "title": "生产",
+    "image1": "工业油气设施",
+    "image2": "生产综合体内部视图",
+    "image3": "炼油厂",
+    "image4": "石油开采工业设备",
+    "previous": "上一个",
+    "next": "下一个",
+    "goToSlide": "转到幻灯片"
+  }
+}

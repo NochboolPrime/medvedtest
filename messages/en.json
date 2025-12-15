@@ -1,0 +1,796 @@
+{
+  "header": {
+    "companyName": "TD Medved",
+    "companySubtitle": "Oil & Gas Equipment",
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "products": "Products",
+      "catalog": "Catalog",
+      "services": "Services",
+      "contacts": "Contacts"
+    },
+    "phone": "+7 (495) 777-56-60",
+    "email": "info@aomedved.ru",
+    "contactButton": "Contact Us"
+  },
+  "hero": {
+    "title": "Exceptional Solutions for Exceptional Challenges",
+    "description": "Design, manufacture, service — turnkey. Reliable solutions for the oil & gas industry and mechanical engineering.",
+    "contactButton": "Contact Us",
+    "certificatesButton": "Certificates",
+    "scrollDown": "Scroll down"
+  },
+  "about": {
+    "title": "About Company",
+    "mission": "We create a sustainable, multifaceted and independent company through investment in people, technology and production facilities.",
+    "principlesTitle": "Business Principles",
+    "principles": [
+      "Business diversity — development of several business areas",
+      "Investment in people, technology and production facilities",
+      "Process improvement and operational efficiency enhancement",
+      "Development of import and export activities"
+    ],
+    "strategyTitle": "Development Strategy",
+    "strategy": [
+      "Investment in people and technology",
+      "Development of high-tech production cluster",
+      "Expansion of civilian sector activities",
+      "Development of import and export directions"
+    ],
+    "certificatesTitle": "Certificates",
+    "certificates": {
+      "iso9001": {
+        "title": "ISO 9001:2015",
+        "description": "Quality Management System"
+      },
+      "iso14001": {
+        "title": "ISO 14001:2015",
+        "description": "Environmental Management System"
+      },
+      "iso45001": {
+        "title": "ISO 45001:2018",
+        "description": "Occupational Health and Safety Management System"
+      },
+      "compliance": {
+        "title": "Certificate of Compliance",
+        "description": "Customs Union Technical Regulations"
+      }
+    },
+    "close": "Close"
+  },
+  "equipment": {
+    "items": {
+      "cementingUnit": {
+        "title": "Cementing Unit CA-320",
+        "description": "High-performance unit for well cementing",
+        "features": ["Pressure up to 70 MPa", "Automated system", "Enhanced reliability", "24/7 support"]
+      },
+      "mobilePump": {
+        "title": "Mobile Pumping Station",
+        "description": "Mobile high-pressure unit for flushing and fracturing",
+        "features": ["Flow rate 2500 l/min", "High mobility", "Modern equipment", "Quick installation"]
+      },
+      "fracturingComplex": {
+        "title": "Fracturing Complex",
+        "description": "Modern automated hydraulic fracturing unit",
+        "features": ["Automated control", "Parameter monitoring", "High efficiency", "Operational safety"]
+      },
+      "multifunctionalUnit": {
+        "title": "Multifunctional Unit",
+        "description": "Universal equipment for various technological operations",
+        "features": ["Universal application", "Enhanced mobility", "Reliable construction", "Easy maintenance"]
+      }
+    },
+    "detailsButton": "Details"
+  },
+  "products": {
+    "title": "Our Products",
+    "description": "High-quality equipment for oil and gas industry",
+    "categories": {
+      "cementing": "Cementing",
+      "fracturing": "Hydraulic Fracturing",
+      "pumps": "Pumping Equipment"
+    },
+    "items": {
+      "cementingUnit": {
+        "name": "Cementing Unit CA-320M",
+        "description": "Cementing unit designed for well cementing operations"
+      },
+      "mixingUnit": {
+        "name": "Mixing Unit SMN-20",
+        "description": "For preparation and delivery of cement slurry"
+      },
+      "fracturingUnit": {
+        "name": "Fracturing Unit AN-700",
+        "description": "For hydraulic fracturing operations"
+      },
+      "highPressurePump": {
+        "name": "High Pressure Pump NVD-2500",
+        "description": "Plunger high pressure pump for oilfield services"
+      }
+    },
+    "detailsButton": "Details",
+    "catalogButton": "View Full Catalog"
+  },
+  "productDetail": {
+    "backButton": "Back to products",
+    "downloadCatalog": "Download Catalog",
+    "descriptionTitle": "Description",
+    "consultationTitle": "Get Consultation",
+    "consultationDescription": "Our specialists will help you choose the optimal solution for your tasks",
+    "contactButton": "Contact Us",
+    "specificationsTitle": "Technical Specifications",
+    "featuresTitle": "Advantages",
+    "applicationsTitle": "Applications",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
+    "goToImage": "Go to image"
+  },
+  "transportationDetail": {
+    "backButton": "Back to equipment",
+    "goToCatalog": "Go to Catalog",
+    "videoTitle": "Product Video",
+    "descriptionTitle": "Description",
+    "specificationsTitle": "Technical Specifications",
+    "advantagesTitle": "Advantages",
+    "applicationsTitle": "Applications",
+    "keyFeaturesTitle": "Key Features",
+    "contactTitle": "Contact Us",
+    "consultationButton": "Get Consultation"
+  },
+  "services": {
+    "title": "Our Services",
+    "details": {
+      "cementirovanie": {
+        "title": "Cementing Units",
+        "description": "Design and manufacturing of mobile cementing installations",
+        "fullDescription": "We specialize in the design, manufacturing, and supply of modern cementing units for the oil and gas industry. Our equipment meets the highest quality and reliability standards, ensuring efficient well cementing operations in any climatic conditions.",
+        "benefits": [
+          "Use of components from leading global manufacturers",
+          "Proprietary control system in manual and automatic modes",
+          "Full warranty and service maintenance",
+          "Compliance with international safety standards",
+          "Operation capability at temperatures from -45°C to +50°C",
+          "Quick payback due to high reliability"
+        ],
+        "process": [
+          {
+            "title": "Consultation and needs analysis",
+            "description": "We study your requirements and equipment operating conditions"
+          },
+          {
+            "title": "Solution design",
+            "description": "We develop technical specifications and equipment project"
+          },
+          {
+            "title": "Production and quality control",
+            "description": "Manufacturing in compliance with all standards and multi-stage control"
+          },
+          {
+            "title": "Delivery and commissioning",
+            "description": "Delivery, installation, commissioning and personnel training"
+          }
+        ],
+        "whyUs": [
+          "Over 15 years of experience in oil and gas engineering",
+          "Own production and engineering center",
+          "Quality guarantee for all equipment",
+          "Qualified technical support 24/7"
+        ]
+      },
+      "grp": {
+        "title": "Fracturing Equipment",
+        "description": "Comprehensive solutions for hydraulic fracturing",
+        "fullDescription": "We provide a complete set of equipment for hydraulic fracturing operations. Our units are equipped with modern control and monitoring systems, ensuring maximum efficiency and safety of the process. We work with both new equipment and modernization of existing ones.",
+        "benefits": [
+          "High-precision automated control system",
+          "Continuous monitoring of all process parameters",
+          "Multi-level safety system",
+          "Remote operation control capability",
+          "Energy-efficient design",
+          "Compatibility with various types of proppant and fluids"
+        ],
+        "process": [
+          {
+            "title": "Feasibility study",
+            "description": "Analysis of geological conditions and selection of optimal equipment"
+          },
+          {
+            "title": "Configuration and preparation",
+            "description": "Formation of equipment set for specific tasks"
+          },
+          {
+            "title": "Installation and setup",
+            "description": "Equipment installation and setup of all control systems"
+          },
+          {
+            "title": "Training and support",
+            "description": "Personnel training and technical support of operations"
+          }
+        ],
+        "whyUs": [
+          "Comprehensive approach to fracturing tasks",
+          "Experience working at complex fields",
+          "Modern high-tech equipment",
+          "Full service maintenance throughout the service life"
+        ]
+      },
+      "nasosnoe": {
+        "title": "Pumping Equipment",
+        "description": "Supply and modernization of pumping units",
+        "fullDescription": "We supply a wide range of high-pressure pumping equipment for the oil and gas industry. We work directly with leading manufacturers, which allows us to offer competitive prices while maintaining high quality. We also carry out modernization and overhaul of existing equipment.",
+        "benefits": [
+          "Direct supplies from leading manufacturers",
+          "Wide range of pumps of various capacities",
+          "Complete technical documentation and certificates",
+          "Availability of spare parts in stock",
+          "Service maintenance and repair",
+          "Warranty for all supplied equipment"
+        ],
+        "process": [
+          {
+            "title": "Requirements determination",
+            "description": "Analysis of technical requirements and operating conditions"
+          },
+          {
+            "title": "Equipment selection",
+            "description": "Selection of optimal pumping equipment for the task"
+          },
+          {
+            "title": "Supply and installation",
+            "description": "Delivery, installation and commissioning works"
+          },
+          {
+            "title": "Maintenance",
+            "description": "Regular technical maintenance and support"
+          }
+        ],
+        "whyUs": [
+          "Direct contracts with equipment manufacturers",
+          "Own warehouse of spare parts",
+          "Team of experienced service engineers",
+          "Flexible delivery and payment terms"
+        ]
+      },
+      "modernizaciya": {
+        "title": "Modernization and Repair",
+        "description": "Overhaul and equipment modernization",
+        "fullDescription": "We provide services for overhaul and modernization of oil and gas equipment. Our experience allows us to significantly extend the service life of equipment, improve its technical characteristics and reduce operating costs. We work with equipment from any manufacturers.",
+        "benefits": [
+          "Comprehensive diagnostics of technical condition",
+          "Replacement of worn units and assemblies",
+          "Modernization of control and automation systems",
+          "Extension of equipment service life",
+          "Improvement of technical characteristics",
+          "Reduction of operating costs"
+        ],
+        "process": [
+          {
+            "title": "Technical diagnostics",
+            "description": "Complete assessment of current equipment condition"
+          },
+          {
+            "title": "Work program development",
+            "description": "Preparation of repair and modernization plan with cost calculation"
+          },
+          {
+            "title": "Work execution",
+            "description": "Repair and modernization according to the approved plan"
+          },
+          {
+            "title": "Testing and commissioning",
+            "description": "Control tests and equipment handover to the customer"
+          }
+        ],
+        "whyUs": [
+          "Experience working with equipment from various manufacturers",
+          "Own production facility",
+          "Availability of necessary spare parts",
+          "Warranty for completed work"
+        ]
+      }
+    },
+    "items": {
+      "cementing": {
+        "title": "Well Cementing",
+        "description": "Design and manufacturing of well cementing equipment, including cementing complexes."
+      },
+      "fracturing": {
+        "title": "Hydraulic Fracturing",
+        "description": "Design and manufacturing of hydraulic fracturing equipment."
+      },
+      "pumps": {
+        "title": "Pumping Equipment",
+        "description": "Supply of pumping equipment (high pressure plunger pumps) for well completion and production enhancement tasks."
+      },
+      "modernization": {
+        "title": "Modernization and Repair",
+        "description": "Modernization, overhaul, service life extension (including software) for cementing equipment and hydraulic fracturing equipment."
+      }
+    },
+    "detailsButton": "Details"
+  },
+  "serviceDetail": {
+    "aboutServiceTitle": "About Service",
+    "guaranteeBadge": "Quality Guarantee",
+    "teamBadge": "Experienced Team",
+    "supportBadge": "24/7 Support",
+    "benefitsTitle": "Benefits",
+    "processTitle": "Work Process",
+    "whyUsTitle": "Why Choose Us",
+    "ctaTitle": "Ready to Start?",
+    "ctaDescription": "Contact us for detailed consultation and commercial offer",
+    "ctaButton": "Get Consultation"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Ready to discuss your project? Write to us or call",
+    "form": {
+      "name": "Your Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "company": "Company",
+      "captcha": "Enter code from image",
+      "refreshCaptcha": "Refresh code",
+      "required": "Required field",
+      "consent": "I agree to the processing of personal data",
+      "consentLink": "privacy policy",
+      "consentText": "By joining this Agreement and providing my data, I confirm that all specified data belongs personally to me, and I consent to the processing of my personal data in accordance with the",
+      "submit": "Send",
+      "sending": "Sending...",
+      "success": "Message sent!",
+      "error": "Sending error",
+      "errorCaptcha": "Invalid code from image",
+      "errorConsent": "Consent to data processing is required"
+    },
+    "info": {
+      "address": "Address",
+      "addressValue": "Moscow, Sample Street, 1",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Working Hours",
+      "hoursValue": "Mon-Fri: 9:00 AM - 6:00 PM"
+    }
+  },
+  "footer": {
+    "companyName": "TD Medved",
+    "companyDescription": "Reliable solutions for oil & gas industry",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "contacts": "Contacts",
+    "address": "Address",
+    "addressValue": "Moscow, Sample Street, 1",
+    "phone": "Phone",
+    "email": "Email",
+    "rights": "All rights reserved",
+    "privacyPolicy": "Privacy Policy",
+    "personalData": "Personal Data Processing"
+  },
+  "catalog": {
+    "title": "Product Catalog",
+    "subtitle": "Professional equipment for oil & gas industry",
+    "search": "Search equipment...",
+    "filters": {
+      "title": "Filters",
+      "categories": "Categories",
+      "allCategories": "All Categories",
+      "priceRange": "Price Range",
+      "showFilters": "Show filters",
+      "hideFilters": "Hide filters",
+      "reset": "Reset",
+      "activeFilters": "Active filters"
+    },
+    "sort": {
+      "label": "Sort",
+      "nameAsc": "By name (A-Z)",
+      "nameDesc": "By name (Z-A)",
+      "priceAsc": "By price (asc)",
+      "priceDesc": "By price (desc)"
+    },
+    "noResults": "No products found",
+    "noResultsDescription": "Try changing search parameters",
+    "foundProducts": "Products found",
+    "viewDetails": "Details",
+    "price": "Price",
+    "backButton": "Back",
+    "downloadPDF": "Download PDF catalog",
+    "pdfDescription": "Description",
+    "pdfKeyFeatures": "Key Features",
+    "pdfTitle": "Equipment Catalog"
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "russian": "Русский",
+    "english": "English",
+    "chinese": "中文"
+  },
+  "common": {
+    "backButton": "Back",
+    "close": "Close",
+    "learnMore": "Learn More"
+  },
+  "cookieConsent": {
+    "title": "We use cookies",
+    "description": "This site uses cookies to improve user experience and analyze traffic. By continuing to use the site, you agree to our",
+    "privacyPolicy": "privacy policy",
+    "accept": "Accept",
+    "close": "Close"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "subtitle": "Personal Data Processing Agreement",
+    "backToHome": "Back to home",
+    "lastUpdated": "Last updated",
+    "intro": {
+      "text": "By joining this Agreement and providing your data on the medved-neftegaz.ru Website (hereinafter referred to as the Website), by filling out the form fields, the User:",
+      "items": [
+        "confirms that all data specified by them belongs personally to them;",
+        "confirms and acknowledges that they have carefully read the Agreement and the terms of processing their personal data specified in the form fields (registration) in full, the text of the agreement and the terms of personal data processing are clear to them;",
+        "gives consent to the Website to process the personal data provided as part of the information for the purpose of concluding this Agreement between them and the Website, as well as its subsequent execution;",
+        "gives consent to the transfer of their personal data;",
+        "expresses consent to the terms of personal data processing."
+      ]
+    },
+    "sections": {
+      "owner": {
+        "title": "Website Owner",
+        "content": "The owner of the medved-neftegaz.ru website is Limited Liability Company \"Trading House \"Medved\"",
+        "inn": "TIN 7707482792",
+        "ogrn": "PSRN 1237700059211",
+        "address": "Address: 107031, Moscow, INT.TER.C. Tverskoy Municipal District, Bolshaya Dmitrovka St., Building 32, Structure 9, Room 3"
+      },
+      "consent": {
+        "title": "Consent to Personal Data Processing",
+        "content": "The User gives their consent to the processing of their personal data, namely the performance of actions provided for in paragraph 3 of part 1 of Article 3 of Federal Law No. 152-FZ dated July 27, 2006 \"On Personal Data\", and confirms that by giving such consent, they act freely, of their own will and in their own interest.",
+        "details": "The User's consent to the processing of personal data is specific, informed and conscious.",
+        "form": "This consent of the User is considered executed in simple written form for the processing of the following personal data:",
+        "dataTypes": ["name;", "phone number;", "email address (e-mail)."]
+      },
+      "operations": {
+        "title": "Operations with Personal Data",
+        "content": "The User provides medved-neftegaz.ru with the right to perform the following actions (operations) with personal data: collection and accumulation; storage for the periods established by regulatory documents for storage of reports, but not less than three years from the date of termination of the User's use of services; clarification (update, change); use; destruction; depersonalization; transfer at the request of the court, including to third parties, in compliance with measures ensuring the protection of personal data from unauthorized access."
+      },
+      "duration": {
+        "title": "Duration of Consent",
+        "content": "This consent is valid indefinitely from the moment of providing the data and can be revoked by you by submitting an application to the website administration with the data specified in Article 14 of the Law \"On Personal Data\".",
+        "withdrawal": "Withdrawal of consent to the processing of personal data can be carried out by the User sending a corresponding order in simple written form to the email address info@aomedved.ru"
+      },
+      "liability": {
+        "title": "Liability",
+        "content": "The Website is not responsible for the use (both lawful and unlawful) by third parties of Information posted by the User on the Website, including its reproduction and distribution, carried out in all possible ways."
+      },
+      "changes": {
+        "title": "Changes to the Agreement",
+        "content": "The Website has the right to make changes to this Agreement. When making changes, the date of the last update is indicated in the current version. The new version of the Agreement comes into force from the moment of its posting, unless otherwise provided by the new version of the Agreement.",
+        "location": "The current version of the Agreement is located on the page at: https://medved-neftegaz.ru/privacy-policy"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "content": "This Consent is recognized by me as my written consent to the processing of my personal data, given in accordance with Article 9 of Federal Law No. 152-FZ dated July 27, 2006 \"On Personal Data\".",
+        "dataSubject": "By this Consent, I confirm that I am the subject of the personal data provided, and also confirm the accuracy of the data provided.",
+        "awareness": "I am aware that registering and/or submitting a request to receive an offer and/or subscribing to receive advertising information on the Website means my written consent to the terms described in this Consent."
+      }
+    }
+  },
+  "personalData": {
+    "title": "Personal Data Processing",
+    "backToHome": "Back to home",
+    "lastUpdated": "Last updated",
+    "sections": {
+      "operator": {
+        "title": "1. Personal Data Operator",
+        "content": "The personal data operator is TD Medved JSC (hereinafter referred to as the Operator), which processes users' personal data in accordance with Federal Law No. 152-FZ dated July 27, 2006 \"On Personal Data\"."
+      },
+      "purposes": {
+        "title": "2. Purposes of Personal Data Processing",
+        "content": "The Operator processes personal data for the following purposes:",
+        "items": [
+          "Providing information about company services and products",
+          "Processing user requests and inquiries",
+          "Conclusion and execution of contracts",
+          "Informing about new services and special offers",
+          "Conducting statistical and other research"
+        ]
+      },
+      "legal": {
+        "title": "3. Legal Grounds for Processing",
+        "content": "Personal data processing is carried out on the basis of:",
+        "items": [
+          "Consent of the personal data subject",
+          "Contract to which the personal data subject is a party",
+          "Legislation of the Russian Federation"
+        ]
+      },
+      "categories": {
+        "title": "4. Categories of Processed Data",
+        "content": "The Operator processes the following categories of personal data:",
+        "items": [
+          "Last name, first name, patronymic",
+          "Contact information (email address, phone number)",
+          "Position and organization name",
+          "Website usage data"
+        ]
+      },
+      "methods": {
+        "title": "5. Processing Methods",
+        "content": "Personal data processing is carried out using automation tools and without such tools. The Operator applies the following processing methods:",
+        "items": [
+          "Collection, recording, systematization, accumulation, storage",
+          "Clarification (updating, modification)",
+          "Extraction, use, transfer (provision, access)",
+          "Depersonalization, blocking, deletion, destruction"
+        ]
+      },
+      "period": {
+        "title": "6. Personal Data Processing Period",
+        "content": "Personal data is processed for the period necessary to achieve processing purposes, unless otherwise provided by law. After achieving processing purposes or upon withdrawal of consent, personal data is deleted or depersonalized."
+      },
+      "rights": {
+        "title": "7. Rights of Personal Data Subjects",
+        "content": "The personal data subject has the right to:",
+        "items": [
+          "Receive information regarding the processing of their personal data",
+          "Request clarification, blocking or destruction of personal data",
+          "Withdraw consent to personal data processing",
+          "Appeal the actions or inaction of the Operator to the authorized body",
+          "Protect their rights and legitimate interests, including compensation for damages"
+        ]
+      },
+      "security": {
+        "title": "8. Personal Data Protection Measures",
+        "content": "The Operator takes necessary legal, organizational and technical measures to protect personal data from unlawful or accidental access, destruction, modification, blocking, copying, provision, distribution, as well as from other unlawful actions."
+      },
+      "contact": {
+        "title": "9. Contact Information",
+        "company": "TD Medved JSC",
+        "address": "Address: 107031, Moscow, VN.TER.G. Tverskoy Municipal District, Dmitrovka B. str., 32, building 9, room 3",
+        "phone": "Phone",
+        "email": "Email"
+      }
+    }
+  },
+  "productData": {
+    "tsementirovaniye": {
+      "title": "Cementing Equipment",
+      "description": "Mobile cementing units for well completion",
+      "longDescription": "Our cementing equipment consists of modern mobile units designed for quality completion of oil and gas wells. We use advanced technologies and components from leading global manufacturers, ensuring reliability and efficiency in the most challenging conditions.",
+      "specifications": {
+        "pressure": { "label": "Working Pressure", "value": "Up to 70 MPa" },
+        "capacity": { "label": "Flow Rate", "value": "2000-3500 l/min" },
+        "power": { "label": "Engine Power", "value": "600-800 HP" },
+        "tankVolume": { "label": "Tank Volume", "value": "5000-7000 l" },
+        "temperature": { "label": "Temperature Range", "value": "From -45°C to +50°C" }
+      },
+      "features": [
+        "Components from world's best manufacturers",
+        "Proprietary control system in manual and automatic modes",
+        "Warranty and service maintenance",
+        "Automated dosing and mixing system",
+        "Real-time parameter monitoring system",
+        "Enhanced structural reliability"
+      ],
+      "applications": [
+        "Primary and secondary well cementing",
+        "Repair work for interval isolation",
+        "Well abandonment and conservation",
+        "Operation in harsh climatic conditions"
+      ]
+    },
+    "grp": {
+      "title": "Fracturing Equipment",
+      "description": "High-pressure hydraulic fracturing units",
+      "longDescription": "Our hydraulic fracturing (HF) units are designed for oil and gas production intensification. The equipment creates fractures in the productive formation, significantly increasing rock permeability and substantially boosting well flow rates.",
+      "specifications": {
+        "pressure": { "label": "Maximum Pressure", "value": "Up to 100 MPa" },
+        "capacity": { "label": "Flow Rate", "value": "3000-4500 l/min" },
+        "power": { "label": "Engine Power", "value": "1000-1500 HP" },
+        "proppant": { "label": "Proppant Concentration", "value": "Up to 25 kg/m³" },
+        "mobility": { "label": "Mobility", "value": "Trailer/semi-trailer configuration" }
+      },
+      "features": [
+        "High-precision process control system",
+        "Automatic pressure and flow control",
+        "Fracturing fluid and proppant mixing system",
+        "Overload protection and emergency systems",
+        "Remote parameter monitoring",
+        "Energy-efficient design"
+      ],
+      "applications": [
+        "Hydraulic fracturing on oil wells",
+        "HF at gas fields",
+        "Multi-stage fracturing of horizontal wells",
+        "Repeat HF for flow rate recovery"
+      ]
+    },
+    "nasos": {
+      "title": "Pumping Equipment",
+      "description": "High-pressure pumping units and systems",
+      "longDescription": "Our pumping equipment consists of modern high-performance units designed for a wide range of tasks in the oil and gas industry. The units ensure reliable operation at high pressures and large volumes of pumped fluid.",
+      "specifications": {
+        "pressure": { "label": "Working Pressure", "value": "Up to 80 MPa" },
+        "capacity": { "label": "Flow Rate", "value": "2500-5000 l/min" },
+        "power": { "label": "Engine Power", "value": "700-1200 HP" },
+        "pumpType": { "label": "Pump Type", "value": "Three-plunger pump" },
+        "weight": { "label": "Unit Weight", "value": "18-25 tons" }
+      },
+      "features": [
+        "Smooth capacity adjustment",
+        "Automatic lubrication system",
+        "Built-in cooling system",
+        "Cavitation and water hammer protection",
+        "Quick-change plunger blocks",
+        "Low vibration and noise levels"
+      ],
+      "applications": [
+        "Well flushing and completion",
+        "Pipeline pressure testing",
+        "Process fluid injection",
+        "Fluid supply for HF"
+      ]
+    }
+  },
+  "transportationData": {
+    "cementirovochnyj-agregat": {
+      "title": "Cementing Unit CA-320",
+      "description": "High-performance unit for well cementing",
+      "fullDescription": "The CA-320 cementing unit is modern high-tech equipment designed for cementing casing strings in oil and gas wells. The unit ensures reliable casing fixation and creation of a quality cement ring.",
+      "features": ["Pressure up to 70 MPa", "Automated system", "Enhanced reliability", "24/7 support"],
+      "specifications": {
+        "maxPressure": { "label": "Maximum Pressure", "value": "70 MPa" },
+        "capacity": { "label": "Flow Rate", "value": "Up to 2500 l/min" },
+        "tankVolume": { "label": "Mixing Tank Volume", "value": "6 m³" },
+        "power": { "label": "Engine Power", "value": "400 HP" },
+        "chassis": { "label": "Chassis Type", "value": "KAMAZ 6x6" },
+        "temperature": { "label": "Temperature Range", "value": "from -45°C to +50°C" }
+      },
+      "advantages": [
+        "High reliability and equipment performance",
+        "Automated process control system",
+        "Operation capability in harsh climatic conditions",
+        "Experienced qualified personnel",
+        "24/7 technical support",
+        "Full compliance with safety standards"
+      ],
+      "applications": [
+        "Casing cementing",
+        "Repair and isolation works",
+        "Inter-annular flow elimination",
+        "New well construction",
+        "Well workover"
+      ]
+    },
+    "peredvizhnaya-nasosnaya": {
+      "title": "Mobile Pumping Station",
+      "description": "Mobile high-pressure unit for flushing and fracturing",
+      "fullDescription": "The mobile high-pressure pumping station is designed to perform a wide range of technological operations in the oil and gas industry. The unit provides working fluid supply under high pressure for various well treatment operations.",
+      "features": ["Flow rate 2500 l/min", "High mobility", "Modern equipment", "Quick setup"],
+      "specifications": {
+        "maxPressure": { "label": "Maximum Pressure", "value": "100 MPa" },
+        "capacity": { "label": "Flow Rate", "value": "2500 l/min" },
+        "power": { "label": "Pump Power", "value": "2000 HP" },
+        "driveType": { "label": "Drive Type", "value": "Diesel" },
+        "chassis": { "label": "Chassis Type", "value": "Semi-trailer" },
+        "setupTime": { "label": "Setup Time", "value": "30 minutes" }
+      },
+      "advantages": [
+        "High performance and efficiency",
+        "Quick deployment at site",
+        "Modern parameter control system",
+        "Low operating costs",
+        "Universal application",
+        "High equipment mobility"
+      ],
+      "applications": [
+        "Hydraulic fracturing (HF)",
+        "Well flushing",
+        "Acid treatments",
+        "Hydro-sandblasting perforation",
+        "Near-wellbore zone cleaning"
+      ]
+    },
+    "kompleks-grp": {
+      "title": "Fracturing Complex",
+      "description": "Modern automated hydraulic fracturing unit",
+      "fullDescription": "The hydraulic fracturing complex is next-generation high-tech equipment equipped with modern automation and control systems. The complex is designed for oil and gas production intensification operations using hydraulic fracturing method.",
+      "features": ["Automated control", "Parameter monitoring", "High efficiency", "Operational safety"],
+      "specifications": {
+        "maxPressure": { "label": "Maximum Pressure", "value": "140 MPa" },
+        "hydraulicPower": { "label": "Hydraulic Power", "value": "2500 HP" },
+        "capacity": { "label": "Flow Rate", "value": "Up to 3000 l/min" },
+        "controlSystem": { "label": "Control System", "value": "Automated" },
+        "unitCount": { "label": "Number of Units", "value": "6-8 units" },
+        "proppantVolume": { "label": "Proppant Volume", "value": "Up to 150 tons" }
+      },
+      "advantages": [
+        "Fully automated process",
+        "High precision parameter control",
+        "Maximum HF efficiency",
+        "Modern safety systems",
+        "Environmental friendliness",
+        "Fast complex mobilization"
+      ],
+      "applications": [
+        "Multi-stage hydraulic fracturing",
+        "HF of horizontal wells",
+        "Oil production intensification",
+        "Well productivity enhancement",
+        "Shale field operations"
+      ]
+    },
+    "mnogofunkcionalnaya-ustanovka": {
+      "title": "Multifunctional Unit",
+      "description": "Universal equipment for various technological operations",
+      "fullDescription": "The multifunctional unit is a universal solution for performing a wide range of technological operations in the oil and gas industry. The equipment combines the functionality of several specialized units, significantly improving work efficiency.",
+      "features": ["Universal application", "Enhanced mobility", "Reliable construction", "Easy maintenance"],
+      "specifications": {
+        "maxPressure": { "label": "Maximum Pressure", "value": "80 MPa" },
+        "capacity": { "label": "Flow Rate", "value": "2000 l/min" },
+        "power": { "label": "Unit Power", "value": "600 HP" },
+        "tankVolume": { "label": "Tank Volume", "value": "8 m³" },
+        "chassis": { "label": "Chassis Type", "value": "URAL 6x6" },
+        "autonomy": { "label": "Operating Autonomy", "value": "12 hours" }
+      },
+      "advantages": [
+        "Versatility and multifunctionality",
+        "High mobility and off-road capability",
+        "Reliable construction for heavy conditions",
+        "Easy maintenance and operation",
+        "Economic efficiency",
+        "Quick reconfiguration for various operations"
+      ],
+      "applications": [
+        "Well workover",
+        "Well flushing and completion",
+        "Equipment pressure testing",
+        "Process fluid injection",
+        "Auxiliary drilling operations"
+      ]
+    }
+  },
+  "excellence": {
+    "title": "Manufacturing Output",
+    "description": "Our solutions and effective technologies help clients achieve exceptional results in the oil and gas industry",
+    "features": {
+      "technology": {
+        "title": "Technology Availability",
+        "description": "Modern equipment and advanced production technologies"
+      },
+      "flexibility": {
+        "title": "Solution Flexibility",
+        "description": "Individual approach to each project and task"
+      },
+      "reliability": {
+        "title": "Reliability",
+        "description": "Quality guarantee and equipment durability"
+      },
+      "efficiency": {
+        "title": "Efficiency",
+        "description": "Fast order fulfillment and technical support"
+      }
+    }
+  },
+  "aboutSection": {
+    "title": "About Company",
+    "description": "TD Medved is a leading manufacturer of equipment for the oil and gas industry. We specialize in the design and manufacture of cementing units, hydraulic fracturing equipment and pumping equipment. Our manufactured products meet the highest standards of quality and reliability.",
+    "whyTitle": "Why Choose Us?",
+    "advantages": [
+      "Own production facility",
+      "Flexible cooperation terms",
+      "Individual approach to each project",
+      "Full cycle: from design to installation",
+      "Warranty and post-warranty service"
+    ]
+  },
+  "production": {
+    "title": "Production",
+    "image1": "Industrial oil and gas facility",
+    "image2": "Interior view of production complex",
+    "image3": "Oil refinery plant",
+    "image4": "Industrial equipment for oil extraction",
+    "previous": "Previous",
+    "next": "Next",
+    "goToSlide": "Go to slide"
+  }
+}

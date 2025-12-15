@@ -4,43 +4,49 @@ import { useState } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const equipmentCategories = [
-  {
-    title: "Цементировочное оборудование",
-    description: "Мобильные цементировочные агрегаты для крепления скважин",
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759479_y-eK02YrFkD1Qf5xscDS3uYNm1Z0oCpS.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759475_y-NKbaasU6vUDHg4dfBRQSb4UDV1l27t.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759476_y-L78Y5178SXiuEJKpF1MjyQxpzzouRa.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759478_y-DT0q16j50seChhkn1kytET7TDNFsxM.jpg",
-    ],
-  },
-  {
-    title: "Оборудование для ГРП",
-    description: "Установки для гидроразрыва пластов высокого давления",
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759477_y-OnujmTYlD8N1eQPCjkvA3Pr1DtMZvf.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759472_y-KmQz1i8UcX3IsuM3UI5TjGUIv8kVpA.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759474_y-3jDmMHOuKsjV4608APsWk2w3iyRqhZ.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759473_y-mq7FNVr9OQinhg23r5EzFKc9yeMoBI.jpg",
-    ],
-  },
-  {
-    title: "Насосное оборудование",
-    description: "Насосные агрегаты и системы высокого давления",
-    images: [
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759489_y-nwTKwwULG6SbtsT9RqEBZ4X6Pb5CZb.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759481_y-Oxd0mXZGmdbNzu8vB3ebayrBPkdduE.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759485_y-pvZeV9G1rSA7i4L223lJxsPX2nfLzK.jpg",
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/photo_5460756544556759487_y-ianx8nBikEGA2jt63hszEfv9DIpt1X.jpg",
-    ],
-  },
-]
+import Link from "next/link"
+import { useTranslations } from "@/hooks/use-translations"
 
 export function Equipment() {
   const [activeCategory, setActiveCategory] = useState(0)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const t = useTranslations()
+
+  const equipmentCategories = [
+    {
+      title: t("products.items.cementingUnit.name"),
+      description: t("products.items.cementingUnit.description"),
+      slug: "tsementirovaniye",
+      images: [
+        "/images/photo-5460756544556759479-y.jpg",
+        "/images/photo-5460756544556759475-y.jpg",
+        "/images/photo-5460756544556759476-y.jpg",
+        "/images/photo-5460756544556759478-y.jpg",
+      ],
+    },
+    {
+      title: t("products.items.fracturingUnit.name"),
+      description: t("products.items.fracturingUnit.description"),
+      slug: "grp",
+      images: [
+        "/images/photo-5460756544556759477-y.jpg",
+        "/images/photo-5460756544556759472-y.jpg",
+        "/images/photo-5460756544556759474-y.jpg",
+        "/images/photo-5460756544556759473-y.jpg",
+      ],
+    },
+    {
+      title: t("products.items.highPressurePump.name"),
+      description: t("products.items.highPressurePump.description"),
+      slug: "nasos",
+      images: [
+        "/images/photo-5460756544556759489-y.jpg",
+        "/images/photo-5460756544556759481-y.jpg",
+        "/images/photo-5460756544556759485-y.jpg",
+        "/images/photo-5460756544556759487-y.jpg",
+      ],
+    },
+  ]
 
   const currentCategory = equipmentCategories[activeCategory]
   const totalImages = currentCategory.images.length
@@ -59,10 +65,8 @@ export function Equipment() {
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         {/* Section header */}
         <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl mb-4 font-extrabold">Наша продукция</h2>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            Производство нефтепромыслового оборудования для цементирования скважин и гидроразрыва пластов
-          </p>
+          <h2 className="text-3xl md:text-4xl mb-4 font-extrabold">{t("products.title")}</h2>
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">{t("products.description")}</p>
         </div>
 
         {/* Category tabs */}
@@ -148,9 +152,11 @@ export function Equipment() {
               </div>
             </div>
 
-            <Button size="lg" className="bg-white text-[#1a1a1a] hover:bg-white/90 font-semibold">
-              Подробнее о продукции
-            </Button>
+            <Link href={`/products/${currentCategory.slug}`}>
+              <Button size="lg" className="bg-white text-[#1a1a1a] hover:bg-white/90 font-semibold">
+                {t("products.detailsButton")}
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

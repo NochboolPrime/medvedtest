@@ -2,6 +2,9 @@ import type React from "react"
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeDesignHelper } from "@/components/theme-design-helper"
+import { LanguageProvider } from "@/components/language-provider"
 
 const onestRegular = localFont({
   src: "../public/fonts/OnestRegular1602-hint.ttf",
@@ -44,11 +47,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" suppressHydrationWarning>
       <body
         className={`${onestRegular.variable} ${onestMedium.variable} ${onestBold.variable} ${onestLight.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+          <LanguageProvider>
+            <ThemeDesignHelper />
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

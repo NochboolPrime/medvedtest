@@ -1,0 +1,401 @@
+"use client"
+
+import type React from "react"
+
+import { useState, useEffect } from "react"
+import { Phone, Mail, User, RefreshCw } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import Link from "next/link"
+import { useToast } from "@/hooks/use-toast"
+
+interface ConsultationModalProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+}
+
+const generateCaptchaImage = (text: string): string => {
+  console.log("[v0] ConsultationModal - generateCaptchaImage called with:", text)
+
+  const canvas = document.createElement("canvas")
+  canvas.width = 180
+  canvas.height = 60
+  const ctx = canvas.getContext("2d")
+
+  if (!ctx) {
+    console.error("[v0] ConsultationModal - Failed to get canvas context")
+    return ""
+  }
+
+  // Background
+  ctx.fillStyle = "#f3f4f6"
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+  // Random lines for noise
+  for (let i = 0; i < 3; i++) {
+    ctx.strokeStyle = `rgba(0,0,0,${Math.random() * 0.3})`
+    ctx.lineWidth = 1
+    ctx.beginPath()
+    ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height)
+    ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height)
+    ctx.stroke()
+  }
+
+  // Draw text with rotation
+  ctx.font = "bold 32px Arial"
+  ctx.textBaseline = "middle"
+
+  for (let i = 0; i < text.length; i++) {
+    ctx.save()
+    const x = 20 + i * 25
+    const y = canvas.height / 2
+    const angle = (Math.random() - 0.5) * 0.4
+
+    ctx.translate(x, y)
+    ctx.rotate(angle)
+    ctx.fillStyle = `hsl(${Math.random() * 360}, 70%, 40%)`
+    ctx.fillText(text[i], 0, 0)
+    ctx.restore()
+  }
+
+  const dataUrl = canvas.toDataURL()
+  console.log("[v0] ConsultationModal - Generated captcha image, length:", dataUrl.length)
+  return dataUrl
+}
+
+const generateCaptchaText = (): string => {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+  let captcha = ""
+  for (let i = 0; i < 6; i++) {
+    captcha += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return captcha
+}
+
+export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps) {
+  const { toast } = useToast()
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+    consent: false, // Added consent field
+  })
+
+  const [showCaptchaModal, setShowCaptchaModal] = useState(false)
+  const [captchaInput, setCaptchaInput] = useState("")
+  const [captchaText, setCaptchaText] = useState("")
+  const [captchaImage, setCaptchaImage] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    console.log("[v0] ConsultationModal - Component mounted, generating initial captcha")
+    const newText = generateCaptchaText()
+    console.log("[v0] ConsultationModal - New captcha text:", newText)
+    setCaptchaText(newText)
+
+    const newImage = generateCaptchaImage(newText)
+    console.log("[v0] ConsultationModal - New captcha image generated:", newImage ? "success" : "failed")
+    setCaptchaImage(newImage)
+  }, [])
+
+  const regenerateCaptcha = () => {
+    console.log("[v0] ConsultationModal - Regenerating captcha")
+    const newText = generateCaptchaText()
+    console.log("[v0] ConsultationModal - New captcha text:", newText)
+    setCaptchaText(newText)
+
+    const newImage = generateCaptchaImage(newText)
+    console.log("[v0] ConsultationModal - New captcha image generated:", newImage ? "success" : "failed")
+    setCaptchaImage(newImage)
+    setCaptchaInput("")
+    setErrors({})
+  }
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {}
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Имя обязательно для заполнения"
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Телефон обязателен для заполнения"
+    } else {
+      const phoneDigits = formData.phone.replace(/\D/g, "")
+      if (phoneDigits.length < 10) {
+        newErrors.phone = "Введите корректный номер телефона (минимум 10 цифр)"
+      } else if (phoneDigits.length > 15) {
+        newErrors.phone = "Номер телефона слишком длинный (максимум 15 цифр)"
+      }
+    }
+
+    if (!formData.consent) {
+      newErrors.consent = "Необходимо согласие на обработку персональных данных"
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!validateForm()) {
+      return
+    }
+
+    console.log("[v0] ConsultationModal - Opening captcha modal")
+    setShowCaptchaModal(true)
+  }
+
+  const handleCaptchaSubmit = async () => {
+    console.log("[v0] ConsultationModal - Captcha submit, input:", captchaInput, "expected:", captchaText)
+
+    if (!captchaInput.trim()) {
+      setErrors({ captcha: "Введите код с картинки" })
+      return
+    }
+
+    if (captchaInput.toUpperCase() !== captchaText) {
+      setErrors({ captcha: "Неверный код. Попробуйте снова" })
+      regenerateCaptcha()
+      return
+    }
+
+    setIsSubmitting(true)
+    setShowCaptchaModal(false)
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+
+      toast({
+        title: "Заявка отправлена",
+        description: "Наш специалист свяжется с вами в ближайшее время",
+      })
+
+      onOpenChange(false)
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        message: "",
+        consent: false,
+      })
+      setCaptchaInput("")
+      setErrors({})
+      regenerateCaptcha()
+    } catch (error) {
+      toast({
+        title: "Ошибка отправки",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="sm:max-w-[500px] bg-background border-border">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-foreground">Получить консультацию</DialogTitle>
+            <DialogDescription className="text-muted-foreground">
+              Оставьте свои контактные данные, и наш специалист свяжется с вами в ближайшее время
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-sm font-medium text-foreground">
+                Ваше имя <span className="text-white">*</span>
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="name"
+                  placeholder="Введите ваше имя"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="pl-10 bg-input border-border text-foreground placeholder:text-muted-foreground"
+                />
+              </div>
+              {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="phone" className="text-sm font-medium text-foreground">
+                Телефон <span className="text-white">*</span>
+              </label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="+7 (___) ___-__-__"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="pl-10 bg-input border-border text-foreground placeholder:text-muted-foreground"
+                />
+              </div>
+              {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm font-medium text-foreground">
+                Email
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="pl-10 bg-input border-border text-foreground placeholder:text-muted-foreground"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="message" className="text-sm font-medium text-foreground">
+                Сообщение
+              </label>
+              <Textarea
+                id="message"
+                placeholder="Расскажите о вашем проекте или задайте вопрос..."
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                rows={3}
+                className="bg-input border-border text-foreground placeholder:text-muted-foreground resize-none"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex items-start space-x-3">
+                <Checkbox
+                  id="consent"
+                  checked={formData.consent}
+                  onCheckedChange={(checked) => setFormData({ ...formData, consent: checked as boolean })}
+                  className="mt-0.5"
+                />
+                <Label
+                  htmlFor="consent"
+                  className="text-[11px] text-muted-foreground opacity-60 leading-snug cursor-pointer flex-1"
+                >
+                  Присоединяясь к настоящему Соглашению и оставляя свои данные, я даю согласие на обработку моих
+                  персональных данных в соответствии с{" "}
+                  <Link
+                    href="/privacy-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline"
+                  >
+                    политикой конфиденциальности
+                  </Link>
+                  .
+                </Label>
+              </div>
+              {errors.consent && <p className="text-red-500 text-sm">{errors.consent}</p>}
+            </div>
+
+            <div className="flex gap-3 pt-4">
+              <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="flex-1">
+                Отмена
+              </Button>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground"
+              >
+                {isSubmitting ? "Отправка..." : "Отправить"}
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showCaptchaModal} onOpenChange={setShowCaptchaModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Проверка безопасности</DialogTitle>
+            <DialogDescription>Введите код с картинки</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="flex gap-2 items-center justify-center">
+              {captchaImage ? (
+                <img
+                  src={captchaImage || "/placeholder.svg"}
+                  alt="Captcha"
+                  className="border border-border rounded"
+                  width={180}
+                  height={60}
+                />
+              ) : (
+                <div className="w-[180px] h-[60px] border border-border rounded flex items-center justify-center text-muted-foreground">
+                  Загрузка...
+                </div>
+              )}
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                onClick={regenerateCaptcha}
+                className="h-[60px] w-[60px] bg-transparent"
+              >
+                <RefreshCw className="h-5 w-5" />
+              </Button>
+            </div>
+            <div className="space-y-2">
+              <Input
+                value={captchaInput}
+                onChange={(e) => {
+                  setCaptchaInput(e.target.value)
+                  setErrors({})
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleCaptchaSubmit()
+                  }
+                }}
+                className="bg-background border-border text-foreground placeholder:text-muted-foreground h-14 text-lg text-center"
+                placeholder="Введите код"
+                autoFocus
+              />
+              {errors.captcha && <p className="text-red-500 text-sm text-center">{errors.captcha}</p>}
+            </div>
+            <div className="flex gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  setShowCaptchaModal(false)
+                  setCaptchaInput("")
+                  setErrors({})
+                }}
+                className="flex-1"
+              >
+                Отмена
+              </Button>
+              <Button
+                type="button"
+                onClick={handleCaptchaSubmit}
+                disabled={isSubmitting}
+                className="flex-1 bg-accent text-accent-foreground"
+              >
+                Подтвердить
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  )
+}

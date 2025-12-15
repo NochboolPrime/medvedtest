@@ -3,75 +3,99 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import { useTranslations } from "@/hooks/use-translations"
+import { useSiteContent } from "@/hooks/use-site-content"
+import { useState, useEffect } from "react"
 
 export function Hero() {
+  const t = useTranslations()
+  const { get, loading } = useSiteContent("hero")
+  const [bannerImage, setBannerImage] = useState(
+    "/images/nizkii-ugol-vystrela-sovremennogo-serogo-zdania-so-steklannymi-oknami.jpg",
+  )
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      try {
+        console.log("[v0] Hero: Fetching banner image")
+        const response = await fetch("/api/hero-banner")
+        const data = await response.json()
+
+        if (data.banner?.image_url) {
+          console.log("[v0] Hero: Banner loaded:", data.banner.image_url)
+          setBannerImage(data.banner.image_url)
+        }
+      } catch (error) {
+        console.error("[v0] Hero: Error fetching banner:", error)
+      }
+    }
+
+    fetchBanner()
+  }, [])
+
   const scrollToNextSection = () => {
-    const aboutSection = document.querySelector("#about")
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth", block: "start" })
+    const certificatesSection = document.querySelector("#certificates")
+    if (certificatesSection) {
+      certificatesSection.scrollIntoView({ behavior: "smooth", block: "start" })
     }
   }
 
+  const scrollToContact = () => {
+    const contactSection = document.querySelector("#contact")
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
+
+  const title = get("title") || t("hero.title")
+  const description = get("description") || t("hero.description")
+  const contactButton = get("contactButton") || t("hero.contactButton")
+  const certificatesButton = get("certificatesButton") || t("hero.certificatesButton")
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-start overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen lg:min-h-[85vh] 2xl:min-h-screen flex items-center justify-start overflow-hidden bg-card dark:bg-[#1a1f2e]"
+    >
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/design-mode/aerofotosnimok-zavodskih-gruzovikov-priparkovannyh-vozle-sklada-v-dnevnoe-vrema.jpg"
+          src={bannerImage || "/placeholder.svg"}
           alt="ТД Медведь - Складской комплекс"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1C2433]/95 via-[#1C2433]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-card/95 via-card/70 to-transparent dark:from-[#1a1f2e]/95 dark:via-[#1a1f2e]/70" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4 md:px-6 pt-32 pb-20">
+      <div className="container relative z-10 mx-auto px-4 md:px-6 pt-32 lg:pt-24 2xl:pt-32 pb-20 lg:pb-12 2xl:pb-20">
         <div className="max-w-3xl">
-          <h1 className="mb-6 text-3xl leading-tight text-white font-extrabold md:text-5xl">
-            Исключительные решения исключительных задач
+          <h1 className="mb-6 lg:mb-4 2xl:mb-6 text-3xl leading-tight text-foreground font-extrabold md:text-5xl lg:text-4xl 2xl:text-5xl">
+            {title}
           </h1>
 
-          <p className="mb-10 text-sm md:text-base text-[#EDF1F7] leading-relaxed max-w-2xl font-light">
-            Проектируем, производим, обслуживаем — под ключ. Надёжные решения для нефтегазовой отрасли и машиностроения.
+          <p className="mb-10 lg:mb-6 2xl:mb-10 text-sm leading-relaxed max-w-2xl font-light text-foreground md:text-xl lg:text-lg 2xl:text-xl">
+            {description}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 lg:gap-3 2xl:gap-4 mb-16 lg:mb-8 2xl:mb-16">
             <Button
               size="lg"
               className="bg-[#B19D76] text-white hover:bg-[#B19D76]/90 font-semibold text-base px-8 rounded-sm transition-all duration-200 hover:scale-105"
+              onClick={scrollToContact}
             >
-              Связаться с нами
+              {contactButton}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-[#B7C5DB] text-white hover:bg-[#B7C5DB] hover:text-[#1C2433] font-semibold text-base px-8 bg-transparent rounded-sm transition-all duration-200 hover:scale-105"
+              className="font-semibold text-base px-8 rounded-sm transition-all duration-200 hover:scale-105 bg-transparent"
+              onClick={scrollToNextSection}
             >
-              Узнать больше
+              {certificatesButton}
             </Button>
-          </div>
-
-          <div className="grid grid-cols-3 gap-6 md:gap-8 max-w-2xl">
-            <div className="text-left">
-              <div className="text-4xl md:text-5xl text-[#B19D76] mb-2 font-extrabold">100+</div>
-              <div className="text-xs md:text-sm text-[#B7C5DB] leading-tight font-light">
-                Успешно завершённых проектов
-              </div>
-            </div>
-            <div className="text-left">
-              <div className="text-4xl md:text-5xl text-[#B19D76] mb-2 font-extrabold">11</div>
-              <div className="text-xs md:text-sm text-[#B7C5DB] leading-tight font-light">
-                Регионов поставок
-                <br />
-                (Россия и СНГ)
-              </div>
-            </div>
-            <div className="text-left">
-              <div className="text-4xl md:text-5xl text-[#B19D76] mb-2 font-extrabold">10+</div>
-              <div className="text-xs md:text-sm text-[#B7C5DB] leading-tight font-light">Направлений работы</div>
-            </div>
           </div>
         </div>
       </div>
@@ -79,10 +103,10 @@ export function Hero() {
       <button
         onClick={scrollToNextSection}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer group"
-        aria-label="Прокрутить вниз"
+        aria-label={t("hero.scrollDown")}
       >
-        <div className="glass rounded-md p-3 border border-[#B7C5DB]/30 transition-all duration-200 group-hover:border-[#B19D76] group-hover:bg-[#B19D76]/10">
-          <ArrowRight className="h-5 w-5 text-[#B7C5DB] rotate-90 transition-colors group-hover:text-[#B19D76]" />
+        <div className="bg-background/80 border border-border rounded-md p-3 transition-all duration-200 group-hover:border-primary group-hover:bg-primary/10">
+          <ArrowRight className="h-5 w-5 text-foreground rotate-90 transition-colors group-hover:text-primary" />
         </div>
       </button>
     </section>
