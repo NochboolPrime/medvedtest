@@ -29,7 +29,7 @@ export async function POST(request: Request) {
   try {
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       console.error("[v0] Missing Supabase environment variables")
-      return NextResponse.json({ error: "Server configuration error: Missing Supabase credentials" }, { status: 500 })
+      return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
     }
 
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {

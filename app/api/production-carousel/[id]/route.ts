@@ -1,11 +1,11 @@
 import { createClient } from "@supabase/supabase-js"
 import { NextResponse } from "next/server"
 
-export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       console.error("[v0] Missing Supabase environment variables")
-      return NextResponse.json({ error: "Server configuration error: Missing Supabase credentials" }, { status: 500 })
+      return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
     }
 
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
@@ -16,7 +16,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     })
 
     const body = await request.json()
-    const { id } = await params
+    const { id } = params
 
     console.log("[v0] Updating production carousel item:", id, body)
 
@@ -54,11 +54,11 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       console.error("[v0] Missing Supabase environment variables")
-      return NextResponse.json({ error: "Server configuration error: Missing Supabase credentials" }, { status: 500 })
+      return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
     }
 
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
@@ -68,7 +68,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
       },
     })
 
-    const { id } = await params
+    const { id } = params
 
     console.log("[v0] Deleting production carousel item:", id)
 

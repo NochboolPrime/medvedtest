@@ -1,16 +1,27 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false,
-  },
-})
+function getSupabaseClient() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return null
+  }
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  })
+}
 
 export async function GET() {
   try {
     console.log("[v0] Fetching hero banner")
+
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      console.log("[v0] Supabase not configured, returning null")
+      return NextResponse.json({ banner: null }, { status: 200 })
+    }
 
     const { data, error } = await supabase.from("hero_banner").select("*").eq("is_active", true).single()
 
@@ -29,6 +40,11 @@ export async function GET() {
 
 export async function PUT(request: Request) {
   try {
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
+    }
+
     const { image_url } = await request.json()
 
     console.log("[v0] Updating hero banner with image:", image_url)
