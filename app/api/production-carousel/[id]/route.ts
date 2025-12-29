@@ -1,22 +1,28 @@
 import { createClient } from "@supabase/supabase-js"
 import { NextResponse } from "next/server"
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+function getSupabaseClient() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return null
+  }
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  })
+}
+
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    const supabase = getSupabaseClient()
+    if (!supabase) {
       console.error("[v0] Missing Supabase environment variables")
       return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
     }
 
-    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-      },
-    })
-
     const body = await request.json()
-    const { id } = params
+    const { id } = await params
 
     console.log("[v0] Updating production carousel item:", id, body)
 
@@ -54,21 +60,15 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    const supabase = getSupabaseClient()
+    if (!supabase) {
       console.error("[v0] Missing Supabase environment variables")
       return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
     }
 
-    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-      },
-    })
-
-    const { id } = params
+    const { id } = await params
 
     console.log("[v0] Deleting production carousel item:", id)
 

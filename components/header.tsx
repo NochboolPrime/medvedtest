@@ -14,6 +14,7 @@ import { useTranslations } from "@/hooks/use-translations"
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [newsEnabled, setNewsEnabled] = useState(false)
   const t = useTranslations()
 
   useEffect(() => {
@@ -22,6 +23,26 @@ export function Header() {
     }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const fetchNewsStatus = async () => {
+      try {
+        const response = await fetch("/api/site-settings")
+        const data = await response.json()
+        console.log("[v0] Header - fetched news status:", data.settings?.news_enabled)
+        setNewsEnabled(data.settings?.news_enabled ?? false)
+      } catch (error) {
+        console.error("[v0] Error fetching news status:", error)
+      }
+    }
+    fetchNewsStatus()
+
+    const handleFocus = () => {
+      fetchNewsStatus()
+    }
+    window.addEventListener("focus", handleFocus)
+    return () => window.removeEventListener("focus", handleFocus)
   }, [])
 
   useEffect(() => {
@@ -101,6 +122,14 @@ export function Header() {
             >
               {t("header.nav.catalog")}
             </Link>
+            {newsEnabled && (
+              <Link
+                href="/news"
+                className="text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:scale-105"
+              >
+                {t("header.nav.news")}
+              </Link>
+            )}
             <a
               href="#services"
               onClick={(e) => scrollToSection(e, "#services")}
@@ -204,6 +233,15 @@ export function Header() {
           >
             {t("header.nav.catalog")}
           </Link>
+          {newsEnabled && (
+            <Link
+              href="/news"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-base font-medium text-foreground hover:text-[#B19D76] transition-colors py-2"
+            >
+              {t("header.nav.news")}
+            </Link>
+          )}
           <a
             href="#services"
             onClick={(e) => scrollToSection(e, "#services")}

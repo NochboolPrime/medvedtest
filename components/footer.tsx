@@ -13,6 +13,7 @@ export function Footer() {
   const t = useTranslations()
   const { theme } = useTheme()
   const { get } = useSiteContent("footer")
+  const { get: getContact } = useSiteContent("contact")
 
   const companyName = get("companyName") || t("footer.companyName")
   const companyDescription = get("companyDescription") || t("footer.companyDescription")
@@ -121,32 +122,33 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="tel:+74957775660"
+                  href={`tel:${(getContact("phone") || "+7 (495) 777-56-60").replace(/\D/g, "")}`}
                   className="flex items-start gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <Phone className="mt-0.5 h-4 w-4 shrink-0" />
-                  +7 (495) 777-56-60
+                  {getContact("phone") || "+7 (495) 777-56-60"}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@aomedved.ru"
+                  href={`mailto:${getContact("email") || "info@aomedved.ru"}`}
                   className="flex items-start gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <Mail className="mt-0.5 h-4 w-4 shrink-0" />
-                  info@aomedved.ru
+                  {getContact("email") || "info@aomedved.ru"}
                 </a>
               </li>
               <li>
                 <a
-                  href="https://yandex.ru/maps/?text=107031%2C%20г.%20Москва%2C%20ВН.ТЕР.Г.%20Муниципальный%20округ%20Тверской%2C%20ул.%20Дмитровка%20Б.%2C%20д.%2032%2C%20стр.%209%2C%20пом.%203"
+                  href={`https://yandex.ru/maps/?text=${encodeURIComponent(getContact("address") || "107031, г. Москва, ВН.ТЕР.Г. Муниципальный округ Тверской, ул. Дмитровка Б., д. 32, стр. 9, пом. 3")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
                   <span>
-                    107031, г. Москва, ВН.ТЕР.Г. Муниципальный округ Тверской, ул. Дмитровка Б., д. 32, стр. 9, пом. 3
+                    {getContact("address") ||
+                      "107031, г. Москва, ВН.ТЕР.Г. Муниципальный округ Тверской, ул. Дмитровка Б., д. 32, стр. 9, пом. 3"}
                   </span>
                 </a>
               </li>

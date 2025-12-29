@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ThemeDesignHelper } from "@/components/theme-design-helper"
 import { LanguageProvider } from "@/components/language-provider"
+import { YandexMetrika } from "@/components/yandex-metrika"
 
 const onestRegular = localFont({
   src: "../public/fonts/OnestRegular1602-hint.ttf",
@@ -33,12 +34,34 @@ const onestLight = localFont({
 export const metadata: Metadata = {
   title: "ТД Медведь - Оборудование для нефтегазовой отрасли",
   description: "Надёжные решения для нефтегазовой отрасли и машиностроения",
-  generator: "v0.app",
+  metadataBase: new URL("https://tdmedved.com"),
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png" }],
   },
+  openGraph: {
+    title: "ТД Медведь - Оборудование для нефтегазовой отрасли",
+    description: "Надёжные решения для нефтегазовой отрасли и машиностроения",
+    url: "https://tdmedved.com",
+    siteName: "ТД Медведь",
+    locale: "ru_RU",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ТД Медведь",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ТД Медведь - Оборудование для нефтегазовой отрасли",
+    description: "Надёжные решения для нефтегазовой отрасли и машиностроения",
+    images: ["/og-image.png"],
+  },
+    generator: 'v0.app'
 }
 
 export default function RootLayout({
@@ -53,6 +76,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           <LanguageProvider>
+            <YandexMetrika />
             <ThemeDesignHelper />
             {children}
           </LanguageProvider>

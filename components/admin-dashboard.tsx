@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Switch } from "@/components/ui/switch"
-import { LogOut, Plus, Edit, Trash2, Save, X } from "lucide-react"
+import { LogOut, Plus, Edit, Trash2, Save, X, FileText } from "lucide-react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { AdminStatistics } from "@/components/admin-statistics"
 import { AdminInstructions } from "@/components/admin-instructions"
@@ -19,6 +19,9 @@ import { AdminContentManager } from "@/components/admin-content-manager"
 import { AdminAnnouncements } from "@/components/admin-announcements"
 import { AdminProductionCarousel } from "@/components/admin-production-carousel"
 import { AdminHeroBanner } from "@/components/admin-hero-banner"
+import { AdminNewsManager } from "@/components/admin-news-manager"
+import { NewsToggleSetting } from "@/components/news-toggle-setting"
+import { YandexMetrikaSettings } from "@/components/yandex-metrika-settings"
 
 interface Product {
   id: string
@@ -50,6 +53,7 @@ interface Product {
   specifications_en?: Array<{ label: string; value: string }>
   specifications_zh?: Array<{ label: string; value: string }>
   video_url?: string
+  specification_pdf_url?: string
 }
 
 export function AdminDashboard() {
@@ -59,6 +63,8 @@ export function AdminDashboard() {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [newPassword, setNewPassword] = useState("")
+  const [uploadingPdf, setUploadingPdf] = useState(false)
+  const [previewPdf, setPreviewPdf] = useState("")
 
   useEffect(() => {
     loadProducts()
@@ -166,6 +172,8 @@ export function AdminDashboard() {
             <TabsTrigger value="production">Производство</TabsTrigger>
             <TabsTrigger value="hero">Главный баннер</TabsTrigger>
             <TabsTrigger value="announcements">Анонсы</TabsTrigger>
+            <TabsTrigger value="news">Новости</TabsTrigger>
+            <TabsTrigger value="analytics">Аналитика</TabsTrigger>
             <TabsTrigger value="statistics">Статистика</TabsTrigger>
             <TabsTrigger value="instructions">Инструкция</TabsTrigger>
             <TabsTrigger value="settings">Настройки</TabsTrigger>
@@ -241,6 +249,14 @@ export function AdminDashboard() {
             <AdminAnnouncements />
           </TabsContent>
 
+          <TabsContent value="news">
+            <AdminNewsManager />
+          </TabsContent>
+
+          <TabsContent value="analytics" className="space-y-4">
+            <YandexMetrikaSettings />
+          </TabsContent>
+
           <TabsContent value="statistics">
             <AdminStatistics />
           </TabsContent>
@@ -250,24 +266,7 @@ export function AdminDashboard() {
           </TabsContent>
 
           <TabsContent value="settings" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Настройки безопасности</CardTitle>
-                <CardDescription>Установите пароль для защиты админ-панели</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="new-password">Новый пароль</Label>
-                  <Input
-                    id="new-password"
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                  />
-                </div>
-                <Button onClick={handleSetPassword}>Установить пароль</Button>
-              </CardContent>
-            </Card>
+            <NewsToggleSetting />
           </TabsContent>
         </Tabs>
       </div>
@@ -307,6 +306,8 @@ function ProductForm({
   const [uploading, setUploading] = useState(false)
   const [previewImage, setPreviewImage] = useState(formData.image || "")
   const [languageTab, setLanguageTab] = useState<"ru" | "en" | "zh">("ru")
+  const [uploadingPdf, setUploadingPdf] = useState(false)
+  const [previewPdf, setPreviewPdf] = useState("")
 
   const handleArrayInput = (field: keyof Product, value: string) => {
     setFormData({ ...formData, [field]: value.split("\n").filter((v) => v.trim()) })
@@ -359,6 +360,33 @@ function ProductForm({
       alert("Ошибка загрузки изображения")
     } finally {
       setUploading(false)
+    }
+  }
+
+  const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploadingPdf(true)
+    try {
+      const formData = new FormData()
+      formData.append("file", file)
+
+      const response = await fetch("/api/upload-pdf", {
+        method: "POST",
+        body: formData,
+      })
+
+      const data = await response.json()
+      if (data.url) {
+        setFormData((prev) => ({ ...prev, specification_pdf_url: data.url }))
+        setPreviewPdf(data.url)
+      }
+    } catch (error) {
+      console.error("[v0] Error uploading PDF:", error)
+      alert("Ошибка загрузки PDF")
+    } finally {
+      setUploadingPdf(false)
     }
   }
 
@@ -628,6 +656,41 @@ function ProductForm({
         <p className="text-xs text-muted-foreground">
           Вставьте полную ссылку на видео с Rutube. Видео будет отображаться на странице товара.
         </p>
+      </div>
+
+      <div className="space-y-2">
+        <Label>PDF Спецификация</Label>
+        <div className="space-y-2">
+          <Input
+            type="file"
+            accept="application/pdf"
+            onChange={handlePdfUpload}
+            disabled={uploadingPdf}
+            className="cursor-pointer"
+          />
+          {uploadingPdf && <p className="text-sm text-muted-foreground">Загрузка PDF...</p>}
+          {previewPdf && (
+            <div className="flex items-center gap-2 p-2 border rounded-md">
+              <FileText className="h-4 w-4 text-muted-foreground" />
+              <a
+                href={previewPdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-blue-500 hover:underline flex-1 truncate"
+              >
+                {previewPdf}
+              </a>
+            </div>
+          )}
+          <Input
+            placeholder="Или введите URL PDF файла"
+            value={formData.specification_pdf_url || ""}
+            onChange={(e) => {
+              setFormData({ ...formData, specification_pdf_url: e.target.value })
+              setPreviewPdf(e.target.value)
+            }}
+          />
+        </div>
       </div>
 
       <div className="flex justify-end gap-2 pt-4">

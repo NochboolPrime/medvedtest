@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, Mail, ShoppingCart } from "lucide-react"
+import { ArrowLeft, Mail, ShoppingCart, FileText } from "lucide-react"
 import { ConsultationModal } from "@/components/consultation-modal"
 import { useTranslations } from "@/hooks/use-translations"
 import { useLanguage } from "@/components/language-provider"
@@ -17,6 +17,7 @@ interface TransportationDetailProps {
   gallery: string[]
   video_url?: string
   price?: number
+  specification_pdf_url?: string // Add PDF URL prop
   title?: string
   description?: string
   features?: string[]
@@ -47,6 +48,7 @@ export function TransportationDetail({
   gallery,
   video_url,
   price,
+  specification_pdf_url, // Add to destructuring
   title: propTitle,
   description: propDescription,
   features: propFeatures,
@@ -375,6 +377,24 @@ export function TransportationDetail({
                   {t("transportationDetail.consultationButton")}
                 </Button>
               </div>
+
+              {specification_pdf_url && (
+                <Button
+                  className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground"
+                  onClick={() => {
+                    const link = document.createElement("a")
+                    link.href = specification_pdf_url
+                    link.download = `${transportation.title}_specification.pdf`
+                    link.target = "_blank"
+                    document.body.appendChild(link)
+                    link.click()
+                    document.body.removeChild(link)
+                  }}
+                >
+                  <FileText className="mr-2 h-4 w-4" />
+                  {t("transportationDetail.downloadSpecification")}
+                </Button>
+              )}
             </motion.div>
           </div>
         </div>

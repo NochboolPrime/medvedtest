@@ -5,6 +5,7 @@ import { X, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useLanguage } from "@/components/language-provider"
+import { useRouter } from "next/navigation"
 
 interface Announcement {
   id: string
@@ -29,6 +30,7 @@ export function AnnouncementPanel() {
   const [isVisible, setIsVisible] = useState(false)
   const [isImageFullscreen, setIsImageFullscreen] = useState(false)
   const { locale } = useLanguage()
+  const router = useRouter()
 
   useEffect(() => {
     console.log("[v0] AnnouncementPanel - Loading active announcement")
@@ -84,6 +86,11 @@ export function AnnouncementPanel() {
 
   console.log("[v0] AnnouncementPanel - Displaying with locale:", locale, { title, content })
 
+  const handleAnnouncementClick = () => {
+    console.log("[v0] AnnouncementPanel - Navigating to catalog")
+    router.push("/catalog")
+  }
+
   return (
     <>
       <div
@@ -91,11 +98,22 @@ export function AnnouncementPanel() {
           isVisible ? "translate-x-0 opacity-100" : "translate-x-[120%] opacity-0"
         }`}
       >
-        <Card className="shadow-lg border-2">
+        <Card
+          className="shadow-lg border-2 cursor-pointer hover:shadow-xl transition-shadow"
+          onClick={handleAnnouncementClick}
+        >
           <CardHeader className="pb-3">
             <div className="flex items-start justify-between">
               <CardTitle className="text-lg">{title}</CardTitle>
-              <Button variant="ghost" size="sm" className="h-6 w-6 p-0" onClick={() => setIsVisible(false)}>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-6 w-6 p-0"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setIsVisible(false)
+                }}
+              >
                 <X className="h-4 w-4" />
               </Button>
             </div>
@@ -106,15 +124,20 @@ export function AnnouncementPanel() {
                 <img
                   src={announcement.image_url || "/placeholder.svg"}
                   alt={title}
-                  className="w-full h-48 object-cover cursor-pointer hover:opacity-90 transition-opacity"
-                  onClick={() => setIsImageFullscreen(true)}
+                  className="w-full h-48 object-cover hover:opacity-90 transition-opacity"
                 />
               </div>
             )}
             <CardDescription className="text-sm whitespace-pre-wrap mt-0">{content}</CardDescription>
 
             {announcement.link_url && linkText && (
-              <Button className="w-full mt-3" onClick={() => window.open(announcement.link_url, "_blank")}>
+              <Button
+                className="w-full mt-3"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  window.open(announcement.link_url, "_blank")
+                }}
+              >
                 {linkText}
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
@@ -122,30 +145,6 @@ export function AnnouncementPanel() {
           </CardContent>
         </Card>
       </div>
-
-      {isImageFullscreen && announcement.image_url && (
-        <div
-          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setIsImageFullscreen(false)}
-        >
-          <div className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4 text-white hover:bg-white/20 z-10"
-              onClick={() => setIsImageFullscreen(false)}
-            >
-              <X className="h-6 w-6" />
-            </Button>
-            <img
-              src={announcement.image_url || "/placeholder.svg"}
-              alt={title}
-              className="max-w-full max-h-full object-contain rounded-lg"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
-        </div>
-      )}
     </>
   )
 }

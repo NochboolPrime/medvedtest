@@ -8,7 +8,8 @@
       "products": "Продукция",
       "catalog": "Каталог",
       "services": "Услуги",
-      "contacts": "Контакты"
+      "contacts": "Контакты",
+      "news": "Новости"
     },
     "phone": "+7 (495) 777-56-60",
     "email": "info@aomedved.ru",
@@ -170,6 +171,7 @@
   "productDetail": {
     "backButton": "Назад к продукции",
     "downloadCatalog": "Скачать каталог",
+    "downloadSpecification": "Скачать спецификацию",
     "descriptionTitle": "Описание",
     "consultationTitle": "Получить консультацию",
     "consultationDescription": "Наши специалисты помогут подобрать оптимальное решение для ваших задач",
@@ -184,6 +186,7 @@
   "transportationDetail": {
     "backButton": "Назад к оборудованию",
     "goToCatalog": "Перейти в каталог",
+    "downloadSpecification": "Скачать спецификацию",
     "videoTitle": "Видео о продукте",
     "descriptionTitle": "Описание",
     "specificationsTitle": "Технические характеристики",
@@ -833,5 +836,39 @@
     "previous": "Предыдущее",
     "next": "Следующее",
     "goToSlide": "Перейти к слайду"
+  },
+  "news": {
+    "title": "Новости",
+    "subtitle": "Актуальные новости и статьи",
+    "readMore": "Читать далее",
+    "backToNews": "Вернуться к новостям",
+    "publishedOn": "Опубликовано",
+    "noNews": "Нет опубликованных новостей",
+    "loading": "Загрузка...",
+    "admin": {
+      "title": "Управление новостями",
+      "addNews": "Добавить новость",
+      "editNews": "Редактировать новость",
+      "deleteNews": "Удалить новость",
+      "titleRu": "Заголовок (RU)",
+      "titleEn": "Заголовок (EN)",
+      "titleZh": "Заголовок (ZH)",
+      "contentRu": "Содержание (RU)",
+      "contentEn": "Содержание (EN)",
+      "contentZh": "Содержание (ZH)",
+      "excerptRu": "Краткое описание (RU)",
+      "excerptEn": "Краткое описание (EN)",
+      "excerptZh": "Краткое описание (ZH)",
+      "slug": "URL (slug)",
+      "image": "Изображение",
+      "uploadImage": "Загрузить изображение",
+      "isPublished": "Опубликовано",
+      "publishedAt": "Дата публикации",
+      "save": "Сохранить",
+      "cancel": "Отмена",
+      "deleteConfirm": "Вы уверены, что хотите удалить эту новость?",
+      "newsToggle": "Включить раздел Новости",
+      "newsToggleDescription": "Показывать вкладку Новости в навигации"
+    }
   }
 }

@@ -18,55 +18,6 @@ interface ConsultationModalProps {
   onOpenChange: (open: boolean) => void
 }
 
-const generateCaptchaImage = (text: string): string => {
-  console.log("[v0] ConsultationModal - generateCaptchaImage called with:", text)
-
-  const canvas = document.createElement("canvas")
-  canvas.width = 180
-  canvas.height = 60
-  const ctx = canvas.getContext("2d")
-
-  if (!ctx) {
-    console.error("[v0] ConsultationModal - Failed to get canvas context")
-    return ""
-  }
-
-  // Background
-  ctx.fillStyle = "#f3f4f6"
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-  // Random lines for noise
-  for (let i = 0; i < 3; i++) {
-    ctx.strokeStyle = `rgba(0,0,0,${Math.random() * 0.3})`
-    ctx.lineWidth = 1
-    ctx.beginPath()
-    ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height)
-    ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height)
-    ctx.stroke()
-  }
-
-  // Draw text with rotation
-  ctx.font = "bold 32px Arial"
-  ctx.textBaseline = "middle"
-
-  for (let i = 0; i < text.length; i++) {
-    ctx.save()
-    const x = 20 + i * 25
-    const y = canvas.height / 2
-    const angle = (Math.random() - 0.5) * 0.4
-
-    ctx.translate(x, y)
-    ctx.rotate(angle)
-    ctx.fillStyle = `hsl(${Math.random() * 360}, 70%, 40%)`
-    ctx.fillText(text[i], 0, 0)
-    ctx.restore()
-  }
-
-  const dataUrl = canvas.toDataURL()
-  console.log("[v0] ConsultationModal - Generated captcha image, length:", dataUrl.length)
-  return dataUrl
-}
-
 const generateCaptchaText = (): string => {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
   let captcha = ""
@@ -83,7 +34,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
     phone: "",
     email: "",
     message: "",
-    consent: false, // Added consent field
+    consent: false,
   })
 
   const [showCaptchaModal, setShowCaptchaModal] = useState(false)
@@ -93,25 +44,66 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
 
-  useEffect(() => {
-    console.log("[v0] ConsultationModal - Component mounted, generating initial captcha")
-    const newText = generateCaptchaText()
-    console.log("[v0] ConsultationModal - New captcha text:", newText)
-    setCaptchaText(newText)
+  const generateCaptchaImage = (text: string): string => {
+    if (typeof window === "undefined") return ""
 
+    try {
+      const canvas = document.createElement("canvas")
+      canvas.width = 180
+      canvas.height = 60
+      const ctx = canvas.getContext("2d")
+
+      if (!ctx) return ""
+
+      // Background
+      ctx.fillStyle = "#f3f4f6"
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      // Random lines for noise
+      for (let i = 0; i < 3; i++) {
+        ctx.strokeStyle = `rgba(0,0,0,${Math.random() * 0.3})`
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height)
+        ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height)
+        ctx.stroke()
+      }
+
+      // Draw text with rotation
+      ctx.font = "bold 32px Arial"
+      ctx.textBaseline = "middle"
+
+      for (let i = 0; i < text.length; i++) {
+        ctx.save()
+        const x = 20 + i * 25
+        const y = canvas.height / 2
+        const angle = (Math.random() - 0.5) * 0.4
+
+        ctx.translate(x, y)
+        ctx.rotate(angle)
+        ctx.fillStyle = `hsl(${Math.random() * 360}, 70%, 40%)`
+        ctx.fillText(text[i], 0, 0)
+        ctx.restore()
+      }
+
+      return canvas.toDataURL()
+    } catch (error) {
+      console.error("[v0] ConsultationModal - Canvas error:", error)
+      return ""
+    }
+  }
+
+  useEffect(() => {
+    const newText = generateCaptchaText()
+    setCaptchaText(newText)
     const newImage = generateCaptchaImage(newText)
-    console.log("[v0] ConsultationModal - New captcha image generated:", newImage ? "success" : "failed")
     setCaptchaImage(newImage)
   }, [])
 
   const regenerateCaptcha = () => {
-    console.log("[v0] ConsultationModal - Regenerating captcha")
     const newText = generateCaptchaText()
-    console.log("[v0] ConsultationModal - New captcha text:", newText)
     setCaptchaText(newText)
-
     const newImage = generateCaptchaImage(newText)
-    console.log("[v0] ConsultationModal - New captcha image generated:", newImage ? "success" : "failed")
     setCaptchaImage(newImage)
     setCaptchaInput("")
     setErrors({})
@@ -150,13 +142,10 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
       return
     }
 
-    console.log("[v0] ConsultationModal - Opening captcha modal")
     setShowCaptchaModal(true)
   }
 
   const handleCaptchaSubmit = async () => {
-    console.log("[v0] ConsultationModal - Captcha submit, input:", captchaInput, "expected:", captchaText)
-
     if (!captchaInput.trim()) {
       setErrors({ captcha: "Введите код с картинки" })
       return

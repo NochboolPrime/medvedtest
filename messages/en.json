@@ -8,7 +8,8 @@
       "products": "Products",
       "catalog": "Catalog",
       "services": "Services",
-      "contacts": "Contacts"
+      "contacts": "Contacts",
+      "news": "News"
     },
     "phone": "+7 (495) 777-56-60",
     "email": "info@aomedved.ru",
@@ -116,6 +117,7 @@
   "productDetail": {
     "backButton": "Back to products",
     "downloadCatalog": "Download Catalog",
+    "downloadSpecification": "Download Specification",
     "descriptionTitle": "Description",
     "consultationTitle": "Get Consultation",
     "consultationDescription": "Our specialists will help you choose the optimal solution for your tasks",
@@ -130,6 +132,7 @@
   "transportationDetail": {
     "backButton": "Back to equipment",
     "goToCatalog": "Go to Catalog",
+    "downloadSpecification": "Download Specification",
     "videoTitle": "Product Video",
     "descriptionTitle": "Description",
     "specificationsTitle": "Technical Specifications",
@@ -792,5 +795,39 @@
     "previous": "Previous",
     "next": "Next",
     "goToSlide": "Go to slide"
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Latest news and articles",
+    "readMore": "Read more",
+    "backToNews": "Back to news",
+    "publishedOn": "Published on",
+    "noNews": "No published news",
+    "loading": "Loading...",
+    "admin": {
+      "title": "News Management",
+      "addNews": "Add News",
+      "editNews": "Edit News",
+      "deleteNews": "Delete News",
+      "titleRu": "Title (RU)",
+      "titleEn": "Title (EN)",
+      "titleZh": "Title (ZH)",
+      "contentRu": "Content (RU)",
+      "contentEn": "Content (EN)",
+      "contentZh": "Content (ZH)",
+      "excerptRu": "Excerpt (RU)",
+      "excerptEn": "Excerpt (EN)",
+      "excerptZh": "Excerpt (ZH)",
+      "slug": "URL (slug)",
+      "image": "Image",
+      "uploadImage": "Upload Image",
+      "isPublished": "Published",
+      "publishedAt": "Publication Date",
+      "save": "Save",
+      "cancel": "Cancel",
+      "deleteConfirm": "Are you sure you want to delete this news?",
+      "newsToggle": "Enable News Section",
+      "newsToggleDescription": "Show News tab in navigation"
+    }
   }
 }

@@ -15,55 +15,6 @@ import Link from "next/link"
 import { useToast } from "@/hooks/use-toast"
 import { useSiteContent } from "@/hooks/use-site-content"
 
-const generateCaptchaImage = (text: string): string => {
-  console.log("[v0] Contact - generateCaptchaImage called with:", text)
-
-  const canvas = document.createElement("canvas")
-  canvas.width = 180
-  canvas.height = 60
-  const ctx = canvas.getContext("2d")
-
-  if (!ctx) {
-    console.error("[v0] Contact - Failed to get canvas context")
-    return ""
-  }
-
-  // Background
-  ctx.fillStyle = "#f3f4f6"
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-  // Random lines for noise
-  for (let i = 0; i < 3; i++) {
-    ctx.strokeStyle = `rgba(0,0,0,${Math.random() * 0.3})`
-    ctx.lineWidth = 1
-    ctx.beginPath()
-    ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height)
-    ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height)
-    ctx.stroke()
-  }
-
-  // Draw text with rotation
-  ctx.font = "bold 32px Arial"
-  ctx.textBaseline = "middle"
-
-  for (let i = 0; i < text.length; i++) {
-    ctx.save()
-    const x = 20 + i * 25
-    const y = canvas.height / 2
-    const angle = (Math.random() - 0.5) * 0.4
-
-    ctx.translate(x, y)
-    ctx.rotate(angle)
-    ctx.fillStyle = `hsl(${Math.random() * 360}, 70%, 40%)`
-    ctx.fillText(text[i], 0, 0)
-    ctx.restore()
-  }
-
-  const dataUrl = canvas.toDataURL()
-  console.log("[v0] Contact - Generated captcha image, length:", dataUrl.length)
-  return dataUrl
-}
-
 const generateCaptchaText = (): string => {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
   let captcha = ""
@@ -92,27 +43,69 @@ export function Contact() {
   const [captchaImage, setCaptchaImage] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [isMounted, setIsMounted] = useState(false)
+
+  const generateCaptchaImage = (text: string): string => {
+    if (typeof window === "undefined") return ""
+
+    try {
+      const canvas = document.createElement("canvas")
+      canvas.width = 180
+      canvas.height = 60
+      const ctx = canvas.getContext("2d")
+
+      if (!ctx) return ""
+
+      // Background
+      ctx.fillStyle = "#f3f4f6"
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      // Random lines for noise
+      for (let i = 0; i < 3; i++) {
+        ctx.strokeStyle = `rgba(0,0,0,${Math.random() * 0.3})`
+        ctx.lineWidth = 1
+        ctx.beginPath()
+        ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height)
+        ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height)
+        ctx.stroke()
+      }
+
+      // Draw text with rotation
+      ctx.font = "bold 32px Arial"
+      ctx.textBaseline = "middle"
+
+      for (let i = 0; i < text.length; i++) {
+        ctx.save()
+        const x = 20 + i * 25
+        const y = canvas.height / 2
+        const angle = (Math.random() - 0.5) * 0.4
+
+        ctx.translate(x, y)
+        ctx.rotate(angle)
+        ctx.fillStyle = `hsl(${Math.random() * 360}, 70%, 40%)`
+        ctx.fillText(text[i], 0, 0)
+        ctx.restore()
+      }
+
+      return canvas.toDataURL()
+    } catch (error) {
+      console.error("[v0] Contact - Canvas error:", error)
+      return ""
+    }
+  }
 
   useEffect(() => {
-    console.log("[v0] Contact - Component mounted, generating initial captcha")
+    setIsMounted(true)
     const newText = generateCaptchaText()
-    console.log("[v0] Contact - New captcha text:", newText)
     setCaptchaText(newText)
-
-    // Generate image immediately
     const newImage = generateCaptchaImage(newText)
-    console.log("[v0] Contact - New captcha image generated:", newImage ? "success" : "failed")
     setCaptchaImage(newImage)
   }, [])
 
   const regenerateCaptcha = () => {
-    console.log("[v0] Contact - Regenerating captcha")
     const newText = generateCaptchaText()
-    console.log("[v0] Contact - New captcha text:", newText)
     setCaptchaText(newText)
-
     const newImage = generateCaptchaImage(newText)
-    console.log("[v0] Contact - New captcha image generated:", newImage ? "success" : "failed")
     setCaptchaImage(newImage)
     setCaptchaInput("")
     setErrors({})
@@ -207,28 +200,31 @@ export function Contact() {
     {
       icon: Phone,
       label: get("phoneLabel") || t("contact.info.phone"),
-      value: get("phoneValue") || "+7 (495) 777-56-60",
-      href: "tel:+74957775660",
+      value: get("phone") || "+7 (495) 777-56-60",
+      href: `tel:${(get("phone") || "+7 (495) 777-56-60").replace(/\D/g, "")}`,
     },
     {
       icon: Mail,
       label: get("emailLabel") || t("contact.info.email"),
-      value: get("emailValue") || "info@aomedved.ru",
-      href: "mailto:info@aomedved.ru",
+      value: get("email") || "info@aomedved.ru",
+      href: `mailto:${get("email") || "info@aomedved.ru"}`,
     },
     {
       icon: MapPin,
       label: get("addressLabel") || t("contact.info.address"),
       value:
-        get("addressValue") ||
+        get("address") ||
         "107031, г. Москва, ВН.ТЕР.Г. Муниципальный округ Тверской, ул. Дмитровка Б., д. 32, стр. 9, пом. 3",
-      href: "yandexnavi://build_route_on_map?lat_to=55.771899&lon_to=37.612267",
+      href: `https://yandex.ru/maps/?text=${encodeURIComponent(get("address") || "107031, г. Москва, ВН.ТЕР.Г. Муниципальный округ Тверской, ул. Дмитровка Б., д. 32, стр. 9, пом. 3")}`,
     },
   ]
 
   const title = get("title") || t("contact.title")
   const description = get("description") || t("contact.description")
   const formTitle = get("formTitle") || t("contact.form.message")
+  const address =
+    get("address") ||
+    "107031, г. Москва, ВН.ТЕР.Г. Муниципальный округ Тверской, ул. Дмитровка Б., д. 32, стр. 9, пом. 3"
 
   return (
     <section id="contact" className="py-6 lg:py-4 2xl:py-12 relative bg-background">
@@ -266,12 +262,23 @@ export function Contact() {
                         </a>
                       ) : (
                         <p className="text-lg lg:text-sm 2xl:text-lg text-foreground font-medium">{method.value}</p>
-                        /* Reduced text size: text-xl→text-lg, lg:text-base→lg:text-sm, 2xl:text-xl→2xl:text-lg */
                       )}
                     </div>
                   </div>
                 )
               })}
+
+              <div className="mt-6 lg:mt-3 2xl:mt-6 rounded-lg overflow-hidden border border-border">
+                <iframe
+                  src={`https://yandex.ru/map-widget/v1/?ll=37.610398,55.770006&mode=search&text=${encodeURIComponent(address)}&z=16&l=map`}
+                  width="100%"
+                  className="w-full h-[240px] md:h-[240px] lg:h-[240px] xl:h-[240px] 2xl:h-[240px]"
+                  frameBorder="0"
+                  allowFullScreen
+                  style={{ border: 0 }}
+                  title="Yandex Map"
+                />
+              </div>
             </div>
 
             <div>

@@ -1,10 +1,24 @@
 import { createClient } from "@supabase/supabase-js"
-import { createClient as createServerClient } from "@/lib/supabase/server"
 import { NextResponse } from "next/server"
+
+function getSupabaseClient() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return null
+  }
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  })
+}
 
 export async function GET() {
   try {
-    const supabase = await createServerClient()
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      return NextResponse.json({ items: [] })
+    }
 
     const { data, error } = await supabase
       .from("production_carousel")
@@ -27,17 +41,11 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    const supabase = getSupabaseClient()
+    if (!supabase) {
       console.error("[v0] Missing Supabase environment variables")
       return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
     }
-
-    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-      },
-    })
 
     const body = await request.json()
 

@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js"
-import { NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
+
+export const runtime = "nodejs"
 
 function getSupabaseClient() {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
@@ -13,44 +15,48 @@ function getSupabaseClient() {
   })
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const supabase = getSupabaseClient()
     if (!supabase) {
       return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
     }
 
+    console.log("[v0] PDF upload request received")
+
     const formData = await request.formData()
     const file = formData.get("file") as File
 
     if (!file) {
+      console.log("[v0] No file provided")
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
     }
 
     // Validate file type
-    const validTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
-    if (!validTypes.includes(file.type)) {
-      return NextResponse.json({ error: "Invalid file type. Only JPEG, PNG, and WebP are allowed" }, { status: 400 })
+    if (file.type !== "application/pdf") {
+      console.log("[v0] Invalid file type:", file.type)
+      return NextResponse.json({ error: "Only PDF files are allowed" }, { status: 400 })
     }
 
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      return NextResponse.json({ error: "File size must be less than 5MB" }, { status: 400 })
+    // Validate file size (max 10MB)
+    const maxSize = 10 * 1024 * 1024 // 10MB
+    if (file.size > maxSize) {
+      console.log("[v0] File too large:", file.size)
+      return NextResponse.json({ error: "File size must be less than 10MB" }, { status: 400 })
     }
 
     // Generate unique filename
-    const fileExt = file.name.split(".").pop()
-    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.pdf`
 
-    console.log("[v0] Uploading certificate to Supabase Storage:", fileName)
+    console.log("[v0] Uploading PDF to Supabase Storage:", fileName)
 
     // Convert file to buffer
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
     // Upload to Supabase Storage
-    const { data, error } = await supabase.storage.from("certificates").upload(fileName, buffer, {
-      contentType: file.type,
+    const { data, error } = await supabase.storage.from("documents").upload(fileName, buffer, {
+      contentType: "application/pdf",
       upsert: false,
     })
 
@@ -60,13 +66,13 @@ export async function POST(request: Request) {
     }
 
     // Get public URL
-    const { data: urlData } = supabase.storage.from("certificates").getPublicUrl(data.path)
+    const { data: urlData } = supabase.storage.from("documents").getPublicUrl(data.path)
 
-    console.log("[v0] Certificate uploaded successfully:", urlData.publicUrl)
+    console.log("[v0] PDF uploaded successfully:", urlData.publicUrl)
 
     return NextResponse.json({ url: urlData.publicUrl })
   } catch (error) {
-    console.error("[v0] Error uploading certificate:", error)
-    return NextResponse.json({ error: "Failed to upload file" }, { status: 500 })
+    console.error("[v0] Error uploading PDF:", error)
+    return NextResponse.json({ error: "Failed to upload PDF" }, { status: 500 })
   }
 }

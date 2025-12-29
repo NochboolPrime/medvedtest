@@ -47,6 +47,7 @@ export default async function TransportationPage({
           gallery={product.gallery || [product.image]}
           video_url={product.video_url}
           price={product.price}
+          specification_pdf_url={product.specification_pdf_url} // Added PDF URL prop
           title={product.title}
           description={product.description}
           features={product.features}
