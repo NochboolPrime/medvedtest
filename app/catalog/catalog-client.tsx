@@ -46,7 +46,10 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [showFilters, setShowFilters] = useState(false)
 
-  const categories = ["all", ...Array.from(new Set(allProducts.filter((p) => p.category).map((p) => p.category)))]
+  const categories = [
+    "all",
+    ...Array.from(new Set(allProducts.filter((p) => p.category && p.category.trim()).map((p) => p.category))),
+  ]
 
   const getLocalizedTitle = (product: Product): string => {
     if (locale === "en" && product.title_en) return product.title_en
@@ -63,7 +66,7 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
   const getLocalizedFeatures = (product: Product): string[] => {
     if (locale === "en" && product.features_en) return product.features_en
     if (locale === "zh" && product.features_zh) return product.features_zh
-    return product.features
+    return product.features || []
   }
 
   const filteredProducts = useMemo(() => {
@@ -346,11 +349,13 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
                         fill
                         className="object-contain p-4 transition-transform duration-500 group-hover:scale-110"
                       />
-                      <div className="absolute top-2 right-2">
-                        <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-semibold rounded-full">
-                          {product.category}
-                        </span>
-                      </div>
+                      {product.category && (
+                        <div className="absolute top-2 right-2">
+                          <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-semibold rounded-full">
+                            {product.category}
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     <div className="p-6 space-y-4 flex flex-col flex-1">
@@ -375,7 +380,7 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
                             <span className="text-lg font-bold text-foreground">{formatPrice(product.price)}</span>
                           </div>
                         )}
-                        <Link href={`/transportation/${product.slug}`} onClick={() => trackClick(product.id)}>
+                        <Link href={`/products/${product.slug}`} onClick={() => trackClick(product.id)}>
                           <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
                             {t("catalog.viewDetails")}
                           </Button>
