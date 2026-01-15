@@ -13,8 +13,7 @@ export function Logo({ className = "" }: { className?: string }) {
   }, [])
 
   const currentTheme = mounted ? (theme === "system" ? resolvedTheme : theme) : "dark"
-  const logoSrc =
-    currentTheme === "light" ? "/images/logo-light.png" : "/images/design-mode/%D0%9D%D0%BE%D1%80%D0%BC%202.png"
+  const logoSrc = currentTheme === "light" ? "/images/logo-light.png" : "/images/logo-dark.png"
 
   return (
     <div className={`relative flex items-center ${className}`}>
@@ -25,6 +24,7 @@ export function Logo({ className = "" }: { className?: string }) {
         height={120}
         className="w-30 h-30 object-contain transition-opacity duration-300"
         priority
+        unoptimized
       />
     </div>
   )

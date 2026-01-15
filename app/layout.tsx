@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   description: "Надёжные решения для нефтегазовой отрасли и машиностроения",
   metadataBase: new URL("https://tdmedved.com"),
   icons: {
-    icon: [{ url: "/icon.png", type: "image/png" }],
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/apple-touch-icon.png", type: "image/png" }],
   },
   openGraph: {
