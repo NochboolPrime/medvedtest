@@ -1,12 +1,21 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase/server"
+import { getSupabaseClient } from "@/lib/supabase/server"
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
     const days = Number.parseInt(searchParams.get("days") || "30")
 
-    const supabase = await createClient()
+    const supabase = getSupabaseClient()
+
+    if (!supabase) {
+      console.error("[v0] Supabase not configured")
+      return NextResponse.json({
+        productStats: [],
+        dailyStats: [],
+        totalEvents: 0,
+      })
+    }
 
     // Get date range
     const startDate = new Date()
@@ -18,12 +27,21 @@ export async function GET(request: Request) {
       .select("product_id, event_type, created_at")
       .gte("created_at", startDate.toISOString())
 
-    if (error) throw error
+    if (error) {
+      console.error("[v0] Error fetching analytics:", error)
+      return NextResponse.json({
+        productStats: [],
+        dailyStats: [],
+        totalEvents: 0,
+      })
+    }
 
     // Get products info
     const { data: products, error: productsError } = await supabase.from("products").select("id, title")
 
-    if (productsError) throw productsError
+    if (productsError) {
+      console.error("[v0] Error fetching products for analytics:", productsError)
+    }
 
     // Process stats
     const productStats = new Map()
@@ -69,6 +87,10 @@ export async function GET(request: Request) {
     })
   } catch (error) {
     console.error("[v0] Error getting analytics:", error)
-    return NextResponse.json({ error: "Failed to get statistics" }, { status: 500 })
+    return NextResponse.json({
+      productStats: [],
+      dailyStats: [],
+      totalEvents: 0,
+    })
   }
 }

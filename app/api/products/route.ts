@@ -1,19 +1,27 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase/server"
+import { getSupabaseClient } from "@/lib/supabase/server"
 import { getAdminSession } from "@/lib/admin-session"
 
 export async function GET() {
   try {
-    const supabase = await createClient()
+    const supabase = getSupabaseClient()
+
+    if (!supabase) {
+      console.error("[v0] Supabase not configured")
+      return NextResponse.json([])
+    }
 
     const { data, error } = await supabase.from("products").select("*").order("created_at", { ascending: false })
 
-    if (error) throw error
+    if (error) {
+      console.error("[v0] Error fetching products:", error)
+      return NextResponse.json([])
+    }
 
     return NextResponse.json(data || [])
   } catch (error) {
     console.error("[v0] Error fetching products:", error)
-    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 })
+    return NextResponse.json([])
   }
 }
 
@@ -24,13 +32,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
+    }
+
     const product = await request.json()
-    const supabase = await createClient()
+    console.log("[v0] Creating product:", product)
 
     const { data, error } = await supabase.from("products").insert(product).select().single()
 
-    if (error) throw error
+    if (error) {
+      console.error("[v0] Error creating product:", error)
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
 
+    console.log("[v0] Created product:", data?.id)
     return NextResponse.json(data)
   } catch (error) {
     console.error("[v0] Error creating product:", error)
@@ -45,12 +62,20 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
+    }
+
     const product = await request.json()
-    const supabase = await createClient()
+    console.log("[v0] Updating product:", product.id)
 
     const { data, error } = await supabase.from("products").update(product).eq("id", product.id).select().single()
 
-    if (error) throw error
+    if (error) {
+      console.error("[v0] Error updating product:", error)
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
 
     return NextResponse.json(data)
   } catch (error) {
@@ -73,11 +98,17 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "Product ID required" }, { status: 400 })
     }
 
-    const supabase = await createClient()
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
+    }
 
     const { error } = await supabase.from("products").delete().eq("id", id)
 
-    if (error) throw error
+    if (error) {
+      console.error("[v0] Error deleting product:", error)
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {

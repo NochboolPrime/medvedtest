@@ -1,46 +1,24 @@
 import { createServerClient } from "@supabase/ssr"
+import { createClient as createSupabaseClient } from "@supabase/supabase-js"
 import { cookies } from "next/headers"
 
-function createMockQueryBuilder() {
-  const mockResult = { data: [], error: null }
-  const mockSingleResult = { data: null, error: { message: "Supabase not configured" } }
-
-  const builder: any = {
-    select: () => builder,
-    insert: () => builder,
-    update: () => builder,
-    delete: () => builder,
-    upsert: () => builder,
-    eq: () => builder,
-    neq: () => builder,
-    gt: () => builder,
-    gte: () => builder,
-    lt: () => builder,
-    lte: () => builder,
-    like: () => builder,
-    ilike: () => builder,
-    is: () => builder,
-    in: () => builder,
-    contains: () => builder,
-    containedBy: () => builder,
-    range: () => builder,
-    order: () => builder,
-    limit: () => builder,
-    offset: () => builder,
-    single: () => Promise.resolve(mockSingleResult),
-    maybeSingle: () => Promise.resolve(mockResult),
-    then: (resolve: any) => resolve(mockResult),
+export function getSupabaseClient() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    console.warn("[v0] Supabase credentials not configured")
+    return null
   }
-
-  return builder
+  return createSupabaseClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  })
 }
 
 export async function createClient() {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     console.warn("[v0] Supabase credentials not configured")
-    return {
-      from: () => createMockQueryBuilder(),
-    } as any
+    return null
   }
 
   const cookieStore = await cookies()
