@@ -18,6 +18,7 @@ export async function GET() {
       return NextResponse.json([])
     }
 
+    console.log("[v0] Fetched products:", data?.length)
     return NextResponse.json(data || [])
   } catch (error) {
     console.error("[v0] Error fetching products:", error)
@@ -40,7 +41,22 @@ export async function POST(request: NextRequest) {
     const product = await request.json()
     console.log("[v0] Creating product:", product)
 
-    const { data, error } = await supabase.from("products").insert(product).select().single()
+    const dbProduct = {
+      slug: product.slug || "",
+      name_ru: product.title || "",
+      name_en: product.title_en || "",
+      name_zh: product.title_zh || "",
+      description_ru: product.description || "",
+      description_en: product.description_en || "",
+      description_zh: product.description_zh || "",
+      category: product.category || "",
+      image_url: product.image || "",
+      specifications: product.specifications || {},
+      is_visible: product.show_on_homepage !== undefined ? product.show_on_homepage : true,
+      specification_pdf_url: product.specification_pdf_url || null,
+    }
+
+    const { data, error } = await supabase.from("products").insert(dbProduct).select().single()
 
     if (error) {
       console.error("[v0] Error creating product:", error)
@@ -70,13 +86,30 @@ export async function PUT(request: NextRequest) {
     const product = await request.json()
     console.log("[v0] Updating product:", product.id)
 
-    const { data, error } = await supabase.from("products").update(product).eq("id", product.id).select().single()
+    const dbProduct = {
+      slug: product.slug || "",
+      name_ru: product.title || "",
+      name_en: product.title_en || "",
+      name_zh: product.title_zh || "",
+      description_ru: product.description || "",
+      description_en: product.description_en || "",
+      description_zh: product.description_zh || "",
+      category: product.category || "",
+      image_url: product.image || "",
+      specifications: product.specifications || {},
+      is_visible: product.show_on_homepage !== undefined ? product.show_on_homepage : true,
+      specification_pdf_url: product.specification_pdf_url || null,
+      updated_at: new Date().toISOString(),
+    }
+
+    const { data, error } = await supabase.from("products").update(dbProduct).eq("id", product.id).select().single()
 
     if (error) {
       console.error("[v0] Error updating product:", error)
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
+    console.log("[v0] Updated product:", data?.id)
     return NextResponse.json(data)
   } catch (error) {
     console.error("[v0] Error updating product:", error)

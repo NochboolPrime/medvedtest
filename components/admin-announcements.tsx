@@ -26,8 +26,8 @@ interface Announcement {
   link_text_en?: string
   link_text_zh?: string
   is_active: boolean
-  show_delay: number
-  auto_hide_delay: number
+  start_date?: string
+  end_date?: string
 }
 
 export function AdminAnnouncements() {
@@ -71,10 +71,13 @@ export function AdminAnnouncements() {
         await fetchAnnouncements()
         setEditingAnnouncement(null)
       } else {
-        console.error("[v0] Admin - Error response:", await response.text())
+        const errorText = await response.text()
+        console.error("[v0] Admin - Error response:", errorText)
+        alert(`Ошибка сохранения: ${errorText}`)
       }
     } catch (error) {
       console.error("[v0] Admin - Error saving announcement:", error)
+      alert("Ошибка сохранения анонса")
     }
   }
 
@@ -175,8 +178,6 @@ export function AdminAnnouncements() {
               link_text_en: "",
               link_text_zh: "",
               is_active: false,
-              show_delay: 3000,
-              auto_hide_delay: 10000,
             })
           }
         >
@@ -221,10 +222,6 @@ export function AdminAnnouncements() {
               <div className="flex items-center gap-2">
                 <Switch checked={announcement.is_active} onCheckedChange={() => handleToggleActive(announcement)} />
                 <Label>Активен</Label>
-              </div>
-              <div className="mt-2 text-sm text-muted-foreground">
-                Показывать через: {announcement.show_delay / 1000}с | Скрывать через:{" "}
-                {announcement.auto_hide_delay === 0 ? "вручную" : `${announcement.auto_hide_delay / 1000}с`}
               </div>
             </CardContent>
           </Card>
@@ -417,35 +414,6 @@ export function AdminAnnouncements() {
                   </Button>
                 </div>
               )}
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Задержка показа (мс)</Label>
-                <Input
-                  type="number"
-                  value={editingAnnouncement.show_delay}
-                  onChange={(e) =>
-                    setEditingAnnouncement({
-                      ...editingAnnouncement,
-                      show_delay: Number(e.target.value),
-                    })
-                  }
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Авто-скрытие через (мс, 0 = вручную)</Label>
-                <Input
-                  type="number"
-                  value={editingAnnouncement.auto_hide_delay}
-                  onChange={(e) =>
-                    setEditingAnnouncement({
-                      ...editingAnnouncement,
-                      auto_hide_delay: Number(e.target.value),
-                    })
-                  }
-                />
-              </div>
             </div>
 
             <div className="flex items-center gap-2">
