@@ -46,18 +46,18 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [showFilters, setShowFilters] = useState(false)
 
-  const categories = ["all", ...Array.from(new Set(allProducts.map((p) => p.category)))]
+  const categories = ["all", ...Array.from(new Set(allProducts.filter((p) => p.category).map((p) => p.category)))]
 
   const getLocalizedTitle = (product: Product): string => {
     if (locale === "en" && product.title_en) return product.title_en
     if (locale === "zh" && product.title_zh) return product.title_zh
-    return product.title
+    return product.title || ""
   }
 
   const getLocalizedDescription = (product: Product): string => {
     if (locale === "en" && product.description_en) return product.description_en
     if (locale === "zh" && product.description_zh) return product.description_zh
-    return product.description
+    return product.description || ""
   }
 
   const getLocalizedFeatures = (product: Product): string[] => {
@@ -70,11 +70,12 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
     return allProducts.filter((product) => {
       const localizedTitle = getLocalizedTitle(product)
       const localizedDescription = getLocalizedDescription(product)
+      const productCategory = product.category || ""
 
       const matchesSearch =
         localizedTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
         localizedDescription.toLowerCase().includes(searchQuery.toLowerCase())
-      const matchesCategory = selectedCategory === "all" || product.category === selectedCategory
+      const matchesCategory = selectedCategory === "all" || productCategory === selectedCategory
 
       return matchesSearch && matchesCategory
     })
