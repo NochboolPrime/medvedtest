@@ -1,24 +1,18 @@
 import { createServerClient } from "@supabase/ssr"
-import { createClient as createSupabaseClient } from "@supabase/supabase-js"
 import { cookies } from "next/headers"
-
-export function getSupabaseClient() {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    console.warn("[v0] Supabase credentials not configured")
-    return null
-  }
-  return createSupabaseClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  })
-}
 
 export async function createClient() {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     console.warn("[v0] Supabase credentials not configured")
-    return null
+    // Return a mock client that returns empty data
+    return {
+      from: () => ({
+        select: () => Promise.resolve({ data: [], error: null }),
+        insert: () => Promise.resolve({ data: null, error: { message: "Supabase not configured" } }),
+        update: () => Promise.resolve({ data: null, error: { message: "Supabase not configured" } }),
+        delete: () => Promise.resolve({ error: { message: "Supabase not configured" } }),
+      }),
+    } as any
   }
 
   const cookieStore = await cookies()
