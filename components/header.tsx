@@ -153,14 +153,14 @@ export function Header() {
 
             <div className="hidden flex-col items-end md:flex">
               <a
-                href="tel:+74957775660"
+                href="tel:+74957775600"
                 className="flex items-center gap-2 text-base font-semibold text-foreground hover:text-muted-foreground transition-colors"
               >
                 <Phone className="h-4 w-4" />
                 {t("header.phone")}
               </a>
               <a
-                href="mailto:info@aomedved.ru"
+                href="mailto:sales@medved-neftegaz.ru"
                 className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 mt-1"
               >
                 <Mail className="h-3 w-3" />

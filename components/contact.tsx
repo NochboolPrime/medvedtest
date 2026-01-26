@@ -152,8 +152,6 @@ export function Contact() {
   }
 
   const handleCaptchaSubmit = async () => {
-    console.log("[v0] Contact - Captcha submit, input:", captchaInput, "expected:", captchaText)
-
     if (!captchaInput.trim()) {
       setErrors({ captcha: t("contact.form.required") })
       return
@@ -169,7 +167,42 @@ export function Contact() {
     setShowCaptchaModal(false)
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      // EmailJS configuration - send email to sales@medved-neftegaz.ru
+      const EMAILJS_SERVICE_ID = "service_rhoqg4t"
+      const EMAILJS_TEMPLATE_ID = "template_2x0a9bi"
+      const EMAILJS_PUBLIC_KEY = "tAREkKW0-VSuNcVgm"
+
+      const templateParams = {
+        to_email: "sales@medved-neftegaz.ru",
+        from_name: formData.name,
+        from_phone: formData.phone,
+        from_email: formData.email || "Не указан",
+        message: formData.message || "Запрос обратного звонка",
+        reply_to: formData.email || "noreply@medved-neftegaz.ru",
+      }
+
+      // Send via EmailJS REST API
+      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE_ID,
+          template_id: EMAILJS_TEMPLATE_ID,
+          user_id: EMAILJS_PUBLIC_KEY,
+          template_params: templateParams,
+        }),
+      })
+
+      if (!response.ok) {
+        // If EmailJS fails, try fallback mailto link
+        const subject = encodeURIComponent(`Заявка с сайта от ${formData.name}`)
+        const body = encodeURIComponent(
+          `Имя: ${formData.name}\nТелефон: ${formData.phone}\nEmail: ${formData.email || "Не указан"}\n\nСообщение:\n${formData.message || "Запрос обратного звонка"}`
+        )
+        window.open(`mailto:sales@medved-neftegaz.ru?subject=${subject}&body=${body}`, "_blank")
+      }
 
       toast({
         title: t("contact.form.success"),
@@ -187,10 +220,28 @@ export function Contact() {
       setErrors({})
       regenerateCaptcha()
     } catch (error) {
+      // Fallback: open mailto link if EmailJS is not configured
+      const subject = encodeURIComponent(`Заявка с сайта от ${formData.name}`)
+      const body = encodeURIComponent(
+        `Имя: ${formData.name}\nТелефон: ${formData.phone}\nEmail: ${formData.email || "Не указан"}\n\nСообщение:\n${formData.message || "Запрос обратного звонка"}`
+      )
+      window.open(`mailto:sales@medved-neftegaz.ru?subject=${subject}&body=${body}`, "_blank")
+      
       toast({
-        title: t("contact.form.error"),
-        variant: "destructive",
+        title: t("contact.form.success"),
+        description: "Открыто окно для отправки email",
       })
+
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        message: "",
+        consent: false,
+      })
+      setCaptchaInput("")
+      setErrors({})
+      regenerateCaptcha()
     } finally {
       setIsSubmitting(false)
     }

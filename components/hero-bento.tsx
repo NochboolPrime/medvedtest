@@ -17,7 +17,7 @@ export function HeroBento() {
             </div>
 
             <h1 className="text-5xl lg:text-6xl font-bold tracking-tight text-balance">
-              Исключительные решения <span className="text-[#1E375C]">исключительных</span> задач
+              Исключительные решения для<span className="text-[#1E375C]">исключительных</span> задач
             </h1>
 
             <p className="text-lg text-muted-foreground text-pretty max-w-xl">

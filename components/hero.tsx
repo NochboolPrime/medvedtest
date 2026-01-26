@@ -11,22 +11,22 @@ export function Hero() {
   const t = useTranslations()
   const { get, loading } = useSiteContent("hero")
   const [bannerImage, setBannerImage] = useState(
-    "/images/nizkii-ugol-vystrela-sovremennogo-serogo-zdania-so-steklannymi-oknami.jpg",
+    "/images/hero-banner-oil-gas.jpg",
   )
 
   useEffect(() => {
     const fetchBanner = async () => {
       try {
-        console.log("[v0] Hero: Fetching banner image")
+        console.log("Hero: Fetching banner image")
         const response = await fetch("/api/hero-banner")
         const data = await response.json()
 
         if (data.banner?.image_url) {
-          console.log("[v0] Hero: Banner loaded:", data.banner.image_url)
+          console.log("Hero: Banner loaded:", data.banner.image_url)
           setBannerImage(data.banner.image_url)
         }
       } catch (error) {
-        console.error("[v0] Hero: Error fetching banner:", error)
+        console.error("Hero: Error fetching banner:", error)
       }
     }
 

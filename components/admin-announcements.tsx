@@ -56,7 +56,7 @@ export function AdminAnnouncements() {
     if (!editingAnnouncement) return
 
     try {
-      console.log("[v0] Admin - Saving announcement:", editingAnnouncement)
+      console.log(" Admin - Saving announcement:", editingAnnouncement)
       const url = "/api/announcements"
       const method = editingAnnouncement.id ? "PUT" : "POST"
 
@@ -67,14 +67,14 @@ export function AdminAnnouncements() {
       })
 
       if (response.ok) {
-        console.log("[v0] Admin - Announcement saved successfully")
+        console.log(" Admin - Announcement saved successfully")
         await fetchAnnouncements()
         setEditingAnnouncement(null)
       } else {
-        console.error("[v0] Admin - Error response:", await response.text())
+        console.error("Admin - Error response:", await response.text())
       }
     } catch (error) {
-      console.error("[v0] Admin - Error saving announcement:", error)
+      console.error("Admin - Error saving announcement:", error)
     }
   }
 
@@ -109,7 +109,7 @@ export function AdminAnnouncements() {
         await fetchAnnouncements()
       }
     } catch (error) {
-      console.error("[v0] Error toggling announcement:", error)
+      console.error("Error toggling announcement:", error)
     }
   }
 
@@ -149,7 +149,7 @@ export function AdminAnnouncements() {
         alert("Ошибка загрузки изображения")
       }
     } catch (error) {
-      console.error("[v0] Admin - Error uploading image:", error)
+      console.error("Admin - Error uploading image:", error)
       alert("Ошибка загрузки изображения")
     } finally {
       setIsUploadingImage(false)
