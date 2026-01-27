@@ -22,7 +22,7 @@ export function HeroOrganic() {
           <div className="flex flex-col justify-center space-y-6">
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance leading-tight">
-                Исключительные решения исключительных задач
+                Исключительные решения исключительных задач для
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground text-pretty">
                 Надёжные решения для нефтегазовой отрасли и машиностроения

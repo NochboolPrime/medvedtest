@@ -260,14 +260,14 @@ export function Header() {
           {/* Mobile Contact Info */}
           <div className="pt-6 mt-6 border-t border-border">
             <a
-              href="tel:+74957775660"
+              href="tel:+74957775600"
               className="flex items-center gap-2 text-base font-semibold text-foreground hover:text-[#B19D76] transition-colors mb-3"
             >
               <Phone className="h-5 w-5" />
               {t("header.phone")}
             </a>
             <a
-              href="mailto:info@aomedved.ru"
+              href="mailto:sales@medved-neftegaz.ru"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <Mail className="h-4 w-4" />
