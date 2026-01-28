@@ -12,12 +12,8 @@ export function Certificates() {
   const { locale } = useLanguage()
   const t = useTranslations()
 
-  console.log("[v0] Certificates - Component rendering, locale:", locale)
-
   // Get all certificate items from database
   const certificateItems = getItems("certificate\\d+")
-
-  console.log("[v0] Certificates - certificateItems from DB:", certificateItems)
 
   // Group certificates by number
   const certificates: Array<{ title: string; description: string; image: string }> = []
@@ -30,8 +26,6 @@ export function Certificates() {
     }
   })
 
-  console.log("[v0] Certificates - certNumbers:", Array.from(certNumbers))
-
   Array.from(certNumbers)
     .sort()
     .forEach((num) => {
@@ -39,14 +33,10 @@ export function Certificates() {
       const description = get(`certificate${num}Description`, "")
       const image = get(`certificate${num}Image`, "/placeholder.svg?height=400&width=300")
 
-      console.log(`[v0] Certificates - certificate${num}:`, { title, description, image })
-
       if (title || description) {
         certificates.push({ title, description, image })
       }
     })
-
-  console.log("[v0] Certificates - Final certificates array:", certificates)
 
   // Fallback to hardcoded certificates if database is empty
   const displayCertificates =

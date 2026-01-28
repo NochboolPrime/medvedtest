@@ -29,6 +29,13 @@ interface Product {
   features_zh?: string[]
 }
 
+interface CatalogPdfData {
+  pdf_url: string
+  title: string
+  title_en: string
+  title_zh: string
+}
+
 interface CatalogPageClientProps {
   products: Product[]
 }
@@ -36,10 +43,24 @@ interface CatalogPageClientProps {
 export function CatalogPageClient({ products: allProducts }: CatalogPageClientProps) {
   const t = useTranslations()
   const { locale } = useLanguage()
+  const [catalogPdf, setCatalogPdf] = useState<CatalogPdfData | null>(null)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" })
+    loadCatalogPdf()
   }, [])
+
+  const loadCatalogPdf = async () => {
+    try {
+      const response = await fetch("/api/catalog-pdf")
+      const data = await response.json()
+      if (data && data.pdf_url) {
+        setCatalogPdf(data)
+      }
+    } catch (error) {
+      console.error("Error loading catalog PDF:", error)
+    }
+  }
 
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState("")
@@ -100,108 +121,16 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
     }
   }
 
-  const generatePDF = async () => {
-    try {
-      // Dynamically import html2pdf
-      const html2pdf = (await import("html2pdf.js")).default
+  const getCatalogPdfTitle = () => {
+    if (!catalogPdf) return t("catalog.downloadPDF")
+    if (locale === "en" && catalogPdf.title_en) return catalogPdf.title_en
+    if (locale === "zh" && catalogPdf.title_zh) return catalogPdf.title_zh
+    return catalogPdf.title || t("catalog.downloadPDF")
+  }
 
-      // Create PDF content
-      const pdfContent = document.createElement("div")
-      pdfContent.style.cssText =
-        "width: 210mm; padding: 15mm; font-family: Arial, sans-serif; background: white; color: black;"
-
-      // Title page
-      pdfContent.innerHTML = `
-        <div style="text-align: center; margin-bottom: 30px; padding: 40px 0; background: linear-gradient(135deg, #1a1f2e 0%, #2d3748 100%); color: white; border-radius: 8px;">
-          <h1 style="font-size: 28px; margin-bottom: 8px; font-weight: bold;">${t("header.companyName") || "ТД МЕДВЕДЬ"}</h1>
-          <p style="font-size: 16px; margin-bottom: 8px; color: #B19D76;">${t("catalog.pdfTitle") || t("catalog.title") || "Каталог оборудования"}</p>
-          <p style="font-size: 12px; color: #cbd5e0;">${new Date().toLocaleDateString(locale === "ru" ? "ru-RU" : locale === "zh" ? "zh-CN" : "en-US")}</p>
-        </div>
-      `
-
-      // Add products
-      filteredProducts.forEach((product, index) => {
-        const localizedTitle = getLocalizedTitle(product)
-        const localizedDescription = getLocalizedDescription(product)
-        const localizedFeatures = getLocalizedFeatures(product)
-
-        const productHtml = `
-          <div style="margin-bottom: 25px; page-break-inside: avoid; ${index > 0 ? "margin-top: 25px;" : ""}">
-            <div style="display: flex; align-items: center; margin-bottom: 8px;">
-              <span style="display: inline-block; width: 4px; height: 20px; background: #B19D76; margin-right: 8px;"></span>
-              <span style="color: #718096; font-size: 11px;">${index + 1}. ${product.category}</span>
-            </div>
-            
-            <h2 style="font-size: 18px; margin-bottom: 6px; color: #1a1f2e; font-weight: bold;">${localizedTitle}</h2>
-            
-            ${
-              product.price > 0
-                ? `
-              <div style="background: #f7fafc; padding: 8px 12px; border-left: 3px solid #B19D76; margin-bottom: 12px;">
-                <p style="font-size: 14px; color: #B19D76; margin: 0; font-weight: bold;">
-                  ${t("catalog.price")}: ${formatPrice(product.price)}
-                </p>
-              </div>
-            `
-                : ""
-            }
-            
-            ${
-              localizedDescription
-                ? `
-              <div style="margin-bottom: 12px;">
-                <h3 style="font-size: 13px; margin-bottom: 4px; color: #2d3748; font-weight: 600;">${t("catalog.pdfDescription") || "Описание"}</h3>
-                <p style="font-size: 11px; line-height: 1.5; color: #4a5568; margin: 0;">${localizedDescription}</p>
-              </div>
-            `
-                : ""
-            }
-            
-            ${
-              localizedFeatures && localizedFeatures.length > 0
-                ? `
-              <div style="margin-bottom: 12px;">
-                <h3 style="font-size: 13px; margin-bottom: 4px; color: #2d3748; font-weight: 600;">${t("catalog.pdfKeyFeatures") || "Ключевые особенности"}</h3>
-                <ul style="margin: 0; padding-left: 18px; font-size: 11px; line-height: 1.6; color: #4a5568;">
-                  ${localizedFeatures.map((feature) => `<li style="margin-bottom: 2px;">${feature}</li>`).join("")}
-                </ul>
-              </div>
-            `
-                : ""
-            }
-            
-            <div style="border-bottom: 1px solid #e2e8f0; margin-top: 15px;"></div>
-          </div>
-        `
-        pdfContent.innerHTML += productHtml
-      })
-
-      // Generate PDF with proper options for Cyrillic support
-      const opt = {
-        margin: [10, 10, 10, 10],
-        filename: `${t("catalog.pdfTitle") || "Каталог"}-${new Date().toISOString().split("T")[0]}.pdf`,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true,
-          letterRendering: true,
-          logging: false,
-        },
-        jsPDF: {
-          unit: "mm",
-          format: "a4",
-          orientation: "portrait",
-          compress: true,
-        },
-        pagebreak: { mode: ["avoid-all", "css", "legacy"] },
-      }
-
-      // Generate and download PDF
-      await html2pdf().set(opt).from(pdfContent).save()
-    } catch (error) {
-      console.error("[v0] Error generating PDF:", error)
-      alert(t("catalog.pdfError") || "Ошибка при создании PDF")
-    }
+  const downloadCatalogPdf = () => {
+    if (!catalogPdf?.pdf_url) return
+    window.open(catalogPdf.pdf_url, "_blank")
   }
 
   return (
@@ -223,13 +152,15 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
                 <div className="w-1 h-16 bg-accent"></div>
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground">{t("catalog.title")}</h1>
               </div>
-              <Button
-                onClick={generatePDF}
-                className="bg-accent text-accent-foreground hover:bg-accent/90 hidden md:flex items-center gap-2"
-              >
-                <Download className="h-4 w-4" />
-                {t("catalog.downloadPDF")}
-              </Button>
+              {catalogPdf?.pdf_url && (
+                <Button
+                  onClick={downloadCatalogPdf}
+                  className="bg-accent text-accent-foreground hover:bg-accent/90 hidden md:flex items-center gap-2"
+                >
+                  <Download className="h-4 w-4" />
+                  {getCatalogPdfTitle()}
+                </Button>
+              )}
             </div>
             <p className="text-muted-foreground text-lg">{t("catalog.subtitle")}</p>
           </motion.div>
@@ -237,12 +168,14 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
       </div>
 
       <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <div className="mb-4 md:hidden">
-          <Button onClick={generatePDF} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-            <Download className="mr-2 h-4 w-4" />
-            {t("catalog.downloadPDF")}
-          </Button>
-        </div>
+        {catalogPdf?.pdf_url && (
+          <div className="mb-4 md:hidden">
+            <Button onClick={downloadCatalogPdf} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+              <Download className="mr-2 h-4 w-4" />
+              {getCatalogPdfTitle()}
+            </Button>
+          </div>
+        )}
 
         <div className="mb-8 space-y-4">
           <div className="relative">

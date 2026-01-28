@@ -1,16 +1,24 @@
--- Create production_carousel table for managing carousel images
-CREATE TABLE IF NOT EXISTS production_carousel (
+-- =====================================================
+-- Карусель производства (Production Carousel)
+-- Выполните этот скрипт в Supabase SQL Editor
+-- =====================================================
+
+-- Удаление старой таблицы (если нужно пересоздать)
+DROP TABLE IF EXISTS production_carousel CASCADE;
+
+-- Создание таблицы production_carousel
+CREATE TABLE production_carousel (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
   
-  -- Image
+  -- Image URL
   image_url TEXT NOT NULL,
   
   -- Captions in different languages
-  caption_ru TEXT NOT NULL,
-  caption_en TEXT NOT NULL,
-  caption_zh TEXT NOT NULL,
+  caption_ru TEXT NOT NULL DEFAULT '',
+  caption_en TEXT NOT NULL DEFAULT '',
+  caption_zh TEXT NOT NULL DEFAULT '',
   
   -- Order and visibility
   order_index INTEGER NOT NULL DEFAULT 0,
@@ -26,18 +34,26 @@ CREATE INDEX IF NOT EXISTS production_carousel_order_idx ON production_carousel(
 -- Enable RLS
 ALTER TABLE production_carousel ENABLE ROW LEVEL SECURITY;
 
--- RLS Policies
--- Allow public to read visible carousel items
-CREATE POLICY "production_carousel_select_visible_public"
-  ON production_carousel
-  FOR SELECT
-  USING (is_visible = true);
+-- Удаление старых политик
+DROP POLICY IF EXISTS "production_carousel_select_visible_public" ON production_carousel;
+DROP POLICY IF EXISTS "production_carousel_all_service_role" ON production_carousel;
+DROP POLICY IF EXISTS "Allow public read production_carousel" ON production_carousel;
+DROP POLICY IF EXISTS "Allow public insert production_carousel" ON production_carousel;
+DROP POLICY IF EXISTS "Allow public update production_carousel" ON production_carousel;
+DROP POLICY IF EXISTS "Allow public delete production_carousel" ON production_carousel;
 
--- Allow service role full access for admin operations
-CREATE POLICY "production_carousel_all_service_role"
-  ON production_carousel
-  FOR ALL
-  USING (auth.role() = 'service_role');
+-- RLS Policies (разрешаем все операции для работы с anon key)
+CREATE POLICY "Allow public read production_carousel" ON production_carousel
+  FOR SELECT USING (true);
+
+CREATE POLICY "Allow public insert production_carousel" ON production_carousel
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Allow public update production_carousel" ON production_carousel
+  FOR UPDATE USING (true) WITH CHECK (true);
+
+CREATE POLICY "Allow public delete production_carousel" ON production_carousel
+  FOR DELETE USING (true);
 
 -- Insert default carousel images
 INSERT INTO production_carousel (image_url, caption_ru, caption_en, caption_zh, order_index, is_visible) VALUES

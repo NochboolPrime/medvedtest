@@ -57,7 +57,7 @@ export function About() {
           viewport={{ once: true }}
           className="mb-20 lg:mb-8 2xl:mb-20 max-w-4xl"
         >
-          <h3 className="font-light mb-6 lg:mb-3 2xl:mb-6 leading-relaxed text-card-foreground text-xl lg:text-lg 2xl:text-xl">
+          <h3 className="font-light mb-6 lg:mb-3 2xl:mb-6 leading-relaxed text-card-foreground text-xl lg:text-lg 2xl:text-xl md:text-justify">
             {mission}
           </h3>
         </motion.div>
@@ -86,7 +86,7 @@ export function About() {
                 <div className="flex-shrink-0 text-5xl lg:text-4xl 2xl:text-5xl font-light text-[#B19D76]/30 leading-none pt-1 text-[rgba(181,162,123,0.83)]">
                   {(index + 1).toString().padStart(2, "0")}
                 </div>
-                <p className="font-normal leading-relaxed pt-2 lg:pt-1 2xl:pt-2 text-card-foreground text-xl lg:text-base 2xl:text-xl">
+                <p className="font-normal leading-relaxed pt-2 lg:pt-1 2xl:pt-2 text-card-foreground text-xl lg:text-base 2xl:text-xl md:text-justify">
                   {principle}
                 </p>
               </motion.div>

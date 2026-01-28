@@ -13,6 +13,14 @@ import { Plus, Edit, Trash2 } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { toast } from "sonner"
+import { createClient } from "@supabase/supabase-js"
+
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!url || !key) return null
+  return createClient(url, key)
+}
 
 interface NewsItem {
   id: string
@@ -52,23 +60,52 @@ export function AdminNewsManager() {
     const file = e.target.files?.[0]
     if (!file) return
 
+    if (!file.type.startsWith("image/")) {
+      toast.error("Пожалуйста, выберите изображение")
+      return
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error("Размер файла не должен превышать 10MB")
+      return
+    }
+
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      toast.error("Supabase не настроен")
+      return
+    }
+
     setIsUploading(true)
-    const formData = new FormData()
-    formData.append("file", file)
 
     try {
-      const response = await fetch("/api/upload-image", {
-        method: "POST",
-        body: formData,
-      })
-      const data = await response.json()
+      // Generate unique filename
+      const ext = file.name.split(".").pop() || "jpg"
+      const fileName = `news-${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`
 
-      if (data.url) {
-        setEditingNews((prev) => ({ ...prev, image_url: data.url }))
+      // Upload directly to Supabase Storage
+      const { data, error } = await supabase.storage
+        .from("images")
+        .upload(fileName, file, {
+          contentType: file.type,
+          upsert: false,
+        })
+
+      if (error) {
+        console.error("Supabase upload error:", error)
+        toast.error(`Ошибка загрузки: ${error.message}`)
+        return
+      }
+
+      // Get public URL
+      const { data: urlData } = supabase.storage.from("images").getPublicUrl(data.path)
+
+      if (urlData.publicUrl) {
+        setEditingNews((prev) => ({ ...prev, image_url: urlData.publicUrl }))
         toast.success("Изображение загружено")
       }
     } catch (error) {
-      console.error("[v0] Error uploading image:", error)
+      console.error("Error uploading image:", error)
       toast.error("Ошибка загрузки изображения")
     } finally {
       setIsUploading(false)

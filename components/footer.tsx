@@ -3,6 +3,7 @@
 import type React from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname, useRouter } from "next/navigation"
 import { Mail, MapPin, Phone } from "lucide-react"
 import { Logo } from "@/components/logo"
 import { useTranslations } from "@/hooks/use-translations"
@@ -14,6 +15,22 @@ export function Footer() {
   const { theme } = useTheme()
   const { get } = useSiteContent("footer")
   const { get: getContact } = useSiteContent("contact")
+  const pathname = usePathname()
+  const router = useRouter()
+  const isHomePage = pathname === "/"
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault()
+    
+    if (isHomePage) {
+      const element = document.querySelector(id)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    } else {
+      router.push(`/${id}`)
+    }
+  }
 
   const companyName = get("companyName") || t("footer.companyName")
   const companyDescription = get("companyDescription") || t("footer.companyDescription")
@@ -55,8 +72,8 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="#hero"
-                  onClick={(e) => scrollToSection(e, "#hero")}
+                  href="/#hero"
+                  onClick={(e) => handleNavClick(e, "#hero")}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
                 >
                   {t("header.nav.home")}
@@ -64,8 +81,8 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#about"
-                  onClick={(e) => scrollToSection(e, "#about")}
+                  href="/#about"
+                  onClick={(e) => handleNavClick(e, "#about")}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
                 >
                   {t("header.nav.about")}
@@ -73,8 +90,8 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#equipment"
-                  onClick={(e) => scrollToSection(e, "#equipment")}
+                  href="/#equipment"
+                  onClick={(e) => handleNavClick(e, "#equipment")}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
                 >
                   {t("header.nav.products")}
@@ -82,8 +99,8 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#services"
-                  onClick={(e) => scrollToSection(e, "#services")}
+                  href="/#services"
+                  onClick={(e) => handleNavClick(e, "#services")}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
                 >
                   {t("header.nav.services")}
@@ -91,8 +108,8 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#contact"
-                  onClick={(e) => scrollToSection(e, "#contact")}
+                  href="/#contact"
+                  onClick={(e) => handleNavClick(e, "#contact")}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
                 >
                   {t("header.nav.contacts")}
@@ -182,12 +199,4 @@ export function Footer() {
       </div>
     </footer>
   )
-}
-
-const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-  e.preventDefault()
-  const element = document.querySelector(id)
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" })
-  }
 }

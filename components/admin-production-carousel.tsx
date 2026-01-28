@@ -10,6 +10,14 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Switch } from "@/components/ui/switch"
 import Image from "next/image"
+import { createClient } from "@supabase/supabase-js"
+
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!url || !key) return null
+  return createClient(url, key)
+}
 
 interface CarouselItem {
   id: string
@@ -37,9 +45,8 @@ export function AdminProductionCarousel() {
       const res = await fetch("/api/production-carousel")
       const data = await res.json()
       setItems(data.items || [])
-      console.log("[v0] Loaded production carousel items:", data.items?.length || 0)
     } catch (error) {
-      console.error("[v0] Error loading production carousel:", error)
+      console.error("Error loading production carousel:", error)
     }
   }
 
@@ -47,8 +54,6 @@ export function AdminProductionCarousel() {
     if (!editingItem) return
 
     try {
-      console.log("[v0] Saving carousel item:", editingItem)
-
       const method = editingItem.id ? "PUT" : "POST"
       const url = editingItem.id ? `/api/production-carousel/${editingItem.id}` : "/api/production-carousel"
 
@@ -59,20 +64,15 @@ export function AdminProductionCarousel() {
       })
 
       if (res.ok) {
-        const result = await res.json()
-        console.log("[v0] Saved successfully:", result)
-
         setIsDialogOpen(false)
         setEditingItem(null)
 
         setTimeout(() => {
           fetchItems()
         }, 100)
-      } else {
-        console.error("[v0] Save failed:", await res.text())
       }
     } catch (error) {
-      console.error("[v0] Error saving carousel item:", error)
+      console.error("Error saving carousel item:", error)
     }
   }
 
@@ -88,30 +88,61 @@ export function AdminProductionCarousel() {
         await fetchItems()
       }
     } catch (error) {
-      console.error("[v0] Error deleting carousel item:", error)
+      console.error("Error deleting carousel item:", error)
     }
   }
 
-  const handleUploadImage = async (file: File, lang: string) => {
+  const handleUploadImage = async (file: File) => {
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      alert("Supabase не настроен. Проверьте переменные окружения.")
+      return
+    }
+
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      alert("Пожалуйста, выберите изображение")
+      return
+    }
+
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert("Файл слишком большой. Максимальный размер: 10MB")
+      return
+    }
+
+    setUploadingLang("image")
     try {
-      setUploadingLang(lang)
-      const formData = new FormData()
-      formData.append("file", file)
+      // Generate unique filename
+      const ext = file.name.split(".").pop() || "jpg"
+      const fileName = `carousel-${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`
 
-      const res = await fetch("/api/upload-certificate", {
-        method: "POST",
-        body: formData,
-      })
+      // Upload directly to Supabase Storage
+      const { data, error } = await supabase.storage
+        .from("images")
+        .upload(fileName, file, {
+          contentType: file.type,
+          upsert: false,
+        })
 
-      const data = await res.json()
-      if (data.url) {
+      if (error) {
+        console.error("Supabase upload error:", error)
+        alert(`Ошибка загрузки: ${error.message}`)
+        return
+      }
+
+      // Get public URL
+      const { data: urlData } = supabase.storage.from("images").getPublicUrl(data.path)
+
+      if (urlData.publicUrl) {
         setEditingItem((prev) => ({
           ...prev,
-          image_url: data.url,
+          image_url: urlData.publicUrl,
         }))
       }
     } catch (error) {
-      console.error("[v0] Error uploading image:", error)
+      console.error("Error uploading image:", error)
+      alert("Ошибка загрузки изображения")
     } finally {
       setUploadingLang(null)
     }
@@ -156,20 +187,16 @@ export function AdminProductionCarousel() {
         ),
       )
 
-      console.log("[v0] Order updated successfully")
-
       setTimeout(() => {
         fetchItems()
       }, 100)
     } catch (error) {
-      console.error("[v0] Error updating order:", error)
+      console.error("Error updating order:", error)
     }
   }
 
   const handleToggleVisibility = async (item: CarouselItem) => {
     try {
-      console.log("[v0] Toggling visibility for:", item.id, !item.is_visible)
-
       const res = await fetch(`/api/production-carousel/${item.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -177,13 +204,12 @@ export function AdminProductionCarousel() {
       })
 
       if (res.ok) {
-        console.log("[v0] Visibility toggled successfully")
         setTimeout(() => {
           fetchItems()
         }, 100)
       }
     } catch (error) {
-      console.error("[v0] Error toggling visibility:", error)
+      console.error("Error toggling visibility:", error)
     }
   }
 
@@ -303,7 +329,7 @@ export function AdminProductionCarousel() {
                     input.accept = "image/*"
                     input.onchange = (e) => {
                       const file = (e.target as HTMLInputElement).files?.[0]
-                      if (file) handleUploadImage(file, "image")
+                      if (file) handleUploadImage(file)
                     }
                     input.click()
                   }}

@@ -121,9 +121,9 @@ ON CONFLICT (section, key) DO UPDATE SET
 INSERT INTO public.site_content (section, key, content_type, value_ru, value_en, value_zh, metadata)
 VALUES
 ('services', 'title', 'text',
- 'Наши услуги',
- 'Our Services',
- '我们的服务',
+ 'Специализация по направлениям',
+ 'Specialization by Areas',
+ '专业领域',
  '{"order": 1}'::jsonb),
 
 ('services', 'service1Title', 'text',

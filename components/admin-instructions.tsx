@@ -151,7 +151,7 @@ export function AdminInstructions() {
                     </div>
                     <div className="border rounded-lg p-3">
                       <h5 className="font-medium text-sm mb-1">Services</h5>
-                      <p className="text-xs text-muted-foreground">Наши услуги (динамическое добавление)</p>
+                      <p className="text-xs text-muted-foreground">Специализация по направлениям (динамическое добавление)</p>
                     </div>
                     <div className="border rounded-lg p-3">
                       <h5 className="font-medium text-sm mb-1">Principles</h5>
@@ -540,8 +540,7 @@ export function AdminInstructions() {
                   <ol className="list-decimal list-inside space-y-2 text-sm text-muted-foreground">
                     <li>Найдите товар, который хотите показать на главной странице</li>
                     <li>Включите переключатель "Показывать на главной странице"</li>
-                    <li>Можно выбрать максимум 4 товара</li>
-                    <li>При попытке выбрать пятый товар появится предупреждение</li>
+                    <li>Можно выбрать любое количество товаров без ограничений</li>
                     <li>Изменения применяются мгновенно</li>
                   </ol>
                 </div>

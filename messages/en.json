@@ -7,7 +7,7 @@
       "about": "About",
       "products": "Products",
       "catalog": "Catalog",
-      "services": "Services",
+      "services": "Specialization",
       "contacts": "Contacts",
       "news": "News"
     },
@@ -143,7 +143,7 @@
     "consultationButton": "Get Consultation"
   },
   "services": {
-    "title": "Our Services",
+    "title": "Specialization by Areas",
     "details": {
       "cementirovanie": {
         "title": "Cementing Units",
@@ -361,7 +361,7 @@
     "companyName": "TD Medved",
     "companyDescription": "Reliable solutions for oil & gas industry",
     "quickLinks": "Quick Links",
-    "services": "Services",
+    "services": "Specialization",
     "contacts": "Contacts",
     "address": "Address",
     "addressValue": "Moscow, Sample Street, 1",

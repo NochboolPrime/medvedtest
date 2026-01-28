@@ -11,6 +11,14 @@ import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Plus, Edit, Trash2 } from "lucide-react"
+import { createClient } from "@supabase/supabase-js"
+
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!url || !key) return null
+  return createClient(url, key)
+}
 
 interface Announcement {
   id?: string
@@ -42,13 +50,11 @@ export function AdminAnnouncements() {
 
   const fetchAnnouncements = async () => {
     try {
-      console.log("Admin - Fetching announcements")
       const response = await fetch("/api/announcements")
       const data = await response.json()
-      console.log("Admin - Fetched announcements:", data)
       setAnnouncements(data)
     } catch (error) {
-      console.error("Admin - Error fetching announcements:", error)
+      console.error("Error fetching announcements:", error)
     }
   }
 
@@ -56,7 +62,6 @@ export function AdminAnnouncements() {
     if (!editingAnnouncement) return
 
     try {
-      console.log(" Admin - Saving announcement:", editingAnnouncement)
       const url = "/api/announcements"
       const method = editingAnnouncement.id ? "PUT" : "POST"
 
@@ -67,14 +72,15 @@ export function AdminAnnouncements() {
       })
 
       if (response.ok) {
-        console.log(" Admin - Announcement saved successfully")
         await fetchAnnouncements()
         setEditingAnnouncement(null)
       } else {
-        console.error("Admin - Error response:", await response.text())
+        const errorText = await response.text()
+        alert(`Ошибка сохранения: ${errorText}`)
       }
     } catch (error) {
-      console.error("Admin - Error saving announcement:", error)
+      console.error("Error saving announcement:", error)
+      alert("Ошибка сохранения анонса")
     }
   }
 
@@ -122,34 +128,49 @@ export function AdminAnnouncements() {
       return
     }
 
-    if (file.size > 5 * 1024 * 1024) {
-      alert("Размер файла не должен превышать 5MB")
+    if (file.size > 10 * 1024 * 1024) {
+      alert("Размер файла не должен превышать 10MB")
+      return
+    }
+
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      alert("Supabase не настроен. Проверьте переменные окружения.")
       return
     }
 
     setIsUploadingImage(true)
 
     try {
-      const formData = new FormData()
-      formData.append("file", file)
+      // Generate unique filename
+      const ext = file.name.split(".").pop() || "jpg"
+      const fileName = `announcement-${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`
 
-      const response = await fetch("/api/upload-image", {
-        method: "POST",
-        body: formData,
-      })
+      // Upload directly to Supabase Storage
+      const { data, error } = await supabase.storage
+        .from("images")
+        .upload(fileName, file, {
+          contentType: file.type,
+          upsert: false,
+        })
 
-      if (response.ok) {
-        const data = await response.json()
-        console.log("Admin - Image uploaded:", data.url)
+      if (error) {
+        console.error("Supabase upload error:", error)
+        alert(`Ошибка загрузки: ${error.message}`)
+        return
+      }
+
+      // Get public URL
+      const { data: urlData } = supabase.storage.from("images").getPublicUrl(data.path)
+
+      if (urlData.publicUrl) {
         setEditingAnnouncement({
           ...editingAnnouncement,
-          image_url: data.url,
+          image_url: urlData.publicUrl,
         })
-      } else {
-        alert("Ошибка загрузки изображения")
       }
     } catch (error) {
-      console.error("Admin - Error uploading image:", error)
+      console.error("Error uploading image:", error)
       alert("Ошибка загрузки изображения")
     } finally {
       setIsUploadingImage(false)

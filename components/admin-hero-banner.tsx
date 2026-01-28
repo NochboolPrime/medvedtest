@@ -9,6 +9,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Upload, Loader2 } from "lucide-react"
 import Image from "next/image"
+import { createClient } from "@supabase/supabase-js"
+
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!url || !key) return null
+  return createClient(url, key)
+}
 
 interface HeroBanner {
   id: string
@@ -31,17 +39,15 @@ export function AdminHeroBanner() {
 
   const fetchBanner = async () => {
     try {
-      console.log("[v0] Fetching hero banner from admin")
       const response = await fetch("/api/hero-banner")
       const data = await response.json()
 
       if (data.banner) {
-        console.log("[v0] Hero banner loaded:", data.banner)
         setBanner(data.banner)
         setImageUrl(data.banner.image_url)
       }
     } catch (error) {
-      console.error("[v0] Error fetching hero banner:", error)
+      console.error("Error fetching hero banner:", error)
     } finally {
       setLoading(false)
     }
@@ -57,34 +63,47 @@ export function AdminHeroBanner() {
       return
     }
 
-    // Validate file size (5MB max)
-    if (file.size > 5 * 1024 * 1024) {
-      alert("Размер файла не должен превышать 5MB")
+    // Validate file size (10MB max)
+    if (file.size > 10 * 1024 * 1024) {
+      alert("Размер файла не должен превышать 10MB")
+      return
+    }
+
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      alert("Supabase не настроен. Проверьте переменные окружения.")
       return
     }
 
     setUploading(true)
 
     try {
-      console.log("[v0] Uploading hero banner image:", file.name)
+      // Generate unique filename
+      const ext = file.name.split(".").pop() || "jpg"
+      const fileName = `hero-banner-${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`
 
-      const formData = new FormData()
-      formData.append("file", file)
+      // Upload directly to Supabase Storage
+      const { data, error } = await supabase.storage
+        .from("images")
+        .upload(fileName, file, {
+          contentType: file.type,
+          upsert: false,
+        })
 
-      const response = await fetch("/api/upload-image", {
-        method: "POST",
-        body: formData,
-      })
-
-      if (!response.ok) {
-        throw new Error("Failed to upload image")
+      if (error) {
+        console.error("Supabase upload error:", error)
+        alert(`Ошибка загрузки: ${error.message}`)
+        return
       }
 
-      const data = await response.json()
-      console.log("[v0] Hero banner image uploaded:", data.url)
-      setImageUrl(data.url)
+      // Get public URL
+      const { data: urlData } = supabase.storage.from("images").getPublicUrl(data.path)
+
+      if (urlData.publicUrl) {
+        setImageUrl(urlData.publicUrl)
+      }
     } catch (error) {
-      console.error("[v0] Error uploading hero banner image:", error)
+      console.error("Error uploading hero banner image:", error)
       alert("Ошибка при загрузке изображения")
     } finally {
       setUploading(false)
@@ -100,8 +119,6 @@ export function AdminHeroBanner() {
     setSaving(true)
 
     try {
-      console.log("[v0] Saving hero banner:", imageUrl)
-
       const response = await fetch("/api/hero-banner", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

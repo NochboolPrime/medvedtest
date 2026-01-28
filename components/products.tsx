@@ -27,7 +27,6 @@ export async function Products() {
       )
       .eq("show_on_homepage", true)
       .order("created_at", { ascending: true })
-      .limit(4)
 
     const mappedProducts = (products || []).map((p) => ({
       id: p.id.toString(),

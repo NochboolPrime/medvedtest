@@ -7,7 +7,7 @@
       "about": "О компании",
       "products": "Продукция",
       "catalog": "Каталог",
-      "services": "Услуги",
+      "services": "Специализация",
       "contacts": "Контакты",
       "news": "Новости"
     },
@@ -197,7 +197,7 @@
     "consultationButton": "Получить консультацию"
   },
   "services": {
-    "title": "Наши услуги",
+    "title": "Специализация по направлениям",
     "details": {
       "cementirovanie": {
         "title": "Цементировочные агрегаты",
@@ -416,7 +416,7 @@
     "companyName": "ТД Медведь",
     "companyDescription": "Надёжные решения для нефтегазовой отрасли",
     "quickLinks": "Быстрые ссылки",
-    "services": "Услуги",
+    "services": "Специализация",
     "contacts": "Контакты",
     "address": "Адрес",
     "addressValue": "г. Москва, ул. Примерная, д. 1",

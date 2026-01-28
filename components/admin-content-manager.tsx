@@ -2,7 +2,15 @@
 
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
+import { createClient as createSupabaseClient } from "@supabase/supabase-js"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+
+function getSupabaseStorageClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!url || !key) return null
+  return createSupabaseClient(url, key)
+}
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -82,10 +90,9 @@ export function AdminContentManager() {
 
       if (error) throw error
 
-      console.log("[v0] Loaded content items:", data?.length)
       setContent(data || [])
     } catch (error) {
-      console.error("[v0] Error loading content:", error)
+      console.error("Error loading content:", error)
       toast({
         title: "Ошибка",
         description: "Не удалось загрузить контент",
@@ -117,7 +124,7 @@ export function AdminContentManager() {
 
       await loadContent()
     } catch (error) {
-      console.error("[v0] Error saving content:", error)
+      console.error("Error saving content:", error)
       toast({
         title: "Ошибка",
         description: "Не удалось сохранить изменения",
@@ -141,7 +148,7 @@ export function AdminContentManager() {
 
       await loadContent()
     } catch (error) {
-      console.error("[v0] Error toggling visibility:", error)
+      console.error("Error toggling visibility:", error)
       toast({
         title: "Ошибка",
         description: "Не удалось изменить видимость",
@@ -364,30 +371,64 @@ export function AdminContentManager() {
     const file = event.target.files?.[0]
     if (!file) return
 
+    if (!file.type.startsWith("image/")) {
+      toast({
+        title: "Ошибка",
+        description: "Пожалуйста, выберите изображение",
+        variant: "destructive",
+      })
+      return
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      toast({
+        title: "Ошибка",
+        description: "Размер файла не должен превышать 10MB",
+        variant: "destructive",
+      })
+      return
+    }
+
+    const storageClient = getSupabaseStorageClient()
+    if (!storageClient) {
+      toast({
+        title: "Ошибка",
+        description: "Supabase не настроен",
+        variant: "destructive",
+      })
+      return
+    }
+
     setUploading(itemId)
     try {
-      const formData = new FormData()
-      formData.append("file", file)
+      // Generate unique filename
+      const ext = file.name.split(".").pop() || "jpg"
+      const fileName = `content-${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`
 
-      const response = await fetch("/api/upload-certificate", {
-        method: "POST",
-        body: formData,
-      })
+      // Upload directly to Supabase Storage
+      const { data, error } = await storageClient.storage
+        .from("images")
+        .upload(fileName, file, {
+          contentType: file.type,
+          upsert: false,
+        })
 
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.error || "Upload failed")
+      if (error) {
+        throw new Error(error.message)
       }
 
-      const { url } = await response.json()
-      updateContent(itemId, lang, url)
+      // Get public URL
+      const { data: urlData } = storageClient.storage.from("images").getPublicUrl(data.path)
 
-      toast({
-        title: "Успешно",
-        description: "Изображение загружено",
-      })
+      if (urlData.publicUrl) {
+        updateContent(itemId, lang, urlData.publicUrl)
+        toast({
+          title: "Успешно",
+          description: "Изображение загружено",
+        })
+      }
     } catch (error) {
-      console.error("[v0] Error uploading image:", error)
+      console.error("Error uploading image:", error)
       toast({
         title: "Ошибка",
         description: "Не удалось загрузить изображение",

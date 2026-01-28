@@ -56,7 +56,7 @@ export function Services() {
     <section id="services" className="py-12 lg:py-6 2xl:py-12 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <div className="mb-12 lg:mb-6 2xl:mb-12">
-          <h2 className="text-center mb-8 lg:mb-4 2xl:mb-8 text-5xl lg:text-4xl 2xl:text-5xl font-extrabold text-foreground">
+          <h2 className="text-center mb-8 lg:mb-4 2xl:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-4xl 2xl:text-5xl font-extrabold text-foreground px-2">
             {title}
           </h2>
         </div>

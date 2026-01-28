@@ -22,6 +22,8 @@ import { AdminHeroBanner } from "@/components/admin-hero-banner"
 import { AdminNewsManager } from "@/components/admin-news-manager"
 import { NewsToggleSetting } from "@/components/news-toggle-setting"
 import { YandexMetrikaSettings } from "@/components/yandex-metrika-settings"
+import { AdminCatalogPdf } from "@/components/admin-catalog-pdf"
+import { AdminCertificates } from "@/components/admin-certificates"
 
 interface Product {
   id: string
@@ -135,13 +137,6 @@ export function AdminDashboard() {
   }
 
   const handleToggleHomepage = async (product: Product) => {
-    const homepageProducts = products.filter((p) => p.show_on_homepage)
-
-    if (!product.show_on_homepage && homepageProducts.length >= 4) {
-      alert("Максимум 4 товара могут отображаться на главной странице")
-      return
-    }
-
     const updated = { ...product, show_on_homepage: !product.show_on_homepage }
     await handleSaveProduct(updated)
   }
@@ -168,6 +163,8 @@ export function AdminDashboard() {
         <Tabs defaultValue="products" className="space-y-6">
           <TabsList>
             <TabsTrigger value="products">Товары</TabsTrigger>
+            <TabsTrigger value="catalog">Каталог PDF</TabsTrigger>
+            <TabsTrigger value="certificates">Сертификаты</TabsTrigger>
             <TabsTrigger value="content">Контент сайта</TabsTrigger>
             <TabsTrigger value="production">Производство</TabsTrigger>
             <TabsTrigger value="hero">Главный баннер</TabsTrigger>
@@ -231,6 +228,14 @@ export function AdminDashboard() {
                 </Card>
               ))}
             </div>
+          </TabsContent>
+
+          <TabsContent value="catalog">
+            <AdminCatalogPdf />
+          </TabsContent>
+
+          <TabsContent value="certificates">
+            <AdminCertificates />
           </TabsContent>
 
           <TabsContent value="content">

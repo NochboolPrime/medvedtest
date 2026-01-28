@@ -2,15 +2,14 @@ import { createClient } from "@supabase/supabase-js"
 import { NextResponse } from "next/server"
 
 function getSupabaseClient() {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  
+  if (!supabaseUrl || !supabaseServiceKey) {
     return null
   }
-  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  })
+  
+  return createClient(supabaseUrl, supabaseServiceKey)
 }
 
 export async function POST(request: Request) {
@@ -42,8 +41,6 @@ export async function POST(request: Request) {
     const fileExt = file.name.split(".").pop()
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
 
-    console.log("[v0] Uploading certificate to Supabase Storage:", fileName)
-
     // Convert file to buffer
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
@@ -55,18 +52,16 @@ export async function POST(request: Request) {
     })
 
     if (error) {
-      console.error("[v0] Supabase upload error:", error)
+      console.error("Supabase upload error:", error)
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
     // Get public URL
     const { data: urlData } = supabase.storage.from("certificates").getPublicUrl(data.path)
 
-    console.log("[v0] Certificate uploaded successfully:", urlData.publicUrl)
-
     return NextResponse.json({ url: urlData.publicUrl })
   } catch (error) {
-    console.error("[v0] Error uploading certificate:", error)
+    console.error("Error uploading certificate:", error)
     return NextResponse.json({ error: "Failed to upload file" }, { status: 500 })
   }
 }

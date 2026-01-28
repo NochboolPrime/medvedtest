@@ -2,15 +2,14 @@ import { createClient } from "@supabase/supabase-js"
 import { NextResponse } from "next/server"
 
 function getSupabaseClient() {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  
+  if (!supabaseUrl || !supabaseKey) {
     return null
   }
-  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  })
+  
+  return createClient(supabaseUrl, supabaseKey)
 }
 
 export async function GET() {
@@ -27,14 +26,13 @@ export async function GET() {
       .order("order_index", { ascending: true })
 
     if (error) {
-      console.error("[v0] Error fetching production carousel:", error)
+      console.error("Error fetching production carousel:", error)
       return NextResponse.json({ items: [] })
     }
 
-    console.log("[v0] Fetched production carousel items:", data?.length || 0)
     return NextResponse.json({ items: data || [] })
   } catch (error) {
-    console.error("[v0] Error in production carousel GET:", error)
+    console.error("Error in production carousel GET:", error)
     return NextResponse.json({ items: [] })
   }
 }
@@ -43,13 +41,10 @@ export async function POST(request: Request) {
   try {
     const supabase = getSupabaseClient()
     if (!supabase) {
-      console.error("[v0] Missing Supabase environment variables")
       return NextResponse.json({ error: "Supabase not configured" }, { status: 503 })
     }
 
     const body = await request.json()
-
-    console.log("[v0] Creating production carousel item:", body)
 
     const { data, error } = await supabase
       .from("production_carousel")
@@ -66,14 +61,13 @@ export async function POST(request: Request) {
       .single()
 
     if (error) {
-      console.error("[v0] Error creating production carousel item:", error)
+      console.error("Error creating production carousel item:", error)
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
-    console.log("[v0] Created production carousel item:", data.id)
     return NextResponse.json({ item: data })
   } catch (error) {
-    console.error("[v0] Error in production carousel POST:", error)
+    console.error("Error in production carousel POST:", error)
     return NextResponse.json({ error: "Failed to create item" }, { status: 500 })
   }
 }
