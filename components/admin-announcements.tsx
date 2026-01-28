@@ -42,13 +42,13 @@ export function AdminAnnouncements() {
 
   const fetchAnnouncements = async () => {
     try {
-      console.log("[v0] Admin - Fetching announcements")
+      console.log("Admin - Fetching announcements")
       const response = await fetch("/api/announcements")
       const data = await response.json()
-      console.log("[v0] Admin - Fetched announcements:", data)
+      console.log("Admin - Fetched announcements:", data)
       setAnnouncements(data)
     } catch (error) {
-      console.error("[v0] Admin - Error fetching announcements:", error)
+      console.error("Admin - Error fetching announcements:", error)
     }
   }
 
@@ -90,7 +90,7 @@ export function AdminAnnouncements() {
         await fetchAnnouncements()
       }
     } catch (error) {
-      console.error("[v0] Error deleting announcement:", error)
+      console.error("Error deleting announcement:", error)
     }
   }
 
@@ -140,7 +140,7 @@ export function AdminAnnouncements() {
 
       if (response.ok) {
         const data = await response.json()
-        console.log("[v0] Admin - Image uploaded:", data.url)
+        console.log("Admin - Image uploaded:", data.url)
         setEditingAnnouncement({
           ...editingAnnouncement,
           image_url: data.url,

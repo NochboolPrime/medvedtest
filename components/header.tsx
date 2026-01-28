@@ -3,6 +3,7 @@
 import type React from "react"
 
 import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
 import { Phone, Mail, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/logo"
@@ -16,6 +17,9 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [newsEnabled, setNewsEnabled] = useState(false)
   const t = useTranslations()
+  const pathname = usePathname()
+  const router = useRouter()
+  const isHomePage = pathname === "/"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,10 +34,9 @@ export function Header() {
       try {
         const response = await fetch("/api/site-settings")
         const data = await response.json()
-        console.log("[v0] Header - fetched news status:", data.settings?.news_enabled)
         setNewsEnabled(data.settings?.news_enabled ?? false)
       } catch (error) {
-        console.error("[v0] Error fetching news status:", error)
+        console.error("Error fetching news status:", error)
       }
     }
     fetchNewsStatus()
@@ -56,22 +59,32 @@ export function Header() {
     }
   }, [isMobileMenuOpen])
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
-    const element = document.querySelector(id)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" })
-    }
     setIsMobileMenuOpen(false)
+    
+    if (isHomePage) {
+      const element = document.querySelector(id)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    } else {
+      router.push(`/${id}`)
+    }
   }
 
-  const scrollToContact = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleContactClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    const element = document.querySelector("#contact")
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" })
-    }
     setIsMobileMenuOpen(false)
+    
+    if (isHomePage) {
+      const element = document.querySelector("#contact")
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    } else {
+      router.push("/#contact")
+    }
   }
 
   return (
@@ -96,22 +109,22 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 lg:flex">
             <a
-              href="#hero"
-              onClick={(e) => scrollToSection(e, "#hero")}
+              href="/#hero"
+              onClick={(e) => handleNavClick(e, "#hero")}
               className="text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:scale-105"
             >
               {t("header.nav.home")}
             </a>
             <a
-              href="#about"
-              onClick={(e) => scrollToSection(e, "#about")}
+              href="/#about"
+              onClick={(e) => handleNavClick(e, "#about")}
               className="text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:scale-105"
             >
               {t("header.nav.about")}
             </a>
             <a
-              href="#products"
-              onClick={(e) => scrollToSection(e, "#products")}
+              href="/#products"
+              onClick={(e) => handleNavClick(e, "#products")}
               className="text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:scale-105"
             >
               {t("header.nav.products")}
@@ -131,15 +144,15 @@ export function Header() {
               </Link>
             )}
             <a
-              href="#services"
-              onClick={(e) => scrollToSection(e, "#services")}
+              href="/#services"
+              onClick={(e) => handleNavClick(e, "#services")}
               className="text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:scale-105"
             >
               {t("header.nav.services")}
             </a>
             <a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, "#contact")}
+              href="/#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
               className="text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:scale-105"
             >
               {t("header.nav.contacts")}
@@ -168,7 +181,7 @@ export function Header() {
               </a>
             </div>
             <Button
-              onClick={scrollToContact}
+              onClick={handleContactClick}
               className="bg-[#B19D76] text-white hover:bg-[#B19D76]/90 font-semibold transition-all duration-200 hover:scale-105"
             >
               {t("header.contactButton")}
@@ -206,22 +219,22 @@ export function Header() {
         <nav className="flex flex-col p-6 gap-6">
           {/* Mobile Navigation Links */}
           <a
-            href="#hero"
-            onClick={(e) => scrollToSection(e, "#hero")}
+            href="/#hero"
+            onClick={(e) => handleNavClick(e, "#hero")}
             className="text-base font-medium text-foreground hover:text-[#B19D76] transition-colors py-2"
           >
             {t("header.nav.home")}
           </a>
           <a
-            href="#about"
-            onClick={(e) => scrollToSection(e, "#about")}
+            href="/#about"
+            onClick={(e) => handleNavClick(e, "#about")}
             className="text-base font-medium text-foreground hover:text-[#B19D76] transition-colors py-2"
           >
             {t("header.nav.about")}
           </a>
           <a
-            href="#products"
-            onClick={(e) => scrollToSection(e, "#products")}
+            href="/#products"
+            onClick={(e) => handleNavClick(e, "#products")}
             className="text-base font-medium text-foreground hover:text-[#B19D76] transition-colors py-2"
           >
             {t("header.nav.products")}
@@ -243,15 +256,15 @@ export function Header() {
             </Link>
           )}
           <a
-            href="#services"
-            onClick={(e) => scrollToSection(e, "#services")}
+            href="/#services"
+            onClick={(e) => handleNavClick(e, "#services")}
             className="text-base font-medium text-foreground hover:text-[#B19D76] transition-colors py-2"
           >
             {t("header.nav.services")}
           </a>
           <a
-            href="#contact"
-            onClick={(e) => scrollToSection(e, "#contact")}
+            href="/#contact"
+            onClick={(e) => handleNavClick(e, "#contact")}
             className="text-base font-medium text-foreground hover:text-[#B19D76] transition-colors py-2"
           >
             {t("header.nav.contacts")}
@@ -277,7 +290,7 @@ export function Header() {
 
           {/* Mobile Contact Button */}
           <Button
-            onClick={scrollToContact}
+            onClick={handleContactClick}
             className="w-full bg-[#B19D76] text-white hover:bg-[#B19D76]/90 font-semibold mt-4"
           >
             {t("header.contactButton")}

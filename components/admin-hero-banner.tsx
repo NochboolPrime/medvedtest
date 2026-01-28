@@ -113,11 +113,11 @@ export function AdminHeroBanner() {
       }
 
       const data = await response.json()
-      console.log("[v0] Hero banner saved:", data)
+      console.log("Hero banner saved:", data)
       setBanner(data.banner)
       alert("Баннер успешно сохранен!")
     } catch (error) {
-      console.error("[v0] Error saving hero banner:", error)
+      console.error("Error saving hero banner:", error)
       alert("Ошибка при сохранении баннера")
     } finally {
       setSaving(false)

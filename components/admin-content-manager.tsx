@@ -184,7 +184,7 @@ export function AdminContentManager() {
 
       await loadContent()
     } catch (error) {
-      console.error("[v0] Error duplicating item:", error)
+      console.error("Error duplicating item:", error)
       toast({
         title: "Ошибка",
         description: "Не удалось добавить элемент",
@@ -206,7 +206,7 @@ export function AdminContentManager() {
 
       await loadContent()
     } catch (error) {
-      console.error("[v0] Error deleting item:", error)
+      console.error("Error deleting item:", error)
       toast({
         title: "Ошибка",
         description: "Не удалось удалить элемент",
@@ -227,7 +227,7 @@ export function AdminContentManager() {
       const maxOrder = Math.max(...sectionItems.map((i) => (i.metadata?.order ? Number(i.metadata.order) : 0)), 0)
       const nextNumber = maxOrder + 1
 
-      console.log("[v0] Adding new item:", { section, template, nextNumber, maxOrder })
+      console.log("Adding new item:", { section, template, nextNumber, maxOrder })
 
       let newItems: any[] = []
 
@@ -336,7 +336,7 @@ export function AdminContentManager() {
       const { error } = await supabase.from("site_content").insert(newItems)
 
       if (error) {
-        console.error("[v0] Insert error:", error)
+        console.error("Insert error:", error)
         throw error
       }
 
@@ -347,7 +347,7 @@ export function AdminContentManager() {
 
       await loadContent()
     } catch (error) {
-      console.error("[v0] Error adding new item:", error)
+      console.error("Error adding new item:", error)
       toast({
         title: "Ошибка",
         description: "Не удалось добавить элемент",

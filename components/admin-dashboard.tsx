@@ -117,7 +117,7 @@ export function AdminDashboard() {
       setEditingProduct(null)
       setIsDialogOpen(false)
     } catch (error) {
-      console.error("[v0] Error saving product:", error)
+      console.error("Error saving product:", error)
       alert("Ошибка сохранения товара")
     }
   }
@@ -129,7 +129,7 @@ export function AdminDashboard() {
       await fetch(`/api/products?id=${id}`, { method: "DELETE" })
       await loadProducts()
     } catch (error) {
-      console.error("[v0] Error deleting product:", error)
+      console.error("Error deleting product:", error)
       alert("Ошибка удаления товара")
     }
   }
@@ -356,7 +356,7 @@ function ProductForm({
         setPreviewImage(data.url)
       }
     } catch (error) {
-      console.error("[v0] Error uploading image:", error)
+      console.error("Error uploading image:", error)
       alert("Ошибка загрузки изображения")
     } finally {
       setUploading(false)
@@ -383,7 +383,7 @@ function ProductForm({
         setPreviewPdf(data.url)
       }
     } catch (error) {
-      console.error("[v0] Error uploading PDF:", error)
+      console.error("Error uploading PDF:", error)
       alert("Ошибка загрузки PDF")
     } finally {
       setUploadingPdf(false)
