@@ -26,6 +26,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
     }
 
+    // Validate file type - only images allowed
+    if (!file.type.startsWith("image/")) {
+      return NextResponse.json({ error: "File must be an image" }, { status: 400 })
+    }
+
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      return NextResponse.json({ error: "File size must be less than 10MB" }, { status: 400 })
+    }
+
     // Generate unique filename
     const fileExt = file.name.split(".").pop()
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
@@ -34,8 +44,8 @@ export async function POST(request: Request) {
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
-    // Upload to Supabase Storage
-    const { data, error } = await supabase.storage.from("uploads").upload(fileName, buffer, {
+    // Upload to Supabase Storage - images bucket
+    const { data, error } = await supabase.storage.from("images").upload(fileName, buffer, {
       contentType: file.type,
       upsert: false,
     })
@@ -46,7 +56,7 @@ export async function POST(request: Request) {
     }
 
     // Get public URL
-    const { data: urlData } = supabase.storage.from("uploads").getPublicUrl(data.path)
+    const { data: urlData } = supabase.storage.from("images").getPublicUrl(data.path)
 
     return NextResponse.json({ url: urlData.publicUrl })
   } catch (error) {

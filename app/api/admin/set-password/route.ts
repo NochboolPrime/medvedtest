@@ -1,28 +1,37 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
-import { getAdminSession } from "@/lib/admin-session"
+import { getAdminSession, createAdminSession } from "@/lib/admin-session"
 import bcrypt from "bcryptjs"
 
 export async function POST(request: NextRequest) {
   try {
-    const isAdmin = await getAdminSession()
-    if (!isAdmin) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    const supabase = await createClient()
+    
+    // Проверяем, установлен ли уже пароль
+    const { data: existingSettings } = await supabase.from("admin_settings").select("id, password_hash").maybeSingle()
+    const hasPassword = !!existingSettings?.password_hash
+    
+    // Если пароль уже установлен, требуем авторизацию для его изменения
+    if (hasPassword) {
+      const isAdmin = await getAdminSession()
+      if (!isAdmin) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+      }
     }
 
     const { password } = await request.json()
-    const supabase = await createClient()
+    
+    if (!password || password.length < 6) {
+      return NextResponse.json({ error: "Пароль должен содержать минимум 6 символов" }, { status: 400 })
+    }
 
     const passwordHash = await bcrypt.hash(password, 10)
 
-    // Check if settings exist
-    const { data: existing } = await supabase.from("admin_settings").select("id").maybeSingle()
-
-    if (existing) {
+    if (existingSettings) {
       const { error } = await supabase
         .from("admin_settings")
         .update({ password_hash: passwordHash, updated_at: new Date().toISOString() })
-        .eq("id", existing.id)
+        .eq("id", existingSettings.id)
 
       if (error) throw error
     } else {
@@ -30,6 +39,9 @@ export async function POST(request: NextRequest) {
 
       if (error) throw error
     }
+
+    // Устанавливаем сессию после установки пароля
+    await createAdminSession()
 
     return NextResponse.json({ success: true })
   } catch (error) {

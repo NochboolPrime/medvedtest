@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     await createAdminSession()
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Login error:", error)
+    console.error("Login error:", error)
     return NextResponse.json({ error: "Ошибка входа" }, { status: 500 })
   }
 }

@@ -58,7 +58,7 @@ interface Product {
   specification_pdf_url?: string
 }
 
-export function AdminDashboard() {
+function AdminDashboard() {
   const router = useRouter()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -90,16 +90,25 @@ export function AdminDashboard() {
   }
 
   const handleSetPassword = async () => {
-    if (!newPassword) return
+    if (!newPassword || newPassword.length < 6) {
+      alert("Пароль должен содержать минимум 6 символов")
+      return
+    }
 
     try {
-      await fetch("/api/admin/set-password", {
+      const response = await fetch("/api/admin/set-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password: newPassword }),
       })
-      setNewPassword("")
-      alert("Пароль успешно установлен")
+      
+      if (response.ok) {
+        setNewPassword("")
+        alert("Пароль успешно установлен")
+      } else {
+        const data = await response.json()
+        alert(data.error || "Ошибка установки пароля")
+      }
     } catch (error) {
       console.error("[v0] Error setting password:", error)
       alert("Ошибка установки пароля")
@@ -271,6 +280,34 @@ export function AdminDashboard() {
           </TabsContent>
 
           <TabsContent value="settings" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Пароль администратора</CardTitle>
+                <CardDescription>
+                  Установите или измените пароль для доступа к админ-панели. Если пароль не установлен, 
+                  доступ к панели открыт без авторизации.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="admin-password">Новый пароль</Label>
+                  <Input
+                    id="admin-password"
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Введите новый пароль (минимум 6 символов)"
+                  />
+                </div>
+                <Button 
+                  onClick={handleSetPassword} 
+                  disabled={!newPassword || newPassword.length < 6}
+                >
+                  <Save className="mr-2 h-4 w-4" />
+                  Установить пароль
+                </Button>
+              </CardContent>
+            </Card>
             <NewsToggleSetting />
           </TabsContent>
         </Tabs>
@@ -711,3 +748,5 @@ function ProductForm({
     </div>
   )
 }
+
+export default AdminDashboard
