@@ -1,9 +1,9 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useEffect } from "react"
+import React from "react"
 import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
+import { createClient } from "@supabase/supabase-js"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -20,10 +20,17 @@ import { AdminAnnouncements } from "@/components/admin-announcements"
 import { AdminProductionCarousel } from "@/components/admin-production-carousel"
 import { AdminHeroBanner } from "@/components/admin-hero-banner"
 import { AdminNewsManager } from "@/components/admin-news-manager"
-import { NewsToggleSetting } from "@/components/news-toggle-setting"
-import { YandexMetrikaSettings } from "@/components/yandex-metrika-settings"
-import { AdminCatalogPdf } from "@/components/admin-catalog-pdf"
-import { AdminCertificates } from "@/components/admin-certificates"
+import { AdminCatalogPdf } from "@/components/admin-catalog-pdf" // Added import
+import { AdminCertificates } from "@/components/admin-certificates" // Added import
+import { YandexMetrikaSettings } from "@/components/yandex-metrika-settings" // Added import
+import { NewsToggleSetting } from "@/components/news-toggle-setting" // Added import
+
+function getSupabaseClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!url || !key) return null
+  return createClient(url, key)
+}
 
 interface Product {
   id: string
@@ -52,8 +59,6 @@ interface Product {
   advantages_zh?: string[]
   applications_en?: string[]
   applications_zh?: string[]
-  specifications_en?: Array<{ label: string; value: string }>
-  specifications_zh?: Array<{ label: string; value: string }>
   video_url?: string
   specification_pdf_url?: string
 }
@@ -345,20 +350,53 @@ function ProductForm({
     const file = e.target.files?.[0]
     if (!file) return
 
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      alert("Пожалуйста, выберите изображение")
+      return
+    }
+
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert("Файл слишком большой. Максимальный размер: 10MB")
+      return
+    }
+
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      alert("Supabase не настроен. Проверьте переменные окружения.")
+      return
+    }
+
     setUploading(true)
     try {
-      const formData = new FormData()
-      formData.append("file", file)
+      // Generate unique filename
+      const ext = file.name.split(".").pop() || "jpg"
+      const fileName = `product-${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`
 
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      })
+      // Upload directly to Supabase Storage
+      const { data, error } = await supabase.storage
+        .from("images")
+        .upload(fileName, file, {
+          contentType: file.type,
+          upsert: false,
+        })
 
-      const data = await response.json()
-      if (data.url) {
-        setFormData((prev) => ({ ...prev, image: data.url }))
-        setPreviewImage(data.url)
+      if (error) {
+        console.error("Supabase upload error:", error)
+        alert(`Ошибка загрузки: ${error.message}. Убедитесь что bucket "images" создан в Supabase Storage.`)
+        return
+      }
+
+      // Get public URL
+      const { data: urlData } = supabase.storage.from("images").getPublicUrl(data.path)
+
+      if (urlData.publicUrl) {
+        setFormData((prev) => ({ ...prev, image: urlData.publicUrl }))
+        setPreviewImage(urlData.publicUrl)
+        alert("Изображение успешно загружено!")
+      } else {
+        alert("Ошибка получения URL файла")
       }
     } catch (error) {
       console.error("Error uploading image:", error)
@@ -372,20 +410,52 @@ function ProductForm({
     const file = e.target.files?.[0]
     if (!file) return
 
+    // Validate file type
+    if (file.type !== "application/pdf") {
+      alert("Пожалуйста, выберите PDF файл")
+      return
+    }
+
+    // Validate file size (max 50MB)
+    if (file.size > 50 * 1024 * 1024) {
+      alert("Файл слишком большой. Максимальный размер: 50MB")
+      return
+    }
+
+    const supabase = getSupabaseClient()
+    if (!supabase) {
+      alert("Supabase не настроен. Проверьте переменные окружения.")
+      return
+    }
+
     setUploadingPdf(true)
     try {
-      const formData = new FormData()
-      formData.append("file", file)
+      // Generate unique filename
+      const fileName = `product-spec-${Date.now()}-${Math.random().toString(36).substring(7)}.pdf`
 
-      const response = await fetch("/api/upload-pdf", {
-        method: "POST",
-        body: formData,
-      })
+      // Upload directly to Supabase Storage
+      const { data, error } = await supabase.storage
+        .from("documents")
+        .upload(fileName, file, {
+          contentType: "application/pdf",
+          upsert: false,
+        })
 
-      const data = await response.json()
-      if (data.url) {
-        setFormData((prev) => ({ ...prev, specification_pdf_url: data.url }))
-        setPreviewPdf(data.url)
+      if (error) {
+        console.error("Supabase upload error:", error)
+        alert(`Ошибка загрузки: ${error.message}. Убедитесь что bucket "documents" создан в Supabase Storage.`)
+        return
+      }
+
+      // Get public URL
+      const { data: urlData } = supabase.storage.from("documents").getPublicUrl(data.path)
+
+      if (urlData.publicUrl) {
+        setFormData((prev) => ({ ...prev, specification_pdf_url: urlData.publicUrl }))
+        setPreviewPdf(urlData.publicUrl)
+        alert("PDF спецификация успешно загружена!")
+      } else {
+        alert("Ошибка получения URL файла")
       }
     } catch (error) {
       console.error("Error uploading PDF:", error)

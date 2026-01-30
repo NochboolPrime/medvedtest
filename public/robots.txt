@@ -1,0 +1,16 @@
+# Block all search engines from indexing this site
+User-agent: *
+Disallow: /
+
+# Block specific crawlers
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /

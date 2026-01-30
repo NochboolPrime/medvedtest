@@ -1,5 +1,13 @@
-import { notFound } from "next/navigation"
+import { redirect } from "next/navigation"
+import { getAdminSession } from "@/lib/admin-session"
+import { AdminDashboard } from "@/components/admin-dashboard"
 
 export default async function AdminDashboardPage() {
-  notFound()
+  const isAdmin = await getAdminSession()
+
+  if (!isAdmin) {
+    redirect("/admin/login")
+  }
+
+  return <AdminDashboard />
 }

@@ -32,34 +32,21 @@ const onestLight = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "ТД Медведь - Оборудование для нефтегазовой отрасли",
-  description: "Надёжные решения для нефтегазовой отрасли и машиностроения",
-  metadataBase: new URL("https://tdmedved.com"),
+  title: "ТД Медведь - Админ панель",
+  description: "Панель управления",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/apple-touch-icon.png", type: "image/png" }],
-  },
-  openGraph: {
-    title: "ТД Медведь - Оборудование для нефтегазовой отрасли",
-    description: "Надёжные решения для нефтегазовой отрасли и машиностроения",
-    url: "https://tdmedved.com",
-    siteName: "ТД Медведь",
-    locale: "ru_RU",
-    type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "ТД Медведь",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "ТД Медведь - Оборудование для нефтегазовой отрасли",
-    description: "Надёжные решения для нефтегазовой отрасли и машиностроения",
-    images: ["/og-image.png"],
   },
     generator: 'v0.app'
 }
