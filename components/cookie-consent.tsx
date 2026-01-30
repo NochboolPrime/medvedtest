@@ -94,7 +94,13 @@ export function CookieConsent() {
                 >
                   {t("cookieConsent.privacyPolicy")}
                 </Link>
-                .
+                {" | "}
+                <Link
+                  href="/user-agreement"
+                  className="underline underline-offset-4 hover:text-foreground transition-colors"
+                >
+                  {t("cookieConsent.userAgreement")}
+                </Link>
               </p>
             </div>
 

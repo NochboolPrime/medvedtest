@@ -341,7 +341,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
                     rel="noopener noreferrer"
                     className="text-blue-500 hover:underline"
                   >
-                    политикой конфиденциальности
+                    Политикой в отношении обработки персональных данных
                   </Link>
                   .
                 </Label>

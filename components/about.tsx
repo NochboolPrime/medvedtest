@@ -114,7 +114,7 @@ export function About() {
                 viewport={{ once: true }}
                 className="dark:bg-[#1a1f2e] p-8 lg:p-4 2xl:p-8 border-l-4 border-primary bg-input"
               >
-                <p className="font-normal leading-relaxed text-xl lg:text-base 2xl:text-xl text-card-foreground">
+                <p className="font-normal leading-relaxed text-xl lg:text-base 2xl:text-xl text-card-foreground tracking-tight">
                   {strategyItem}
                 </p>
               </motion.div>

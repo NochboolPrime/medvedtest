@@ -94,7 +94,7 @@ export function AnnouncementPanel() {
   return (
     <>
       <div
-        className={`fixed right-4 top-20 z-50 w-96 max-w-[calc(100vw-2rem)] transition-all duration-500 ${
+        className={`fixed right-2 sm:right-4 top-16 sm:top-20 z-50 w-72 sm:w-96 max-w-[calc(100vw-1rem)] sm:max-w-[calc(100vw-2rem)] transition-all duration-500 ${
           isVisible ? "translate-x-0 opacity-100" : "translate-x-[120%] opacity-0"
         }`}
       >
@@ -102,13 +102,13 @@ export function AnnouncementPanel() {
           className="shadow-lg border-2 cursor-pointer hover:shadow-xl transition-shadow"
           onClick={handleAnnouncementClick}
         >
-          <CardHeader className="pb-3">
-            <div className="flex items-start justify-between">
-              <CardTitle className="text-lg">{title}</CardTitle>
+          <CardHeader className="pb-2 sm:pb-3 p-3 sm:p-6">
+            <div className="flex items-start justify-between gap-2">
+              <CardTitle className="text-base sm:text-lg leading-tight">{title}</CardTitle>
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-6 w-6 p-0"
+                className="h-6 w-6 p-0 flex-shrink-0"
                 onClick={(e) => {
                   e.stopPropagation()
                   setIsVisible(false)
@@ -118,28 +118,28 @@ export function AnnouncementPanel() {
               </Button>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-3 sm:p-6 pt-0">
             {announcement.image_url && (
-              <div className="-mx-6 -mt-6 mb-3">
+              <div className="-mx-3 sm:-mx-6 -mt-3 sm:-mt-6 mb-2 sm:mb-3">
                 <img
                   src={announcement.image_url || "/placeholder.svg"}
                   alt={title}
-                  className="w-full h-48 object-cover hover:opacity-90 transition-opacity"
+                  className="w-full h-32 sm:h-48 object-cover hover:opacity-90 transition-opacity"
                 />
               </div>
             )}
-            <CardDescription className="text-sm whitespace-pre-wrap mt-0">{content}</CardDescription>
+            <CardDescription className="text-xs sm:text-sm whitespace-pre-wrap mt-0 line-clamp-4 sm:line-clamp-none">{content}</CardDescription>
 
             {announcement.link_url && linkText && (
               <Button
-                className="w-full mt-3"
+                className="w-full mt-2 sm:mt-3 text-sm sm:text-base"
                 onClick={(e) => {
                   e.stopPropagation()
                   window.open(announcement.link_url, "_blank")
                 }}
               >
                 {linkText}
-                <ExternalLink className="ml-2 h-4 w-4" />
+                <ExternalLink className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             )}
           </CardContent>

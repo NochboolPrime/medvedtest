@@ -77,7 +77,7 @@ export function ProductsClient({ products }: ProductsClientProps) {
 
   return (
     <section id="products" className="py-12 lg:py-6 2xl:py-12 bg-background dark:bg-[#1a1f2e]">
-      <div className="container mx-auto px-4 md:px-6 max-w-full">
+      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         <div className="mb-12 lg:mb-6 2xl:mb-12">
           <Link href="/catalog" className="block">
             <h2 className="text-center mb-8 lg:mb-4 2xl:mb-8 text-5xl lg:text-4xl 2xl:text-5xl font-medium hover:text-[#B19D76] transition-colors cursor-pointer">

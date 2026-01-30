@@ -84,27 +84,27 @@ VALUES
  '{"order": 8}'::jsonb),
 
 ('about', 'strategy1', 'text',
- 'Инвестиции в людей и технологии',
- 'Investments in people and technology',
- '对人才和技术的投资',
+ 'Российское производство — Современное оборудование, созданное в РФ, с полным контролем качества и локальной поддержкой',
+ 'Russian Production — Modern equipment made in Russia with full quality control and local support',
+ '俄罗斯制造 — 在俄罗斯生产的现代化设备，具有全面的质量控制和本地支持',
  '{"order": 9, "index": 0}'::jsonb),
 
 ('about', 'strategy2', 'text',
- 'Развитие высокотехнологичного производственного кластера',
- 'Development of high-tech production cluster',
- '发展高科技生产集群',
+ 'Поддержка на весь срок службы — Сопровождение от проектирования и запуска до модернизации и утилизации',
+ 'Lifetime Support — Assistance from design and launch to modernization and disposal',
+ '全生命周期支持 — 从设计和启动到现代化和报废的全程服务',
  '{"order": 10, "index": 1}'::jsonb),
 
 ('about', 'strategy3', 'text',
- 'Расширение гражданского сектора деятельности',
- 'Expansion of civilian sector activities',
- '扩大民用部门业务',
+ 'Индивидуальный подход — Гибкие, масштабируемые решения, адаптированные под реальные задачи партнёра',
+ 'Individual Approach — Flexible, scalable solutions adapted to partner real challenges',
+ '个性化方案 — 灵活、可扩展的解决方案，针对合作伙伴的实际需求定制',
  '{"order": 11, "index": 2}'::jsonb),
 
 ('about', 'strategy4', 'text',
- 'Развитие импортных и экспортных направлений',
- 'Development of import and export directions',
- '发展进出口方向',
+ 'Технологичность и доступность — Передовые инженерные решения без избыточной сложности и неоправданной стоимости',
+ 'Technology and Accessibility — Advanced engineering solutions without excessive complexity and unjustified costs',
+ '技术与可及性 — 先进的工程解决方案，避免过度复杂和不合理的成本',
  '{"order": 12, "index": 3}'::jsonb),
 
 ('about', 'certificatesTitle', 'text',
@@ -127,9 +127,9 @@ VALUES
  '{"order": 1}'::jsonb),
 
 ('services', 'service1Title', 'text',
- 'Цементирование скважин',
- 'Well Cementing',
- '固井',
+ 'Оборудование для цементирования скважин',
+ 'Well Cementing Equipment',
+ '油井固井设备',
  '{"order": 2, "index": 0}'::jsonb),
 
 ('services', 'service1Description', 'text',
@@ -139,9 +139,9 @@ VALUES
  '{"order": 3, "index": 0}'::jsonb),
 
 ('services', 'service2Title', 'text',
- 'Гидроразрыв пласта',
- 'Hydraulic Fracturing',
- '水力压裂',
+ 'Оборудование для гидроразрыва пласта',
+ 'Hydraulic Fracturing Equipment',
+ '水力压裂设备',
  '{"order": 4, "index": 1}'::jsonb),
 
 ('services', 'service2Description', 'text',
@@ -163,9 +163,9 @@ VALUES
  '{"order": 7, "index": 2}'::jsonb),
 
 ('services', 'service4Title', 'text',
- 'Модернизация и ремонт',
- 'Modernization and Repair',
- '现代化改造和维修',
+ 'Оборудование для модернизации и ремонта',
+ 'Modernization and Repair Equipment',
+ '现代化与维修设备',
  '{"order": 8, "index": 3}'::jsonb),
 
 ('services', 'service4Description', 'text',

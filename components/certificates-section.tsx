@@ -1,5 +1,7 @@
 "use client"
 
+import React from "react"
+
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { useState, useEffect } from "react"
@@ -152,14 +154,14 @@ export function CertificatesSection() {
 
   return (
     <section id="certificates" className="py-16 lg:py-8 2xl:py-16 px-4 bg-muted dark:bg-[#1a1f2e]">
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-6xl px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <h4 className="mb-8 lg:mb-4 2xl:mb-8 text-card-foreground text-5xl lg:text-4xl 2xl:text-5xl font-medium">
+          <h4 className="mb-8 lg:mb-4 2xl:mb-8 text-card-foreground text-5xl lg:text-4xl 2xl:text-5xl font-medium text-center">
             {t("about.certificatesTitle")}
           </h4>
           <div className="grid md:grid-cols-2 gap-6 lg:gap-4 2xl:gap-6">

@@ -75,7 +75,7 @@ export function ProductDetail({ productKey, images, specificationPdfUrl }: Produ
     <div className="py-20 bg-background">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Back button */}
-        <Link href="/#products">
+        <Link href="/catalog">
           <Button variant="ghost" className="mb-8 text-foreground hover:bg-accent/10">
             <ArrowLeft className="mr-2 h-4 w-4" />
             {t("productDetail.backButton")}

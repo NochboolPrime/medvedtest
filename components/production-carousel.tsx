@@ -77,7 +77,7 @@ export function ProductionCarousel() {
 
   return (
     <section className="py-16 lg:py-8 2xl:py-16 px-4 bg-background">
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-6xl px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export function ProductionCarousel() {
           viewport={{ once: true }}
           className="mb-12 lg:mb-6 2xl:mb-12"
         >
-          <h2 className="text-foreground mb-2 lg:mb-1 2xl:mb-2 font-medium text-5xl lg:text-4xl 2xl:text-5xl">
+          <h2 className="text-foreground mb-2 lg:mb-1 2xl:mb-2 font-medium text-5xl lg:text-4xl 2xl:text-5xl text-center">
             {locale === "en" ? "Production" : locale === "zh" ? "生产" : "Производство"}
           </h2>
         </motion.div>
@@ -100,7 +100,7 @@ export function ProductionCarousel() {
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* Carousel container */}
-          <div className="relative aspect-[16/9] md:aspect-[21/9] lg:aspect-[18/9] 2xl:aspect-[21/9] overflow-hidden rounded-lg bg-muted">
+          <div className="relative aspect-[4/3] md:aspect-[16/9] lg:aspect-[16/9] 2xl:aspect-[16/9] overflow-hidden rounded-lg bg-muted">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}

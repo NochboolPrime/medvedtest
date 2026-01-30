@@ -34,10 +34,10 @@
     ],
     "strategyTitle": "Development Strategy",
     "strategy": [
-      "Investment in people and technology",
-      "Development of high-tech production cluster",
-      "Expansion of civilian sector activities",
-      "Development of import and export directions"
+      "Russian Production — Modern equipment made in Russia with full quality control and local support",
+      "Lifetime Support — Assistance from design and launch to modernization and disposal",
+      "Individual Approach — Flexible, scalable solutions adapted to partner's real challenges",
+      "Technology and Accessibility — Advanced engineering solutions without excessive complexity and unjustified costs"
     ],
     "certificatesTitle": "Certificates",
     "certificates": {
@@ -296,11 +296,11 @@
     },
     "items": {
       "cementing": {
-        "title": "Well Cementing",
+        "title": "Well Cementing Equipment",
         "description": "Design and manufacturing of well cementing equipment, including cementing complexes."
       },
       "fracturing": {
-        "title": "Hydraulic Fracturing",
+        "title": "Hydraulic Fracturing Equipment",
         "description": "Design and manufacturing of hydraulic fracturing equipment."
       },
       "pumps": {
@@ -308,7 +308,7 @@
         "description": "Supply of pumping equipment (high pressure plunger pumps) for well completion and production enhancement tasks."
       },
       "modernization": {
-        "title": "Modernization and Repair",
+        "title": "Modernization and Repair Equipment",
         "description": "Modernization, overhaul, service life extension (including software) for cementing equipment and hydraulic fracturing equipment."
       }
     },
@@ -416,8 +416,9 @@
   },
   "cookieConsent": {
     "title": "We use cookies",
-    "description": "This site uses cookies to improve user experience and analyze traffic. By continuing to use the site, you agree to our",
-    "privacyPolicy": "privacy policy",
+    "description": "We use cookies for fast and convenient website operation. By continuing to use the site, you accept the terms of personal data processing.",
+    "privacyPolicy": "Personal Data Processing Policy",
+    "userAgreement": "User Agreement",
     "accept": "Accept",
     "close": "Close"
   },

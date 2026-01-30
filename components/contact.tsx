@@ -395,27 +395,26 @@ export function Contact() {
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex items-start space-x-3">
+                  <div className="flex items-center gap-3">
                     <Checkbox
                       id="consent"
                       checked={formData.consent}
                       onCheckedChange={(checked) => setFormData({ ...formData, consent: checked as boolean })}
-                      className="mt-0.5"
                     />
                     <Label
                       htmlFor="consent"
                       className="text-[11px] text-muted-foreground opacity-60 leading-snug cursor-pointer flex-1"
                     >
                       Присоединяясь к настоящему Соглашению и оставляя свои данные, я подтверждаю, что все
-                      указанныеданные данные принадлежат лично мне, и даю согласие на обработку моих персональных данных
-                      в соответствии с политикой конфиденциальности{" "}
+                      указанные данные принадлежат лично мне, и даю согласие на обработку моих персональных данных
+                      в соответствии с{" "}
                       <Link
                         href="/privacy-policy"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-blue-400 underline transition-colors text-accent"
                       >
-                        политикой конфиденциальности
+                        Политикой в отношении обработки персональных данных
                       </Link>
                       .
                     </Label>

@@ -107,7 +107,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center gap-6 lg:flex">
             <a
               href="/#hero"
               onClick={(e) => handleNavClick(e, "#hero")}
@@ -121,6 +121,13 @@ export function Header() {
               className="text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:scale-105"
             >
               {t("header.nav.about")}
+            </a>
+            <a
+              href="/#services"
+              onClick={(e) => handleNavClick(e, "#services")}
+              className="text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:scale-105"
+            >
+              {t("header.nav.services")}
             </a>
             <a
               href="/#products"
@@ -144,13 +151,6 @@ export function Header() {
               </Link>
             )}
             <a
-              href="/#services"
-              onClick={(e) => handleNavClick(e, "#services")}
-              className="text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:scale-105"
-            >
-              {t("header.nav.services")}
-            </a>
-            <a
               href="/#contact"
               onClick={(e) => handleNavClick(e, "#contact")}
               className="text-sm font-medium text-muted-foreground transition-all duration-200 hover:text-foreground hover:scale-105"
@@ -161,8 +161,10 @@ export function Header() {
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-4">
-            <LanguageSwitcher />
-            <ThemeToggle />
+            <div className="flex items-center gap-1">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
 
             <div className="hidden flex-col items-end md:flex">
               <a
@@ -188,7 +190,7 @@ export function Header() {
             </Button>
           </div>
 
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-1">
             <LanguageSwitcher />
             <ThemeToggle />
             <Button
@@ -233,6 +235,13 @@ export function Header() {
             {t("header.nav.about")}
           </a>
           <a
+            href="/#services"
+            onClick={(e) => handleNavClick(e, "#services")}
+            className="text-base font-medium text-foreground hover:text-[#B19D76] transition-colors py-2"
+          >
+            {t("header.nav.services")}
+          </a>
+          <a
             href="/#products"
             onClick={(e) => handleNavClick(e, "#products")}
             className="text-base font-medium text-foreground hover:text-[#B19D76] transition-colors py-2"
@@ -255,13 +264,6 @@ export function Header() {
               {t("header.nav.news")}
             </Link>
           )}
-          <a
-            href="/#services"
-            onClick={(e) => handleNavClick(e, "#services")}
-            className="text-base font-medium text-foreground hover:text-[#B19D76] transition-colors py-2"
-          >
-            {t("header.nav.services")}
-          </a>
           <a
             href="/#contact"
             onClick={(e) => handleNavClick(e, "#contact")}

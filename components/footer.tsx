@@ -90,20 +90,20 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="/#equipment"
-                  onClick={(e) => handleNavClick(e, "#equipment")}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
-                >
-                  {t("header.nav.products")}
-                </a>
-              </li>
-              <li>
-                <a
                   href="/#services"
                   onClick={(e) => handleNavClick(e, "#services")}
                   className="text-sm text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
                 >
                   {t("header.nav.services")}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/#products"
+                  onClick={(e) => handleNavClick(e, "#products")}
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
+                >
+                  {t("header.nav.products")}
                 </a>
               </li>
               <li>
@@ -177,21 +177,21 @@ export function Footer() {
         <div className="mt-12 border-t border-border pt-8">
           <div className="flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground md:flex-row">
             <p>
-              © 2025 {companyName}. {t("footer.rights")}.
+              © 2026 {companyName}. {t("footer.rights")}.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/privacy-policy"
                 className="hover:text-foreground transition-colors underline-offset-4 hover:underline"
               >
-                {t("footer.privacyPolicy")}
+                Политика в отношении обработки персональных данных
               </Link>
               <span className="hidden md:inline">•</span>
               <Link
-                href="/personal-data"
+                href="/user-agreement"
                 className="hover:text-foreground transition-colors underline-offset-4 hover:underline"
               >
-                {t("footer.personalData")}
+                Пользовательское соглашение
               </Link>
             </div>
           </div>
