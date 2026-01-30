@@ -25,11 +25,24 @@ export async function POST(request: NextRequest) {
     }
 
     const product = await request.json()
+    
+    // Validate required fields
+    if (!product.image) {
+      return NextResponse.json({ error: "Изображение товара обязательно" }, { status: 400 })
+    }
+    
+    if (!product.title) {
+      return NextResponse.json({ error: "Название товара обязательно" }, { status: 400 })
+    }
+    
     const supabase = await createClient()
 
     const { data, error } = await supabase.from("products").insert(product).select().single()
 
-    if (error) throw error
+    if (error) {
+      console.error("[v0] Supabase error creating product:", error)
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
 
     return NextResponse.json(data)
   } catch (error) {

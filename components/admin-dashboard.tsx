@@ -117,18 +117,35 @@ function AdminDashboard() {
 
   const handleSaveProduct = async (product: Product) => {
     try {
+      console.log("[v0] handleSaveProduct - Saving product:", product)
+      console.log("[v0] handleSaveProduct - Product image:", product.image)
+      
+      // Validate image before saving
+      if (!product.image) {
+        alert("Пожалуйста, загрузите изображение товара")
+        return
+      }
+      
       const method = product.id ? "PUT" : "POST"
-      await fetch("/api/products", {
+      const response = await fetch("/api/products", {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(product),
       })
 
+      const data = await response.json()
+      console.log("[v0] handleSaveProduct - Response:", response.status, data)
+      
+      if (!response.ok) {
+        alert(data.error || "Ошибка сохранения товара")
+        return
+      }
+
       await loadProducts()
       setEditingProduct(null)
       setIsDialogOpen(false)
     } catch (error) {
-      console.error("Error saving product:", error)
+      console.error("[v0] handleSaveProduct - Error:", error)
       alert("Ошибка сохранения товара")
     }
   }
@@ -382,23 +399,31 @@ function ProductForm({
     const file = e.target.files?.[0]
     if (!file) return
 
+    console.log("[v0] handleImageUpload - Starting upload for file:", file.name, file.type, file.size)
     setUploading(true)
     try {
-      const formData = new FormData()
-      formData.append("file", file)
+      const formDataObj = new FormData()
+      formDataObj.append("file", file)
 
       const response = await fetch("/api/upload", {
         method: "POST",
-        body: formData,
+        body: formDataObj,
       })
 
+      console.log("[v0] handleImageUpload - Response status:", response.status)
       const data = await response.json()
+      console.log("[v0] handleImageUpload - Response data:", data)
+      
       if (data.url) {
+        console.log("[v0] handleImageUpload - Setting image URL:", data.url)
         setFormData((prev) => ({ ...prev, image: data.url }))
         setPreviewImage(data.url)
+      } else if (data.error) {
+        console.error("[v0] handleImageUpload - Server error:", data.error)
+        alert(`Ошибка загрузки: ${data.error}`)
       }
     } catch (error) {
-      console.error("Error uploading image:", error)
+      console.error("[v0] handleImageUpload - Error:", error)
       alert("Ошибка загрузки изображения")
     } finally {
       setUploading(false)
@@ -409,23 +434,31 @@ function ProductForm({
     const file = e.target.files?.[0]
     if (!file) return
 
+    console.log("[v0] handlePdfUpload - Starting upload for file:", file.name, file.type, file.size)
     setUploadingPdf(true)
     try {
-      const formData = new FormData()
-      formData.append("file", file)
+      const formDataObj = new FormData()
+      formDataObj.append("file", file)
 
       const response = await fetch("/api/upload-pdf", {
         method: "POST",
-        body: formData,
+        body: formDataObj,
       })
 
+      console.log("[v0] handlePdfUpload - Response status:", response.status)
       const data = await response.json()
+      console.log("[v0] handlePdfUpload - Response data:", data)
+      
       if (data.url) {
+        console.log("[v0] handlePdfUpload - Setting PDF URL:", data.url)
         setFormData((prev) => ({ ...prev, specification_pdf_url: data.url }))
         setPreviewPdf(data.url)
+      } else if (data.error) {
+        console.error("[v0] handlePdfUpload - Server error:", data.error)
+        alert(`Ошибка загрузки PDF: ${data.error}`)
       }
     } catch (error) {
-      console.error("Error uploading PDF:", error)
+      console.error("[v0] handlePdfUpload - Error:", error)
       alert("Ошибка загрузки PDF")
     } finally {
       setUploadingPdf(false)
