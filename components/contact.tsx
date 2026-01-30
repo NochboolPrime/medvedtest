@@ -281,7 +281,7 @@ export function Contact() {
     <section id="contact" className="py-6 lg:py-4 2xl:py-12 relative bg-background">
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         <div className="mb-6 lg:mb-3 2xl:mb-6 text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-3xl 2xl:text-5xl mb-4 lg:mb-2 2xl:mb-4 font-extrabold text-foreground">
+          <h2 className="text-4xl lg:text-3xl 2xl:text-5xl mb-4 lg:mb-2 2xl:mb-4 font-extrabold text-foreground">
             {title}
           </h2>
           <p className="text-lg lg:text-base 2xl:text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>

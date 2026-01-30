@@ -80,7 +80,7 @@ export function ProductsClient({ products }: ProductsClientProps) {
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         <div className="mb-12 lg:mb-6 2xl:mb-12">
           <Link href="/catalog" className="block">
-            <h2 className="text-center mb-8 lg:mb-4 2xl:mb-8 text-5xl lg:text-4xl 2xl:text-5xl font-medium hover:text-[#B19D76] transition-colors cursor-pointer">
+            <h2 className="text-center mb-8 lg:mb-4 2xl:mb-8 text-4xl lg:text-4xl 2xl:text-5xl font-medium hover:text-[#B19D76] transition-colors cursor-pointer">
               {t("products.title")}
             </h2>
           </Link>

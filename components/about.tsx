@@ -44,7 +44,7 @@ export function About() {
           viewport={{ once: true }}
           className="mb-8 lg:mb-4 2xl:mb-8"
         >
-          <h2 className="text-5xl lg:text-4xl 2xl:text-5xl text-foreground mb-4 lg:mb-2 2xl:mb-4 leading-tight md:text-5xl font-medium">
+          <h2 className="text-4xl lg:text-4xl 2xl:text-5xl text-foreground mb-4 lg:mb-2 2xl:mb-4 leading-tight font-medium">
             {t("about.title")}
           </h2>
         </motion.div>
@@ -70,7 +70,7 @@ export function About() {
           viewport={{ once: true }}
           className="mb-24 lg:mb-8 2xl:mb-24"
         >
-          <h4 className="mb-8 lg:mb-4 2xl:mb-8 text-card-foreground text-5xl lg:text-4xl 2xl:text-5xl font-medium">
+          <h4 className="mb-8 lg:mb-4 2xl:mb-8 text-card-foreground text-4xl lg:text-4xl 2xl:text-5xl font-medium">
             {t("about.principlesTitle")}
           </h4>
           <div className="space-y-6 lg:space-y-3 2xl:space-y-6">
@@ -101,7 +101,7 @@ export function About() {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <h4 className="mb-8 lg:mb-4 2xl:mb-8 text-card-foreground text-5xl lg:text-4xl 2xl:text-5xl font-medium">
+          <h4 className="mb-8 lg:mb-4 2xl:mb-8 text-card-foreground text-4xl lg:text-4xl 2xl:text-5xl font-medium">
             {t("about.strategyTitle")}
           </h4>
           <div className="grid md:grid-cols-2 gap-6 lg:gap-4 2xl:gap-6">

@@ -85,7 +85,7 @@ export function ProductionCarousel() {
           viewport={{ once: true }}
           className="mb-12 lg:mb-6 2xl:mb-12"
         >
-          <h2 className="text-foreground mb-2 lg:mb-1 2xl:mb-2 font-medium text-5xl lg:text-4xl 2xl:text-5xl text-center">
+          <h2 className="text-foreground mb-2 lg:mb-1 2xl:mb-2 font-medium text-4xl lg:text-4xl 2xl:text-5xl text-center">
             {locale === "en" ? "Production" : locale === "zh" ? "生产" : "Производство"}
           </h2>
         </motion.div>

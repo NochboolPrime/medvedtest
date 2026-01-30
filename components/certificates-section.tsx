@@ -161,7 +161,7 @@ export function CertificatesSection() {
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <h4 className="mb-8 lg:mb-4 2xl:mb-8 text-card-foreground text-5xl lg:text-4xl 2xl:text-5xl font-medium text-center">
+          <h4 className="mb-8 lg:mb-4 2xl:mb-8 text-card-foreground text-4xl lg:text-4xl 2xl:text-5xl font-medium text-center">
             {t("about.certificatesTitle")}
           </h4>
           <div className="grid md:grid-cols-2 gap-6 lg:gap-4 2xl:gap-6">

@@ -55,8 +55,8 @@ export function Services() {
   return (
     <section id="services" className="py-12 lg:py-6 2xl:py-12 bg-background">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="mb-12 lg:mb-6 2xl:mb-12">
-          <h2 className="text-center mb-8 lg:mb-4 2xl:mb-8 text-3xl sm:text-4xl md:text-5xl lg:text-4xl 2xl:text-5xl text-foreground px-2 font-medium">
+        <div className="mb-12 lg:mb-6 2xl:mb-12 max-w-6xl mx-auto">
+          <h2 className="text-left mb-8 lg:mb-4 2xl:mb-8 text-4xl lg:text-4xl 2xl:text-5xl text-foreground font-medium">
             {title}
           </h2>
         </div>
@@ -85,7 +85,7 @@ export function Services() {
                     <h3 className="text-2xl md:text-3xl lg:text-2xl 2xl:text-3xl font-bold mb-3 lg:mb-2 2xl:mb-3 transition-transform duration-300 text-foreground">
                       {service.title}
                     </h3>
-                    <p className="text-base lg:text-sm 2xl:text-base text-muted-foreground max-w-5xl leading-relaxed">
+                    <p className="text-base lg:text-sm 2xl:text-base text-muted-foreground max-w-5xl leading-relaxed text-left">
                       {service.description}
                     </p>
                   </div>
