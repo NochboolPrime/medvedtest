@@ -137,7 +137,7 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
     <div className="min-h-screen bg-background text-foreground">
       <div className="bg-card border-b border-border">
         <div className="container mx-auto px-4 py-4 max-w-7xl">
-          <Button variant="ghost" onClick={() => router.back()} className="text-foreground hover:bg-muted">
+          <Button variant="ghost" onClick={() => router.push('/')} className="text-foreground hover:bg-muted">
             <ArrowLeft className="mr-2 h-4 w-4" />
             {t("catalog.backButton")}
           </Button>
