@@ -405,16 +405,14 @@ export function Contact() {
                       htmlFor="consent"
                       className="text-[11px] text-muted-foreground opacity-60 leading-snug cursor-pointer flex-1"
                     >
-                      Присоединяясь к настоящему Соглашению и оставляя свои данные, я подтверждаю, что все
-                      указанные данные принадлежат лично мне, и даю согласие на обработку моих персональных данных
-                      в соответствии с{" "}
+                      {t("contact.form.consentText")}{" "}
                       <Link
                         href="/privacy-policy"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-blue-400 underline transition-colors text-accent"
                       >
-                        Политикой в отношении обработки персональных данных
+                        {t("contact.form.privacyPolicyLink")}
                       </Link>
                       .
                     </Label>

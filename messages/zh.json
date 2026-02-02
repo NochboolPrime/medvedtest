@@ -331,7 +331,11 @@
       "success": "消息已发送！",
       "error": "发送错误",
       "errorCaptcha": "图片代码无效",
-      "errorConsent": "需要同意数据处理"
+      "errorConsent": "需要同意数据处理",
+      "cancel": "取消",
+      "consentFullText": "通过加入本协议并提供我的数据，我确认所有指定的数据都属于我个人，并且我同意根据",
+      "privacyPolicyLink": "个人数据处理政策",
+      "userAgreementLink": "用户协议"
     },
     "info": {
       "address": "地址",
@@ -354,7 +358,42 @@
     "email": "电子邮件",
     "rights": "版权所有",
     "privacyPolicy": "隐私政策",
-    "personalData": "个人数据处理"
+    "personalData": "个人数据处理",
+    "privacyPolicyLink": "个人数据处理政策",
+    "userAgreementLink": "用户协议"
+  },
+  "consultationModal": {
+    "title": "获取咨询",
+    "description": "留下您的联系方式，我们的专家将尽快与您联系",
+    "namePlaceholder": "请输入您的姓名",
+    "nameLabel": "您的姓名",
+    "phoneLabel": "电话",
+    "phonePlaceholder": "+7 (___) ___-__-__",
+    "emailLabel": "电子邮件",
+    "emailPlaceholder": "your@email.com",
+    "messageLabel": "留言",
+    "messagePlaceholder": "告诉我们您的项目或提出问题...",
+    "consentText": "通过加入本协议并提供我的数据，我同意根据以下政策处理我的个人数据",
+    "privacyPolicyLink": "个人数据处理政策",
+    "cancel": "取消",
+    "submit": "提交",
+    "sending": "发送中...",
+    "captchaTitle": "安全验证",
+    "captchaDescription": "请输入图片中的代码",
+    "captchaPlaceholder": "输入代码",
+    "confirm": "确认",
+    "errorName": "姓名为必填项",
+    "errorPhone": "电话为必填项",
+    "errorPhoneMin": "请输入有效的电话号码（至少10位数字）",
+    "errorPhoneMax": "电话号码太长（最多15位数字）",
+    "errorConsent": "需要同意数据处理",
+    "errorCaptchaEmpty": "请输入图片中的代码",
+    "errorCaptchaWrong": "代码无效，请重试",
+    "successTitle": "请求已发送",
+    "successDescription": "我们的专家将尽快与您联系",
+    "emailSentTitle": "请求已发送",
+    "emailSentDescription": "已打开电子邮件窗口",
+    "loading": "加载中..."
   },
   "languageSwitcher": {
     "label": "语言",
@@ -726,6 +765,79 @@
       "deleteConfirm": "您确定要删除此新闻吗？",
       "newsToggle": "启用新闻部分",
       "newsToggleDescription": "在导航中显示新闻选项卡"
+    }
+  },
+  "userAgreement": {
+    "title": "用户协议",
+    "backToHome": "返回主页",
+    "intro": "本用户协议（以下简称协议）规范有限责任公司熊贸易公司（以下简称熊贸易公司或管理部门）一方与网站用户另一方之间的关系。",
+    "disclaimer": "熊贸易公司网站不是大众媒体。使用该网站即表示您同意本协议的条款。如果您不同意本协议的条款，请不要使用熊贸易公司网站！",
+    "sections": {
+      "rights": {
+        "title": "各方的权利和义务",
+        "userRights": {
+          "title": "用户有权：",
+          "items": [
+            "在网站上搜索信息",
+            "在网站上接收信息",
+            "评论网站上发布的内容",
+            "将信息复制到其他网站并注明来源",
+            "要求管理部门隐藏关于用户的任何信息",
+            "要求管理部门隐藏用户提供给网站的任何信息",
+            "将网站信息用于个人非商业目的",
+            "经管理部门许可将网站信息用于商业目的",
+            "经版权所有者许可将网站信息用于商业目的"
+          ]
+        },
+        "adminRights": {
+          "title": "管理部门有权：",
+          "items": [
+            "根据其自由裁量权和必要性创建、修改、取消规则",
+            "限制对网站上任何信息的访问",
+            "创建、修改、删除信息",
+            "删除用户帐户",
+            "拒绝注册而无需说明原因"
+          ]
+        },
+        "userObligations": {
+          "title": "用户承诺：",
+          "items": [
+            "确保个人数据免受第三方访问的安全",
+            "如有更改，更新注册时提供的个人数据",
+            "不传播旨在宣传战争、煽动民族、种族或宗教仇恨和敌意的信息，以及传播需承担刑事或行政责任的其他信息",
+            "不破坏网站的功能",
+            "如果实际上属于同一人，则不在网站上创建多个帐户",
+            "不进行旨在误导其他用户的行为",
+            "不使用脚本（程序）自动收集信息和/或与网站及其服务进行交互"
+          ]
+        },
+        "adminObligations": {
+          "title": "管理部门承诺：",
+          "items": [
+            "维护网站的功能，除非由于管理部门无法控制的原因而无法做到",
+            "对用户帐户实施全面保护",
+            "通过发出警告或删除违反规则的用户帐户来保护传播受限或被法律禁止的信息"
+          ]
+        }
+      },
+      "liability": {
+        "title": "各方的责任",
+        "items": [
+          "用户个人对其传播的信息承担全部责任",
+          "管理部门不对用户期望的服务与实际收到的服务之间的差异负责",
+          "管理部门对第三方提供的服务不承担任何责任",
+          "如果发生不可抗力情况（军事行动、紧急状态、自然灾害等），管理部门不保证用户发布的信息的安全性，以及信息资源的不间断运行"
+        ]
+      },
+      "terms": {
+        "title": "协议有效期条款",
+        "items": [
+          "本协议在任何使用本网站时生效。",
+          "协议在出现新版本时停止生效。",
+          "管理部门保留根据其自由裁量权单方面更改本协议的权利。",
+          "管理部门不会通知用户协议的更改。"
+        ]
+      }
     }
   }
 }

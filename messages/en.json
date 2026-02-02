@@ -346,7 +346,11 @@
       "success": "Message sent!",
       "error": "Sending error",
       "errorCaptcha": "Invalid code from image",
-      "errorConsent": "Consent to data processing is required"
+      "errorConsent": "Consent to data processing is required",
+      "cancel": "Cancel",
+      "consentFullText": "By joining this Agreement and providing my data, I confirm that all specified data belongs personally to me, and I consent to the processing of my personal data in accordance with the",
+      "privacyPolicyLink": "Personal Data Processing Policy",
+      "userAgreementLink": "User Agreement"
     },
     "info": {
       "address": "Address",
@@ -369,7 +373,9 @@
     "email": "Email",
     "rights": "All rights reserved",
     "privacyPolicy": "Privacy Policy",
-    "personalData": "Personal Data Processing"
+    "personalData": "Personal Data Processing",
+    "privacyPolicyLink": "Personal Data Processing Policy",
+    "userAgreementLink": "User Agreement"
   },
   "catalog": {
     "title": "Product Catalog",
@@ -413,6 +419,39 @@
     "backButton": "Back",
     "close": "Close",
     "learnMore": "Learn More"
+  },
+  "consultationModal": {
+    "title": "Get a Consultation",
+    "description": "Leave your contact details and our specialist will contact you shortly",
+    "namePlaceholder": "Enter your name",
+    "nameLabel": "Your name",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "+7 (___) ___-__-__",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us about your project or ask a question...",
+    "consentText": "By joining this Agreement and providing my data, I consent to the processing of my personal data in accordance with the",
+    "privacyPolicyLink": "Personal Data Processing Policy",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "sending": "Sending...",
+    "captchaTitle": "Security Check",
+    "captchaDescription": "Enter the code from the image",
+    "captchaPlaceholder": "Enter code",
+    "confirm": "Confirm",
+    "errorName": "Name is required",
+    "errorPhone": "Phone is required",
+    "errorPhoneMin": "Enter a valid phone number (minimum 10 digits)",
+    "errorPhoneMax": "Phone number is too long (maximum 15 digits)",
+    "errorConsent": "Consent to data processing is required",
+    "errorCaptchaEmpty": "Enter the code from the image",
+    "errorCaptchaWrong": "Invalid code. Please try again",
+    "successTitle": "Request sent",
+    "successDescription": "Our specialist will contact you shortly",
+    "emailSentTitle": "Request sent",
+    "emailSentDescription": "Email window opened",
+    "loading": "Loading..."
   },
   "cookieConsent": {
     "title": "We use cookies",
@@ -829,6 +868,79 @@
       "deleteConfirm": "Are you sure you want to delete this news?",
       "newsToggle": "Enable News Section",
       "newsToggleDescription": "Show News tab in navigation"
+    }
+  },
+  "userAgreement": {
+    "title": "User Agreement",
+    "backToHome": "Back to home",
+    "intro": "This User Agreement (hereinafter referred to as the Agreement) regulates relations between Limited Liability Company \"TRADING HOUSE \"MEDVED\" (hereinafter TD Medved or Administration) on the one hand and the website user on the other.",
+    "disclaimer": "The TD Medved website is not a mass media outlet. By using the site, you agree to the terms of this agreement. If you do not agree to the terms of this agreement, do not use the TD Medved site!",
+    "sections": {
+      "rights": {
+        "title": "Rights and obligations of the parties",
+        "userRights": {
+          "title": "User has the right to:",
+          "items": [
+            "search for information on the site",
+            "receive information on the site",
+            "comment on content posted on the site",
+            "copy information to other sites with indication of the source",
+            "require the administration to hide any information about the user",
+            "require the administration to hide any information provided by the user to the site",
+            "use site information for personal non-commercial purposes",
+            "use site information for commercial purposes with Administration permission",
+            "use site information for commercial purposes with copyright holders permission"
+          ]
+        },
+        "adminRights": {
+          "title": "Administration has the right to:",
+          "items": [
+            "at its discretion and necessity create, modify, cancel rules",
+            "restrict access to any information on the site",
+            "create, modify, delete information",
+            "delete user accounts",
+            "refuse registration without explanation of reasons"
+          ]
+        },
+        "userObligations": {
+          "title": "User undertakes to:",
+          "items": [
+            "ensure the safety of personal data from third party access",
+            "update Personal data provided during registration in case of changes",
+            "not disseminate information aimed at propaganda of war, incitement of national, racial or religious hatred and enmity, as well as other information for the dissemination of which criminal or administrative liability is provided",
+            "not disrupt the functionality of the site",
+            "not create multiple accounts on the Site if in fact they belong to the same person",
+            "not commit actions aimed at misleading other Users",
+            "not use scripts (programs) for automated collection of information and/or interaction with the Site and its Services"
+          ]
+        },
+        "adminObligations": {
+          "title": "Administration undertakes to:",
+          "items": [
+            "maintain the functionality of the site except in cases where this is impossible due to reasons beyond the Administration's control",
+            "implement comprehensive protection of the User's account",
+            "protect information the dissemination of which is restricted or prohibited by laws by issuing a warning or deleting the account of a user who violated the rules"
+          ]
+        }
+      },
+      "liability": {
+        "title": "Liability of the parties",
+        "items": [
+          "the user personally bears full responsibility for the information they disseminate",
+          "the administration is not responsible for the discrepancy between the services expected by the User and those actually received",
+          "the administration bears no responsibility for services provided by third parties",
+          "in case of force majeure (military actions, state of emergency, natural disaster, etc.) the Administration does not guarantee the safety of information posted by the User, as well as uninterrupted operation of the information resource"
+        ]
+      },
+      "terms": {
+        "title": "Terms of Agreement validity",
+        "items": [
+          "This Agreement comes into force with any use of this site.",
+          "The Agreement ceases to be effective upon the appearance of its new version.",
+          "The Administration reserves the right to unilaterally change this agreement at its discretion.",
+          "The Administration does not notify users of changes to the Agreement."
+        ]
+      }
     }
   }
 }

@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import Link from "next/link"
 import { useToast } from "@/hooks/use-toast"
+import { useTranslations } from "@/hooks/use-translations"
 
 interface ConsultationModalProps {
   open: boolean
@@ -29,6 +30,7 @@ const generateCaptchaText = (): string => {
 
 export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps) {
   const { toast } = useToast()
+  const t = useTranslations()
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -113,22 +115,22 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
     const newErrors: Record<string, string> = {}
 
     if (!formData.name.trim()) {
-      newErrors.name = "Имя обязательно для заполнения"
+      newErrors.name = t("consultationModal.errorName")
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = "Телефон обязателен для заполнения"
+      newErrors.phone = t("consultationModal.errorPhone")
     } else {
       const phoneDigits = formData.phone.replace(/\D/g, "")
       if (phoneDigits.length < 10) {
-        newErrors.phone = "Введите корректный номер телефона (минимум 10 цифр)"
+        newErrors.phone = t("consultationModal.errorPhoneMin")
       } else if (phoneDigits.length > 15) {
-        newErrors.phone = "Номер телефона слишком длинный (максимум 15 цифр)"
+        newErrors.phone = t("consultationModal.errorPhoneMax")
       }
     }
 
     if (!formData.consent) {
-      newErrors.consent = "Необходимо согласие на обработку персональных данных"
+      newErrors.consent = t("consultationModal.errorConsent")
     }
 
     setErrors(newErrors)
@@ -147,12 +149,12 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
 
   const handleCaptchaSubmit = async () => {
     if (!captchaInput.trim()) {
-      setErrors({ captcha: "Введите код с картинки" })
+      setErrors({ captcha: t("consultationModal.errorCaptchaEmpty") })
       return
     }
 
     if (captchaInput.toUpperCase() !== captchaText) {
-      setErrors({ captcha: "Неверный код. Попробуйте снова" })
+      setErrors({ captcha: t("consultationModal.errorCaptchaWrong") })
       regenerateCaptcha()
       return
     }
@@ -199,8 +201,8 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
       }
 
       toast({
-        title: "Заявка отправлена",
-        description: "Наш специалист свяжется с вами в ближайшее время",
+        title: t("consultationModal.successTitle"),
+        description: t("consultationModal.successDescription"),
       })
 
       onOpenChange(false)
@@ -223,8 +225,8 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
       window.open(`mailto:sales@medved-neftegaz.ru?subject=${subject}&body=${body}`, "_blank")
 
       toast({
-        title: "Заявка отправлена",
-        description: "Открыто окно для отправки email",
+        title: t("consultationModal.emailSentTitle"),
+        description: t("consultationModal.emailSentDescription"),
       })
 
       onOpenChange(false)
@@ -248,22 +250,22 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="sm:max-w-[500px] bg-background border-border">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-foreground">Получить консультацию</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-foreground">{t("consultationModal.title")}</DialogTitle>
             <DialogDescription className="text-muted-foreground">
-              Оставьте свои контактные данные, и наш специалист свяжется с вами в ближайшее время
+              {t("consultationModal.description")}
             </DialogDescription>
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium text-foreground">
-                Ваше имя <span className="text-white">*</span>
+                {t("consultationModal.nameLabel")} <span className="text-white">*</span>
               </label>
               <div className="relative">
                 <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="name"
-                  placeholder="Введите ваше имя"
+                  placeholder={t("consultationModal.namePlaceholder")}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="pl-10 bg-input border-border text-foreground placeholder:text-muted-foreground"
@@ -274,14 +276,14 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
 
             <div className="space-y-2">
               <label htmlFor="phone" className="text-sm font-medium text-foreground">
-                Телефон <span className="text-white">*</span>
+                {t("consultationModal.phoneLabel")} <span className="text-white">*</span>
               </label>
               <div className="relative">
                 <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="phone"
                   type="tel"
-                  placeholder="+7 (___) ___-__-__"
+                  placeholder={t("consultationModal.phonePlaceholder")}
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="pl-10 bg-input border-border text-foreground placeholder:text-muted-foreground"
@@ -292,14 +294,14 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
 
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium text-foreground">
-                Email
+                {t("consultationModal.emailLabel")}
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
                   id="email"
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder={t("consultationModal.emailPlaceholder")}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="pl-10 bg-input border-border text-foreground placeholder:text-muted-foreground"
@@ -309,11 +311,11 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
 
             <div className="space-y-2">
               <label htmlFor="message" className="text-sm font-medium text-foreground">
-                Сообщение
+                {t("consultationModal.messageLabel")}
               </label>
               <Textarea
                 id="message"
-                placeholder="Расскажите о вашем проекте или задайте вопрос..."
+                placeholder={t("consultationModal.messagePlaceholder")}
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 rows={3}
@@ -333,15 +335,14 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
                   htmlFor="consent"
                   className="text-[11px] text-muted-foreground opacity-60 leading-snug cursor-pointer flex-1"
                 >
-                  Присоединяясь к настоящему Соглашению и оставляя свои данные, я даю согласие на обработку моих
-                  персональных данных в соответствии с{" "}
+                  {t("consultationModal.consentText")}{" "}
                   <Link
                     href="/privacy-policy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-500 hover:underline"
                   >
-                    Политикой в отношении обработки персональных данных
+                    {t("consultationModal.privacyPolicyLink")}
                   </Link>
                   .
                 </Label>
@@ -351,14 +352,14 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
 
             <div className="flex gap-3 pt-4">
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="flex-1">
-                Отмена
+                {t("consultationModal.cancel")}
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground"
               >
-                {isSubmitting ? "Отправка..." : "Отправить"}
+                {isSubmitting ? t("consultationModal.sending") : t("consultationModal.submit")}
               </Button>
             </div>
           </form>
@@ -368,8 +369,8 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
       <Dialog open={showCaptchaModal} onOpenChange={setShowCaptchaModal}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Проверка безопасности</DialogTitle>
-            <DialogDescription>Введите код с картинки</DialogDescription>
+            <DialogTitle>{t("consultationModal.captchaTitle")}</DialogTitle>
+            <DialogDescription>{t("consultationModal.captchaDescription")}</DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div className="flex gap-2 items-center justify-center">
@@ -383,7 +384,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
                 />
               ) : (
                 <div className="w-[180px] h-[60px] border border-border rounded flex items-center justify-center text-muted-foreground">
-                  Загрузка...
+                  {t("consultationModal.loading")}
                 </div>
               )}
               <Button
@@ -409,7 +410,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
                   }
                 }}
                 className="bg-background border-border text-foreground placeholder:text-muted-foreground h-14 text-lg text-center"
-                placeholder="Введите код"
+                placeholder={t("consultationModal.captchaPlaceholder")}
                 autoFocus
               />
               {errors.captcha && <p className="text-red-500 text-sm text-center">{errors.captcha}</p>}
@@ -425,7 +426,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
                 }}
                 className="flex-1"
               >
-                Отмена
+                {t("consultationModal.cancel")}
               </Button>
               <Button
                 type="button"
@@ -433,7 +434,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
                 disabled={isSubmitting}
                 className="flex-1 bg-accent text-accent-foreground"
               >
-                Подтвердить
+                {t("consultationModal.confirm")}
               </Button>
             </div>
           </div>

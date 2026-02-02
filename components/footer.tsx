@@ -179,19 +179,19 @@ export function Footer() {
             <p>
               © 2026 {companyName}. {t("footer.rights")}.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-start gap-4 md:justify-center">
               <Link
                 href="/privacy-policy"
                 className="hover:text-foreground transition-colors underline-offset-4 hover:underline"
               >
-                Политика в отношении обработки персональных данных
+                {t("footer.privacyPolicyLink")}
               </Link>
               <span className="hidden md:inline">•</span>
               <Link
                 href="/user-agreement"
                 className="hover:text-foreground transition-colors underline-offset-4 hover:underline"
               >
-                Пользовательское соглашение
+                {t("footer.userAgreementLink")}
               </Link>
             </div>
           </div>
