@@ -54,6 +54,8 @@ interface Product {
   applications_zh?: string[]
   specifications_en?: Array<{ label: string; value: string }>
   specifications_zh?: Array<{ label: string; value: string }>
+  category_en?: string
+  category_zh?: string
   video_url?: string
   specification_pdf_url?: string
 }
@@ -608,6 +610,15 @@ function ProductForm({
               placeholder="Maximum Pressure: 70 MPa&#10;Capacity: Up to 2500 l/min"
             />
           </div>
+
+          <div className="space-y-2">
+            <Label>Category (English)</Label>
+            <Input
+              value={formData.category_en || ""}
+              onChange={(e) => setFormData({ ...formData, category_en: e.target.value })}
+              placeholder="e.g. Cementing Equipment"
+            />
+          </div>
         </TabsContent>
 
         <TabsContent value="zh" className="space-y-4">
@@ -671,6 +682,15 @@ function ProductForm({
               onChange={(e) => handleSpecificationsInput(e.target.value, "zh")}
               rows={6}
               placeholder="最大压力: 70 兆帕&#10;生产能力: 高达 2500 升/分钟"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label>类别 (Chinese)</Label>
+            <Input
+              value={formData.category_zh || ""}
+              onChange={(e) => setFormData({ ...formData, category_zh: e.target.value })}
+              placeholder="例如：固井设备"
             />
           </div>
         </TabsContent>

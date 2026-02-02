@@ -27,6 +27,8 @@ interface Product {
   description_zh?: string
   features_en?: string[]
   features_zh?: string[]
+  category_en?: string
+  category_zh?: string
 }
 
 interface CatalogPdfData {
@@ -67,7 +69,31 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [showFilters, setShowFilters] = useState(false)
 
-  const categories = ["all", ...Array.from(new Set(allProducts.map((p) => p.category)))]
+  // Get unique categories with their translations
+  const categoryMap = useMemo(() => {
+    const map = new Map<string, { ru: string; en?: string; zh?: string }>()
+    allProducts.forEach((p) => {
+      if (!map.has(p.category)) {
+        map.set(p.category, {
+          ru: p.category,
+          en: p.category_en,
+          zh: p.category_zh,
+        })
+      }
+    })
+    return map
+  }, [allProducts])
+
+  const categories = ["all", ...Array.from(categoryMap.keys())]
+
+  const getLocalizedCategoryByKey = (categoryKey: string): string => {
+    if (categoryKey === "all") return t("catalog.filters.allCategories")
+    const cat = categoryMap.get(categoryKey)
+    if (!cat) return categoryKey
+    if (locale === "en" && cat.en) return cat.en
+    if (locale === "zh" && cat.zh) return cat.zh
+    return cat.ru
+  }
 
   const getLocalizedTitle = (product: Product): string => {
     if (locale === "en" && product.title_en) return product.title_en
@@ -85,6 +111,12 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
     if (locale === "en" && product.features_en) return product.features_en
     if (locale === "zh" && product.features_zh) return product.features_zh
     return product.features
+  }
+
+  const getLocalizedCategory = (product: Product): string => {
+    if (locale === "en" && product.category_en) return product.category_en
+    if (locale === "zh" && product.category_zh) return product.category_zh
+    return product.category
   }
 
   const filteredProducts = useMemo(() => {
@@ -216,7 +248,7 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
                     </SelectItem>
                     {categories.slice(1).map((category) => (
                       <SelectItem key={category} value={category} className="text-foreground">
-                        {category}
+                        {getLocalizedCategoryByKey(category)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -242,7 +274,7 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
                   onClick={() => setSelectedCategory("all")}
                   className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-accent/10 text-accent text-sm hover:bg-accent/20 transition-colors"
                 >
-                  {selectedCategory}
+                  {getLocalizedCategoryByKey(selectedCategory)}
                   <X className="h-3 w-3" />
                 </button>
               )}
@@ -261,6 +293,7 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
               const localizedTitle = getLocalizedTitle(product)
               const localizedDescription = getLocalizedDescription(product)
               const localizedFeatures = getLocalizedFeatures(product)
+              const localizedCategory = getLocalizedCategory(product)
 
               return (
                 <motion.div
@@ -280,7 +313,7 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
                       />
                       <div className="absolute top-2 right-2">
                         <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-semibold rounded-full">
-                          {product.category}
+                          {localizedCategory}
                         </span>
                       </div>
                     </div>
