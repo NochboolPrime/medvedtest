@@ -142,7 +142,7 @@ export function ProductDetail({ productKey, images, specificationPdfUrl }: Produ
           <div className="flex flex-col">
             <div className="bg-card border border-border rounded-lg p-6 mb-6">
               <h2 className="text-2xl font-bold text-foreground mb-4">{t("productDetail.descriptionTitle")}</h2>
-              <p className="text-muted-foreground leading-relaxed">{product.longDescription}</p>
+              <p className="text-muted-foreground leading-relaxed text-justify">{product.longDescription}</p>
             </div>
 
             <div className="bg-card border-2 border-accent rounded-lg p-6 shadow-lg">
@@ -199,7 +199,7 @@ export function ProductDetail({ productKey, images, specificationPdfUrl }: Produ
               {product.features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <CheckCircle2 className="h-6 w-6 text-accent flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground">{feature}</span>
+                  <span className="text-foreground text-justify">{feature}</span>
                 </li>
               ))}
             </ul>
@@ -212,7 +212,7 @@ export function ProductDetail({ productKey, images, specificationPdfUrl }: Produ
               {product.applications.map((application, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <div className="w-2 h-2 rounded-full bg-accent flex-shrink-0 mt-2" />
-                  <span className="text-foreground">{application}</span>
+                  <span className="text-foreground text-justify">{application}</span>
                 </li>
               ))}
             </ul>
