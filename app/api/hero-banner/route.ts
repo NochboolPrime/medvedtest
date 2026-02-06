@@ -15,25 +15,25 @@ function getSupabaseClient() {
 
 export async function GET() {
   try {
-    console.log("[v0] Fetching hero banner")
+    console.log(" Fetching hero banner")
 
     const supabase = getSupabaseClient()
     if (!supabase) {
-      console.log("[v0] Supabase not configured, returning null")
+      console.log(" Supabase not configured, returning null")
       return NextResponse.json({ banner: null }, { status: 200 })
     }
 
     const { data, error } = await supabase.from("hero_banner").select("*").eq("is_active", true).single()
 
     if (error) {
-      console.error("[v0] Error fetching hero banner:", error)
+      console.error(" Error fetching hero banner:", error)
       return NextResponse.json({ banner: null }, { status: 200 })
     }
 
-    console.log("[v0] Hero banner fetched:", data)
+    console.log(" Hero banner fetched:", data)
     return NextResponse.json({ banner: data })
   } catch (error) {
-    console.error("[v0] Error in hero banner GET:", error)
+    console.error(" Error in hero banner GET:", error)
     return NextResponse.json({ banner: null }, { status: 200 })
   }
 }
@@ -47,7 +47,7 @@ export async function PUT(request: Request) {
 
     const { image_url } = await request.json()
 
-    console.log("[v0] Updating hero banner with image:", image_url)
+    console.log(" Updating hero banner with image:", image_url)
 
     // First, deactivate all existing banners
     await supabase.from("hero_banner").update({ is_active: false }).neq("id", "00000000-0000-0000-0000-000000000000")
@@ -79,14 +79,14 @@ export async function PUT(request: Request) {
     }
 
     if (result.error) {
-      console.error("[v0] Error updating hero banner:", result.error)
+      console.error(" Error updating hero banner:", result.error)
       return NextResponse.json({ error: result.error.message }, { status: 500 })
     }
 
-    console.log("[v0] Hero banner updated:", result.data)
+    console.log(" Hero banner updated:", result.data)
     return NextResponse.json({ banner: result.data })
   } catch (error) {
-    console.error("[v0] Error in hero banner PUT:", error)
+    console.error(" Error in hero banner PUT:", error)
     return NextResponse.json({ error: "Failed to update banner" }, { status: 500 })
   }
 }

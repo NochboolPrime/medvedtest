@@ -149,7 +149,7 @@ export function CatalogPageClient({ products: allProducts }: CatalogPageClientPr
         body: JSON.stringify({ productId, eventType: "click" }),
       })
     } catch (error) {
-      console.error("[v0] Error tracking click:", error)
+      console.error(" Error tracking click:", error)
     }
   }
 

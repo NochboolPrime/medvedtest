@@ -9,23 +9,23 @@ export function About() {
   const t = useTranslations()
   const { get: getAbout, getItems: getAboutItems } = useSiteContent("about")
 
-  console.log("[v0] About - Component rendering")
+  console.log(" About - Component rendering")
 
   const dynamicMission = useMemo(() => {
     const mission = getAbout("mission")
-    console.log("[v0] About - Loading mission from DB:", mission)
+    console.log(" About - Loading mission from DB:", mission)
     return mission
   }, [getAbout])
 
   const dynamicPrinciples = useMemo(() => {
     const items = getAboutItems("^principle\\d+$")
-    console.log("[v0] About - Loading principles from DB:", items)
+    console.log(" About - Loading principles from DB:", items)
     return items.map((item) => item.value).filter(Boolean)
   }, [getAboutItems])
 
   const dynamicStrategy = useMemo(() => {
     const items = getAboutItems("^strategy\\d+$")
-    console.log("[v0] About - Loading strategy from DB:", items)
+    console.log(" About - Loading strategy from DB:", items)
     return items.map((item) => item.value).filter(Boolean)
   }, [getAboutItems])
 

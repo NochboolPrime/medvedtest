@@ -45,7 +45,7 @@ export async function Products() {
 
     return <ProductsClient products={mappedProducts} />
   } catch (error) {
-    console.error("[v0] Error loading products:", error)
+    console.error(" Error loading products:", error)
     return <ProductsClient products={[]} />
   }
 }

@@ -28,7 +28,7 @@ export function ProductDetail({ productKey, images, specificationPdfUrl }: Produ
         )
       }
     } catch (e) {
-      console.log("[v0] No specifications found for product:", productKey)
+      console.log(" No specifications found for product:", productKey)
     }
     return []
   }

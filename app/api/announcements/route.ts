@@ -9,13 +9,13 @@ export async function GET() {
     const { data, error } = await supabase.from("announcements").select("*").order("created_at", { ascending: false })
 
     if (error) {
-      console.error("[v0] Error fetching announcements:", error)
+      console.error(" Error fetching announcements:", error)
       return NextResponse.json([])
     }
 
     return NextResponse.json(data || [])
   } catch (error) {
-    console.error("[v0] Error in announcements GET:", error)
+    console.error(" Error in announcements GET:", error)
     return NextResponse.json([])
   }
 }
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(data)
   } catch (error) {
-    console.error("[v0] Error creating announcement:", error)
+    console.error(" Error creating announcement:", error)
     return NextResponse.json({ error: "Failed to create announcement" }, { status: 500 })
   }
 }
@@ -76,7 +76,7 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json(data)
   } catch (error) {
-    console.error("[v0] Error updating announcement:", error)
+    console.error(" Error updating announcement:", error)
     return NextResponse.json({ error: "Failed to update announcement" }, { status: 500 })
   }
 }
@@ -103,7 +103,7 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Error deleting announcement:", error)
+    console.error(" Error deleting announcement:", error)
     return NextResponse.json({ error: "Failed to delete announcement" }, { status: 500 })
   }
 }

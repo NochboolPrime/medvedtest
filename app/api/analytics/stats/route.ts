@@ -68,7 +68,7 @@ export async function GET(request: Request) {
       totalEvents: analytics?.length || 0,
     })
   } catch (error) {
-    console.error("[v0] Error getting analytics:", error)
+    console.error(" Error getting analytics:", error)
     return NextResponse.json({ error: "Failed to get statistics" }, { status: 500 })
   }
 }

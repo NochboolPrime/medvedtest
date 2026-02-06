@@ -30,14 +30,14 @@ export function ProductionCarousel() {
       try {
         const res = await fetch("/api/production-carousel")
         const data = await res.json()
-        console.log("[v0] ProductionCarousel - Loaded items:", data.items?.length || 0)
+        console.log(" ProductionCarousel - Loaded items:", data.items?.length || 0)
         if (data.items && data.items.length > 0) {
           setItems(data.items)
           // Set auto-slide interval from first item
           setAutoSlideInterval(data.items[0]?.auto_slide_interval || 3000)
         }
       } catch (error) {
-        console.error("[v0] ProductionCarousel - Error loading:", error)
+        console.error(" ProductionCarousel - Error loading:", error)
       }
     }
     fetchItems()
@@ -73,7 +73,7 @@ export function ProductionCarousel() {
 
   const currentImage = items[currentIndex]
 
-  console.log("[v0] ProductionCarousel - Current item:", currentIndex, getCaption(currentImage))
+  console.log(" ProductionCarousel - Current item:", currentIndex, getCaption(currentImage))
 
   return (
     <section className="py-16 lg:py-8 2xl:py-16 px-4 bg-background">

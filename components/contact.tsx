@@ -89,7 +89,7 @@ export function Contact() {
 
       return canvas.toDataURL()
     } catch (error) {
-      console.error("[v0] Contact - Canvas error:", error)
+      console.error(" Contact - Canvas error:", error)
       return ""
     }
   }
@@ -147,7 +147,7 @@ export function Contact() {
       return
     }
 
-    console.log("[v0] Contact - Opening captcha modal")
+    console.log(" Contact - Opening captcha modal")
     setShowCaptchaModal(true)
   }
 

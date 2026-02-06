@@ -90,7 +90,7 @@ export function ConsultationModal({ open, onOpenChange }: ConsultationModalProps
 
       return canvas.toDataURL()
     } catch (error) {
-      console.error("[v0] ConsultationModal - Canvas error:", error)
+      console.error(" ConsultationModal - Canvas error:", error)
       return ""
     }
   }

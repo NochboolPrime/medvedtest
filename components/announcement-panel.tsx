@@ -33,37 +33,37 @@ export function AnnouncementPanel() {
   const router = useRouter()
 
   useEffect(() => {
-    console.log("[v0] AnnouncementPanel - Loading active announcement")
+    console.log(" AnnouncementPanel - Loading active announcement")
     fetch("/api/announcements/active")
       .then((res) => {
-        console.log("[v0] AnnouncementPanel - Response status:", res.status)
+        console.log(" AnnouncementPanel - Response status:", res.status)
         return res.json()
       })
       .then((data) => {
-        console.log("[v0] AnnouncementPanel - Received data:", data)
+        console.log(" AnnouncementPanel - Received data:", data)
         if (data.announcement) {
-          console.log("[v0] AnnouncementPanel - Setting announcement:", data.announcement)
+          console.log(" AnnouncementPanel - Setting announcement:", data.announcement)
           setAnnouncement(data.announcement)
 
-          console.log("[v0] AnnouncementPanel - Scheduling show after:", data.announcement.show_delay, "ms")
+          console.log(" AnnouncementPanel - Scheduling show after:", data.announcement.show_delay, "ms")
           setTimeout(() => {
-            console.log("[v0] AnnouncementPanel - Showing announcement")
+            console.log(" AnnouncementPanel - Showing announcement")
             setIsVisible(true)
           }, data.announcement.show_delay)
 
           if (data.announcement.auto_hide_delay > 0) {
-            console.log("[v0] AnnouncementPanel - Scheduling hide after:", data.announcement.auto_hide_delay, "ms")
+            console.log(" AnnouncementPanel - Scheduling hide after:", data.announcement.auto_hide_delay, "ms")
             setTimeout(() => {
-              console.log("[v0] AnnouncementPanel - Hiding announcement")
+              console.log(" AnnouncementPanel - Hiding announcement")
               setIsVisible(false)
             }, data.announcement.show_delay + data.announcement.auto_hide_delay)
           }
         } else {
-          console.log("[v0] AnnouncementPanel - No active announcement found")
+          console.log(" AnnouncementPanel - No active announcement found")
         }
       })
       .catch((error) => {
-        console.error("[v0] AnnouncementPanel - Error loading announcement:", error)
+        console.error(" AnnouncementPanel - Error loading announcement:", error)
       })
   }, [])
 
@@ -84,10 +84,10 @@ export function AnnouncementPanel() {
         ? announcement.link_text_en
         : announcement.link_text_zh
 
-  console.log("[v0] AnnouncementPanel - Displaying with locale:", locale, { title, content })
+  console.log(" AnnouncementPanel - Displaying with locale:", locale, { title, content })
 
   const handleAnnouncementClick = () => {
-    console.log("[v0] AnnouncementPanel - Navigating to catalog")
+    console.log(" AnnouncementPanel - Navigating to catalog")
     router.push("/catalog")
   }
 

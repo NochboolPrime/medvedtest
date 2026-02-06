@@ -26,7 +26,7 @@ export function NewsToggleSetting() {
   const handleToggle = async (checked: boolean) => {
     setIsLoading(true)
 
-    console.log("[v0] Toggling news to:", checked)
+    console.log(" Toggling news to:", checked)
 
     const response = await fetch("/api/site-settings", {
       method: "PUT",
@@ -42,7 +42,7 @@ export function NewsToggleSetting() {
           : t("news.admin.newsToggle") + " " + t("common.disabled", "отключен"),
       )
 
-      console.log("[v0] News toggle successful, refreshing...")
+      console.log(" News toggle successful, refreshing...")
 
       router.refresh()
 
@@ -51,7 +51,7 @@ export function NewsToggleSetting() {
       }, 500)
     } else {
       const errorData = await response.json()
-      console.error("[v0] Error toggling news:", errorData)
+      console.error(" Error toggling news:", errorData)
       toast.error(t("common.error", "Ошибка обновления настроек"))
     }
     setIsLoading(false)

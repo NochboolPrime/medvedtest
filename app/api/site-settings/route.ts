@@ -17,14 +17,14 @@ export async function GET() {
   try {
     const supabase = getSupabaseClient()
     if (!supabase) {
-      console.log("[v0] Supabase not configured, returning empty settings")
+      console.log(" Supabase not configured, returning empty settings")
       return NextResponse.json({ settings: {} }, { status: 200 })
     }
 
     const { data: settings, error } = await supabase.from("site_settings").select("*")
 
     if (error) {
-      console.error("[v0] Error fetching site settings:", error)
+      console.error(" Error fetching site settings:", error)
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
@@ -40,7 +40,7 @@ export async function GET() {
 
     return NextResponse.json({ settings: settingsObj })
   } catch (error) {
-    console.error("[v0] Unexpected error in site-settings GET:", error)
+    console.error(" Unexpected error in site-settings GET:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }
@@ -55,7 +55,7 @@ export async function PUT(request: Request) {
     const body = await request.json()
     const { key, value } = body
 
-    console.log("[v0] Updating site setting:", key, "to:", value)
+    console.log(" Updating site setting:", key, "to:", value)
 
     const { data: setting, error } = await supabase
       .from("site_settings")
@@ -64,14 +64,14 @@ export async function PUT(request: Request) {
       .single()
 
     if (error) {
-      console.error("[v0] Error updating site setting:", error.message)
+      console.error(" Error updating site setting:", error.message)
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
-    console.log("[v0] Site setting updated successfully:", setting)
+    console.log(" Site setting updated successfully:", setting)
     return NextResponse.json({ setting })
   } catch (error) {
-    console.error("[v0] Unexpected error in site-settings PUT:", error)
+    console.error(" Unexpected error in site-settings PUT:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

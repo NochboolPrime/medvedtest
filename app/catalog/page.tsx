@@ -22,7 +22,7 @@ export default async function CatalogPage() {
 
     return <CatalogPageClient products={products || []} />
   } catch (error) {
-    console.error("[v0] Error loading products:", error)
+    console.error(" Error loading products:", error)
     return <CatalogPageClient products={[]} />
   }
 }

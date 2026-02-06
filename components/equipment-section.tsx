@@ -46,7 +46,7 @@ export async function EquipmentSection() {
 
     return <EquipmentSectionClient products={mappedProducts} />
   } catch (error) {
-    console.error("[v0] Error loading equipment:", error)
+    console.error(" Error loading equipment:", error)
     return <EquipmentSectionClient products={[]} />
   }
 }

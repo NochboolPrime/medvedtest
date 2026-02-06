@@ -22,7 +22,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
     .eq("is_published", true)
     .single()
 
-  console.log("[v0] News detail - slug:", slug, "newsItem:", newsItem, "error:", error)
+  console.log(" News detail - slug:", slug, "newsItem:", newsItem, "error:", error)
 
   if (!newsItem) {
     notFound()

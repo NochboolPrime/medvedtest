@@ -28,7 +28,7 @@ export function useSiteContent(section: string) {
 
   async function loadContent() {
     try {
-      console.log(`[v0] useSiteContent - Loading section: ${section}, locale: ${locale}`)
+      console.log(` useSiteContent - Loading section: ${section}, locale: ${locale}`)
 
       const { data, error } = await supabase
         .from("site_content")
@@ -38,11 +38,11 @@ export function useSiteContent(section: string) {
         .order("metadata->order", { ascending: true })
 
       if (error) {
-        console.error(`[v0] useSiteContent - Database error:`, error)
+        console.error(` useSiteContent - Database error:`, error)
         throw error
       }
 
-      console.log(`[v0] useSiteContent - Loaded ${data?.length || 0} items for section ${section}:`, data)
+      console.log(` useSiteContent - Loaded ${data?.length || 0} items for section ${section}:`, data)
 
       const contentMap: ContentMap = {}
       const itemsList: ContentItem[] = []
@@ -61,13 +61,13 @@ export function useSiteContent(section: string) {
         }
       })
 
-      console.log(`[v0] useSiteContent - Content map for ${section}:`, contentMap)
-      console.log(`[v0] useSiteContent - Items list for ${section}:`, itemsList)
+      console.log(` useSiteContent - Content map for ${section}:`, contentMap)
+      console.log(` useSiteContent - Items list for ${section}:`, itemsList)
 
       setContent(contentMap)
       setItems(itemsList)
     } catch (error) {
-      console.error(`[v0] Error loading content for section ${section}:`, error)
+      console.error(` Error loading content for section ${section}:`, error)
     } finally {
       setLoading(false)
     }

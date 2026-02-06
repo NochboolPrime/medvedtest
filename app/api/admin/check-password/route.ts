@@ -13,7 +13,7 @@ export async function GET() {
 
     return NextResponse.json({ hasPassword: !!data?.password_hash })
   } catch (error) {
-    console.error("[v0] Error checking password:", error)
+    console.error(" Error checking password:", error)
     return NextResponse.json({ hasPassword: false, error: "Failed to check password" }, { status: 500 })
   }
 }

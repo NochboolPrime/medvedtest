@@ -90,7 +90,7 @@ export function TransportationDetail({
         body: JSON.stringify({ productId: id, eventType: "detail_view" }),
       })
     } catch (error) {
-      console.error("[v0] Error tracking detail view:", error)
+      console.error(" Error tracking detail view:", error)
     }
   }
 
@@ -160,7 +160,7 @@ export function TransportationDetail({
         return `https://rutube.ru/play/embed/${videoIdMatch[1]}`
       }
     } catch (e) {
-      console.error("[v0] Error parsing video URL:", e)
+      console.error(" Error parsing video URL:", e)
     }
     return null
   }

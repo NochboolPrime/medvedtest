@@ -6,7 +6,7 @@ export async function POST() {
     await deleteAdminSession()
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Logout error:", error)
+    console.error(" Logout error:", error)
     return NextResponse.json({ error: "Ошибка выхода" }, { status: 500 })
   }
 }

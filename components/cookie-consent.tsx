@@ -20,7 +20,7 @@ export function CookieConsent() {
       }
     } catch (error) {
       // localStorage may not be available in some environments
-      console.warn("[v0] CookieConsent: localStorage not available")
+      console.warn(" CookieConsent: localStorage not available")
     }
   }, [])
 
@@ -43,7 +43,7 @@ export function CookieConsent() {
     try {
       localStorage.setItem("cookieConsent", "accepted")
     } catch (error) {
-      console.warn("[v0] CookieConsent: Could not save consent")
+      console.warn(" CookieConsent: Could not save consent")
     }
     setShowConsent(false)
   }, [])

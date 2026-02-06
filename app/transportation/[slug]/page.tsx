@@ -14,7 +14,7 @@ export async function generateStaticParams() {
       })) || []
     )
   } catch (error) {
-    console.error("[v0] Error generating static params:", error)
+    console.error(" Error generating static params:", error)
     return []
   }
 }
@@ -73,7 +73,7 @@ export default async function TransportationPage({
       </>
     )
   } catch (error) {
-    console.error("[v0] Error loading product:", error)
+    console.error(" Error loading product:", error)
     notFound()
   }
 }

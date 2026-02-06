@@ -33,9 +33,9 @@ export function ProductsClient({ products }: ProductsClientProps) {
 
   useEffect(() => {
     if (products.length > 0) {
-      console.log("[v0] Products Section - First product:", products[0])
-      console.log("[v0] Products Section - First product title_en:", products[0].title_en)
-      console.log("[v0] Products Section - First product title_zh:", products[0].title_zh)
+      console.log(" Products Section - First product:", products[0])
+      console.log(" Products Section - First product title_en:", products[0].title_en)
+      console.log(" Products Section - First product title_zh:", products[0].title_zh)
     }
   }, [locale, products])
 
@@ -47,7 +47,7 @@ export function ProductsClient({ products }: ProductsClientProps) {
         body: JSON.stringify({ productId, eventType: "view" }),
       })
     } catch (error) {
-      console.error("[v0] Error tracking view:", error)
+      console.error(" Error tracking view:", error)
     }
   }
 
@@ -59,7 +59,7 @@ export function ProductsClient({ products }: ProductsClientProps) {
         body: JSON.stringify({ productId, eventType: "click" }),
       })
     } catch (error) {
-      console.error("[v0] Error tracking click:", error)
+      console.error(" Error tracking click:", error)
     }
   }
 

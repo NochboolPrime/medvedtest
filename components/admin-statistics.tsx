@@ -52,7 +52,7 @@ export function AdminStatistics() {
       setDailyStats(data.dailyStats || [])
       setTotalEvents(data.totalEvents || 0)
     } catch (error) {
-      console.error("[v0] Error loading statistics:", error)
+      console.error(" Error loading statistics:", error)
     } finally {
       setLoading(false)
     }

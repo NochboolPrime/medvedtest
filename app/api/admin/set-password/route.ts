@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Set password error:", error)
+    console.error(" Set password error:", error)
     return NextResponse.json({ error: "Ошибка установки пароля" }, { status: 500 })
   }
 }

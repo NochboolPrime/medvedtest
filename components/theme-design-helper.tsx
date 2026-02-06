@@ -26,7 +26,7 @@ export function ThemeDesignHelper() {
           
           // Проверяем, изменились ли CSS-переменные
           if (style.cssText.includes('--')) {
-            console.log('[v0] CSS-переменные изменены в design-режиме для темы:', currentTheme)
+            console.log(' CSS-переменные изменены в design-режиме для темы:', currentTheme)
             
             // Применяем изменения к правильному селектору темы
             applyThemeSpecificChanges(style, currentTheme || 'dark')
@@ -79,5 +79,5 @@ function applyThemeSpecificChanges(style: CSSStyleDeclaration, activeTheme: stri
     root.style.setProperty(prop, value)
   })
   
-  console.log('[v0] Применены изменения к теме:', activeTheme, cssVariables)
+  console.log(' Применены изменения к теме:', activeTheme, cssVariables)
 }

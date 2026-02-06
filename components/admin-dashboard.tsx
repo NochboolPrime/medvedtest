@@ -80,7 +80,7 @@ function AdminDashboard() {
       const data = await response.json()
       setProducts(data)
     } catch (error) {
-      console.error("[v0] Error loading products:", error)
+      console.error(" Error loading products:", error)
     } finally {
       setLoading(false)
     }
@@ -112,15 +112,15 @@ function AdminDashboard() {
         alert(data.error || "Ошибка установки пароля")
       }
     } catch (error) {
-      console.error("[v0] Error setting password:", error)
+      console.error(" Error setting password:", error)
       alert("Ошибка установки пароля")
     }
   }
 
   const handleSaveProduct = async (product: Product) => {
     try {
-      console.log("[v0] handleSaveProduct - Saving product:", product)
-      console.log("[v0] handleSaveProduct - Product image:", product.image)
+      console.log(" handleSaveProduct - Saving product:", product)
+      console.log(" handleSaveProduct - Product image:", product.image)
       
       // Validate image before saving
       if (!product.image) {
@@ -136,7 +136,7 @@ function AdminDashboard() {
       })
 
       const data = await response.json()
-      console.log("[v0] handleSaveProduct - Response:", response.status, data)
+      console.log(" handleSaveProduct - Response:", response.status, data)
       
       if (!response.ok) {
         alert(data.error || "Ошибка сохранения товара")
@@ -147,7 +147,7 @@ function AdminDashboard() {
       setEditingProduct(null)
       setIsDialogOpen(false)
     } catch (error) {
-      console.error("[v0] handleSaveProduct - Error:", error)
+      console.error(" handleSaveProduct - Error:", error)
       alert("Ошибка сохранения товара")
     }
   }
@@ -388,7 +388,7 @@ function ProductForm({
       const field = lang === "en" ? "specifications_en" : lang === "zh" ? "specifications_zh" : "specifications"
       setFormData({ ...formData, [field]: specs })
     } catch (e) {
-      console.error("[v0] Error parsing specifications:", e)
+      console.error(" Error parsing specifications:", e)
     }
   }
 
@@ -401,7 +401,7 @@ function ProductForm({
     const file = e.target.files?.[0]
     if (!file) return
 
-    console.log("[v0] handleImageUpload - Starting upload for file:", file.name, file.type, file.size)
+    console.log(" handleImageUpload - Starting upload for file:", file.name, file.type, file.size)
     setUploading(true)
     try {
       const formDataObj = new FormData()
@@ -412,20 +412,20 @@ function ProductForm({
         body: formDataObj,
       })
 
-      console.log("[v0] handleImageUpload - Response status:", response.status)
+      console.log(" handleImageUpload - Response status:", response.status)
       const data = await response.json()
-      console.log("[v0] handleImageUpload - Response data:", data)
+      console.log(" handleImageUpload - Response data:", data)
       
       if (data.url) {
-        console.log("[v0] handleImageUpload - Setting image URL:", data.url)
+        console.log(" handleImageUpload - Setting image URL:", data.url)
         setFormData((prev) => ({ ...prev, image: data.url }))
         setPreviewImage(data.url)
       } else if (data.error) {
-        console.error("[v0] handleImageUpload - Server error:", data.error)
+        console.error(" handleImageUpload - Server error:", data.error)
         alert(`Ошибка загрузки: ${data.error}`)
       }
     } catch (error) {
-      console.error("[v0] handleImageUpload - Error:", error)
+      console.error(" handleImageUpload - Error:", error)
       alert("Ошибка загрузки изображения")
     } finally {
       setUploading(false)
@@ -436,7 +436,7 @@ function ProductForm({
     const file = e.target.files?.[0]
     if (!file) return
 
-    console.log("[v0] handlePdfUpload - Starting upload for file:", file.name, file.type, file.size)
+    console.log(" handlePdfUpload - Starting upload for file:", file.name, file.type, file.size)
     setUploadingPdf(true)
     try {
       const formDataObj = new FormData()
@@ -447,20 +447,20 @@ function ProductForm({
         body: formDataObj,
       })
 
-      console.log("[v0] handlePdfUpload - Response status:", response.status)
+      console.log(" handlePdfUpload - Response status:", response.status)
       const data = await response.json()
-      console.log("[v0] handlePdfUpload - Response data:", data)
+      console.log(" handlePdfUpload - Response data:", data)
       
       if (data.url) {
-        console.log("[v0] handlePdfUpload - Setting PDF URL:", data.url)
+        console.log(" handlePdfUpload - Setting PDF URL:", data.url)
         setFormData((prev) => ({ ...prev, specification_pdf_url: data.url }))
         setPreviewPdf(data.url)
       } else if (data.error) {
-        console.error("[v0] handlePdfUpload - Server error:", data.error)
+        console.error(" handlePdfUpload - Server error:", data.error)
         alert(`Ошибка загрузки PDF: ${data.error}`)
       }
     } catch (error) {
-      console.error("[v0] handlePdfUpload - Error:", error)
+      console.error(" handlePdfUpload - Error:", error)
       alert("Ошибка загрузки PDF")
     } finally {
       setUploadingPdf(false)

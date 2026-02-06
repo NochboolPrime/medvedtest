@@ -17,7 +17,7 @@ export function YandexMetrika() {
           metrikaId && !isNaN(Number(metrikaId)) && String(metrikaId) !== "false" && String(metrikaId) !== "true"
 
         if (!metrikaEnabled || !isValidId) {
-          console.log("[v0] Yandex Metrika disabled or invalid ID")
+          console.log(" Yandex Metrika disabled or invalid ID")
           return
         }
 
@@ -54,9 +54,9 @@ export function YandexMetrika() {
           ecommerce: "dataLayer",
         })
 
-        console.log("[v0] Yandex Metrika initialized with ID:", numericId)
+        console.log(" Yandex Metrika initialized with ID:", numericId)
       } catch (error) {
-        console.error("[v0] Failed to load Yandex Metrika:", error)
+        console.error(" Failed to load Yandex Metrika:", error)
       }
     }
 

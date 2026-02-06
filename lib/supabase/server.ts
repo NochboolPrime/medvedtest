@@ -3,7 +3,7 @@ import { cookies } from "next/headers"
 
 export async function createClient() {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    console.warn("[v0] Supabase credentials not configured")
+    console.warn(" Supabase credentials not configured")
     // Return a mock client that returns empty data
     return {
       from: () => ({
