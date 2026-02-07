@@ -67,7 +67,7 @@ export default function PrivacyPolicyPage() {
         <h2 className="text-xl font-semibold mb-4 text-foreground">5. Заключительные положения</h2>
         <p>5.1. Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты sales@medved-neftegaz.ru.</p>
         <p className="mt-2">5.2. В данном документе будут отражены любые изменения политики обработки персональных данных Оператором.</p>
-        <p className="mt-2">5.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу https://medved-neftegaz.ru/privacy-policy.</p>
+        <p className="mt-2">{"5.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу https://medved-neftegaz.ru/privacy-policy"}</p>
       </section>
     </div>
   )
@@ -123,7 +123,7 @@ export default function PrivacyPolicyPage() {
         <h2 className="text-xl font-semibold mb-4 text-foreground">5. Final Provisions</h2>
         <p>5.1. The User can receive any clarifications on issues of interest regarding the processing of their personal data by contacting the Operator via email at sales@medved-neftegaz.ru.</p>
         <p className="mt-2">5.2. This document will reflect any changes to the Operator&apos;s personal data processing policy.</p>
-        <p className="mt-2">5.3. The current version of the Policy is freely available on the Internet at https://medved-neftegaz.ru/privacy-policy.</p>
+        <p className="mt-2">{"5.3. The current version of the Policy is freely available on the Internet at https://medved-neftegaz.ru/privacy-policy"}</p>
       </section>
     </div>
   )
@@ -179,7 +179,7 @@ export default function PrivacyPolicyPage() {
         <h2 className="text-xl font-semibold mb-4 text-foreground">5. 最终条款</h2>
         <p>5.1. 用户可以通过电子邮件sales@medved-neftegaz.ru联系运营商，获取有关其个人数据处理的任何问题的解释。</p>
         <p className="mt-2">5.2. 本文件将反映运营商个人数据处理政策的任何变更。</p>
-        <p className="mt-2">5.3. 政策的当前版本可在互联网上免费访问，网址为https://medved-neftegaz.ru/privacy-policy。</p>
+        <p className="mt-2">{"5.3. 政策的当前版本可在互联网上免费访问，网址为 https://medved-neftegaz.ru/privacy-policy"}</p>
       </section>
     </div>
   )

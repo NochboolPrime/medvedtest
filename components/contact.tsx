@@ -251,8 +251,8 @@ export function Contact() {
     {
       icon: Phone,
       label: get("phoneLabel") || t("contact.info.phone"),
-      value: get("phone") || "+7 (495) 777-56-60",
-      href: `tel:${(get("phone") || "+7 (495) 777-56-60").replace(/\D/g, "")}`,
+      value: get("phone") || "+7 (495) 777-56-00",
+      href: `tel:${(get("phone") || "+7 (495) 777-56-00").replace(/\D/g, "").replace(/^7/, "8")}`,
     },
     {
       icon: Mail,

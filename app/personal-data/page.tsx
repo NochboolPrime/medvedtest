@@ -114,7 +114,7 @@ export default function PersonalDataPage() {
               <p>{t("personalData.sections.contact.address")}</p>
               <p>
                 {t("personalData.sections.contact.phone")}:{" "}
-                <a href="tel:+74957775660" className="text-primary hover:underline">
+                <a href="tel:84957775660" className="text-primary hover:underline">
                   +7 (495) 777-56-60
                 </a>
               </p>

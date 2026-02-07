@@ -168,7 +168,7 @@ export function Header() {
 
             <div className="hidden flex-col items-end md:flex">
               <a
-                href="tel:+74957775600"
+                href="tel:84957775600"
                 className="flex items-center gap-2 text-base font-semibold text-foreground hover:text-muted-foreground transition-colors"
               >
                 <Phone className="h-4 w-4" />
@@ -275,7 +275,7 @@ export function Header() {
           {/* Mobile Contact Info */}
           <div className="pt-6 mt-6 border-t border-border">
             <a
-              href="tel:+74957775600"
+              href="tel:84957775600"
               className="flex items-center gap-2 text-base font-semibold text-foreground hover:text-[#B19D76] transition-colors mb-3"
             >
               <Phone className="h-5 w-5" />

@@ -139,7 +139,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href={`tel:${(getContact("phone") || "+7 (495) 777-56-60").replace(/\D/g, "")}`}
+                  href={`tel:${(getContact("phone") || "+7 (495) 777-56-60").replace(/\D/g, "").replace(/^7/, "8")}`}
                   className="flex items-start gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <Phone className="mt-0.5 h-4 w-4 shrink-0" />
